@@ -1,0 +1,71 @@
+<include file="Index/header" />
+<div class="container">
+	<div style="width: 250px;height: 600px; position: absolute; left: 80%; top:70px;overflow:scroll">
+		<ul class="list-group">
+			<?php
+				foreach ($noPassers as $key) {
+			?>
+		    <li class="list-group-item"><a onclick="showpic(this)" href="#" title="<?php echo $key['uid'] ?>" name="<?php echo $key['pic'] ?>"><?php echo $key['uid'].": ".$key['time'] ?></a></li>
+		    <?php
+				}
+			?>
+		</ul>
+	</div>
+	<div class="row">
+		<div class="col-md-offset-3" style="width:600px; height: 450px; margin-top: 100px; margin-bottom: 70px; border: 2px solid #0000FF; background-size: cover;" id="showpic"></div>
+		</div>
+		<button class="col-md-1 col-md-offset-4 btn btn-success" id="pass">通过</button>
+		<button class="col-md-1 col-md-offset-2 btn btn-danger" id="delete">删除</button>
+	</div>
+</div>
+<script>
+	function showpic(pic){
+		var show = document.getElementById('showpic');
+		url = "__PUBLIC__/allimage/" + pic.name;
+		show.style.backgroundImage = "url('"+url+"')"; 
+		var id = pic.title;
+		show.title = id;
+	}
+
+	var pass = document.getElementById('pass');
+	pass.onclick = function(){
+		var id = document.getElementById('showpic').title;
+		if(id){
+			var xhr = new XMLHttpRequest();
+			xhr.open("POST", "<{:U('Check/pass')}>");
+			xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+			xhr.send('stunum='+id);
+			xhr.onload = function(){
+				if(xhr.responseText){
+					alert("pass! 已可以在主页显示");
+					window.location.href = "<{:U('Check/index')}>";
+				}else{
+					alert("通过失败");
+				}
+			}
+		}else{
+			alert("请先选择照片");
+		}
+	}
+	var del = document.getElementById('delete');
+	del.onclick = function(){
+		var id = document.getElementById('showpic').title;
+		if(id){
+			var xhr = new XMLHttpRequest();
+			xhr.open("POST", "<{:U('Check/delete')}>");
+			xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+			xhr.send('stunum='+id);
+			xhr.onload = function(){
+				if(xhr.responseText){
+					alert("已从数据库删除");
+					window.location.href = "<{:U('Check/index')}>";
+				}else{
+					alert("通过失败");
+				}
+			}
+		}else{
+			alert("请先选择照片");
+		}
+	} 
+</script>
+<include file="Index/footer" />

@@ -1,0 +1,18 @@
+<include file="Index/header" />
+<div style=" position: absolute; top:100px;width: 80%; height:600px; text-align: center; overflow:scroll; border: 2px solid #0000FF;">
+	<?php
+	krsort($message);
+	foreach ($message as $key){
+	?>
+	<p style="postion: relative;">
+		编号：<?php echo $key['id']; ?>&nbsp
+		名字：<?php echo $key['stu_name']; ?> &nbsp   
+		学号：<?php echo $key['uid']; ?>&nbsp
+		性别：<?php echo $key['sex']; ?>&nbsp
+		票数：<?php echo $key['vote']; ?>
+	</p>
+	<?php
+	}
+	?>
+</div>
+<include file="Index/footer" />
