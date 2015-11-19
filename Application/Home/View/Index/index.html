@@ -4,15 +4,48 @@
 		<meta charset="UTF-8">
 		<title>青年之声</title>
 		<link rel="stylesheet" href="__PUBLIC__/home/css/index.css">
+		<style>
+			@font-face {
+				font-family: 'iconfont';
+				src: url('http://at.alicdn.com/t/font_1447931591_1980233.eot'); /* IE9*/
+				src: url('http://at.alicdn.com/t/font_1447931591_1980233.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+				url('http://at.alicdn.com/t/font_1447931591_1980233.woff') format('woff'), /* chrome、firefox */
+				url('http://at.alicdn.com/t/font_1447931591_1980233.ttf') format('truetype'), /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/
+				url('http://at.alicdn.com/t/font_1447931591_1980233.svg#iconfont') format('svg'); /* iOS 4.1- */
+				}
+				                
+		</style>
 	</head>
 	<body>
 		
 		<div id="header">
-			<div class="school-logo">
-				<img src="__PUBLIC__/home/images/cqupt.png">
-			</div>
 			<div class="nav-bar">
-				
+				<ul>
+					<li class="school-logo">
+						<img src="__PUBLIC__/home/images/cqupt.png">
+					</li>
+					<li>
+						<a href="javascript:void(0)">首页</a>
+					</li>
+					<li>
+						<a href="javascript:void(0)">学生辅导</a>
+					</li>
+					<li>
+						<a href="javascript:void(0)">职业规划</a>
+					</li>
+					<li>
+						<a href="javascript:void(0)">心里互助</a>
+					</li>
+					<li>
+						<a href="javascript:void(0)">书籍信箱</a>
+					</li>
+					<li>
+						<a href="javascript:void(0)">接待中心</a>
+					</li>
+					<li>
+						<a href="javascript:void(0)">售后服务</a>
+					</li>
+				</ul>
 			</div>
 			<div class="login-reg-btn">
 				<span>登录</span>
@@ -28,10 +61,11 @@
 			</div>
 				
 			<div class="main-content">
+
 				<div class="left-sidebar">
 					<div class="add-question-container">
-						<span>提问框</span>
-						<div>
+						<p>提问框</p>
+						<div class="at-question">
 							<button>@提问</button>
 						</div>
 						<div>
@@ -40,21 +74,228 @@
 					</div>
 					
 					<div class="website-link">
-						
+						<p>网站链接</p>
+						<ul>
+							<li>
+								<a href="javascript:void(0)">红岩网校
+								</a>
+							</li>
+							<li>
+								<a href="javascript:void(0)">校学生会团宣部
+								</a>
+							</li>
+							<li>
+								<a href="javascript:void(0)">体育部
+								</a>
+							</li>
+							<li>
+								<a href="javascript:void(0)">勤工助学部
+								</a>
+							</li>
+							<li>
+								<a href="javascript:void(0)">宿管部
+								</a>
+							</li>
+							<li>
+								<a href="javascript:void(0)">
+									科联
+								</a>
+							</li>
+						</ul>
 					</div>
 
 				</div>
 				
-				<div class="question-list">
+				<div class="middle">
+					<div class="list-title">
+						<div class="all-question on-focus">
+							所有提问
+						</div>
+						<div class="ask-me">
+							向我提问
+						</div>
+					</div>
 					
+					<div class="question-list">
+						<?php 
+							for ($i = 0; $i < 4; $i++) { 
+						?>
+							<div class="question">
+								<div class="question-header">
+									<div class="user-avatar">
+										<img src="__PUBLIC__/home/images/face.png">
+									</div>
+									<div class="user-name">
+										能不能赏口饭吃
+									</div>
+									<div class="post-date">
+										<span>2015年11月20日</span>
+										<span>11:20</span>
+									</div>
+								</div>
+								<div class="question-body">
+									<div class="question-title">
+										<strong>		如何看待阿里无线前端发布的Weex?
+										</strong>
+									</div>
+									<div class="question-content">
+										大家好，不匿名，我认为这是一个从头到尾的KPI项目，所以我觉得@赵锦江(勾三股四) 做的超棒，今年KPI肯定有所体现哈哈哈哈做的超棒，今年KPI肯定有所体现哈哈哈哈做的超棒，今年KPI肯定有所体现哈哈哈哈做的超棒，今年KPI肯定有所体现哈哈哈哈做的超棒，今年KPI肯定有所体现哈哈哈哈
+									</div>
+								</div>
+								<div class="question-footer">
+									<div class="question-praise">
+										<i class="iconfont">&#xe590;</i>12345人赞同	
+									</div>
+									<div class="question-reply">
+										<input type="text" name="question-reply" placeholder="请输入回复内容">
+										<button>回复</button>
+									</div>
+								</div>
+							</div>
+						<?php 
+							}
+						 ?>
+					</div>
 				</div>
 				
 				<div class="right-sidebar">
-					
+					<div class="weico-link-list">
+						<p>微博链接</p>
+						<ul class="weico-avatar-list">
+							<li>
+								<img src="__PUBLIC__/home/images/face.png" height="59" width="59">
+								<span>大哥大</span>
+							</li>
+							<li class="weico-avatar-middle">
+								<img src="__PUBLIC__/home/images/face.png" height="59" width="59">
+								<span>大哥大</span>
+							</li>
+							<li>
+								<img src="__PUBLIC__/home/images/face.png" height="59" width="59">
+								<span>大哥大</span>
+							</li>
+							<li>
+								<img src="__PUBLIC__/home/images/face.png" height="59" width="59">
+								<span>大哥大</span>
+							</li>
+							<li class="weico-avatar-middle">
+								<img src="__PUBLIC__/home/images/face.png" height="59" width="59">
+								<span>大哥大</span>
+							</li>
+							<li>
+								<img src="__PUBLIC__/home/images/face.png" height="59" width="59">
+								<span>大哥大</span>
+							</li>
+							<li>
+								<img src="__PUBLIC__/home/images/face.png" height="59" width="59">
+								<span>大哥大</span>
+							</li>
+							<li class="weico-avatar-middle">
+								<img src="__PUBLIC__/home/images/face.png" height="59" width="59">
+								<span>大哥大</span>
+							</li>
+							<li>
+								<img src="__PUBLIC__/home/images/face.png" height="59" width="59">
+								<span>大哥大</span>
+							</li>
+							<li>
+								<img src="__PUBLIC__/home/images/face.png" height="59" width="59">
+								<span>大哥大</span>
+							</li>
+							<li class="weico-avatar-middle">
+								<img src="__PUBLIC__/home/images/face.png" height="59" width="59">
+								<span>大哥大</span>
+							</li>
+							<li>
+								<img src="__PUBLIC__/home/images/face.png" height="59" width="59">
+								<span>大哥大</span>
+							</li>
+						</ul>
+						<div class="show-more-weico">查看更多</div>
+					</div>
+					<div class="president-list">
+						<p>主席信息</p>
+						<ul>
+							<li>
+								<img src="__PUBLIC__/home/images/face.png" height="43" width="43">
+								<div class="president-info">
+									<p class="president-name">刘晨凌</p>
+									<p class="president-dep">WEB研发部</p>
+								</div>
+								<div class="handle">
+									<p class="view-info">查看信息</p>
+									<p class="at-me">想他提问</p>
+								</div>
+							</li>
+							<li>
+								<img src="__PUBLIC__/home/images/face.png" height="43" width="43">
+								<div class="president-info">
+									<p class="president-name">刘晨凌</p>
+									<p class="president-dep">WEB研发部</p>
+								</div>
+								<div class="handle">
+									<p class="view-info">查看信息</p>
+									<p class="at-me">想他提问</p>
+								</div>
+							</li>
+							<li>
+								<img src="__PUBLIC__/home/images/face.png" height="43" width="43">
+								<div class="president-info">
+									<p class="president-name">刘晨凌</p>
+									<p class="president-dep">WEB研发部</p>
+								</div>
+								<div class="handle">
+									<p class="view-info">查看信息</p>
+									<p class="at-me">想他提问</p>
+								</div>
+							</li>
+							<li>
+								<img src="__PUBLIC__/home/images/face.png" height="43" width="43">
+								<div class="president-info">
+									<p class="president-name">刘晨凌</p>
+									<p class="president-dep">WEB研发部</p>
+								</div>
+								<div class="handle">
+									<p class="view-info">查看信息</p>
+									<p class="at-me">想他提问</p>
+								</div>
+							</li>
+							<li>
+								<img src="__PUBLIC__/home/images/face.png" height="43" width="43">
+								<div class="president-info">
+									<p class="president-name">刘晨凌</p>
+									<p class="president-dep">WEB研发部</p>
+								</div>
+								<div class="handle">
+									<p class="view-info">查看信息</p>
+									<p class="at-me">想他提问</p>
+								</div>
+							</li>
+							<li>
+								<img src="__PUBLIC__/home/images/face.png" height="43" width="43">
+								<div class="president-info">
+									<p class="president-name">刘晨凌</p>
+									<p class="president-dep">WEB研发部</p>
+								</div>
+								<div class="handle">
+									<p class="view-info">查看信息</p>
+									<p class="at-me">想他提问</p>
+								</div>
+							</li>
+						</ul>
+						<div class="show-more-president">查看更多</div>
+					</div>
 				</div>
 
 			</div>	
 			
+		</div>
+
+		<div id="footer">
+			<p>关于红岩网校 | 开发团队 | 指出错误 | 管理入口</p>
+			<p>地址:重庆市南岸区南山街道崇文路2号重庆邮电大学 联系电话:62461084/62487910</p>
+			<p>本网站由红岩网校工作站负责开发管理,不经红岩网校委员会书面同意,不得进行转载</p>	
+
 		</div>
 		
 		
