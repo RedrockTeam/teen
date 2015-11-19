@@ -9,12 +9,8 @@ class IndexController extends Controller {
     public function login(){
         $manager = I('manager');
         $password = I('password');
-        $where = [
-            "manager" => $manager,
-            "password" => $password, 
-        ];
-        if(M('manager')->where($where)->select()){
-            session('manager', $manager);
+        if($manager == 'hongyanstaff' && $password == 'hongyanstaff'){
+            session('manager', '红岩网校管理者');
             $this->ajaxReturn("true");
         }
     }
