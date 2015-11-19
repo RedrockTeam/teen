@@ -9,36 +9,91 @@
 
 	button {
 		border: 0;
+		padding: 0;
+		margin: 0;
 	}
+	ul {
+		margin: 0;
+		padding: 0;
+	}
+
+	li {
+		list-style: none;
+	}
+
+	input {
+		padding: 0;
+		margin: 0;
+	}
+	
+	a {
+		text-decoration: none;
+	}
+
+	p {
+		margin: 0;
+		padding: 0;
+	}
+
+	
 
 	#header {
 		width: 100%;
-		height: 66px;
-		padding: 0 percentage(236 / 1400) 0 percentage(197 / 1400);
-		//background: red;
-		background-color: #fff;
-	    background-image: -moz-linear-gradient(top, #fff, #fafafa);
-	    background-image: -ms-linear-gradient(top, #fff, #fafafa);
-	    background-image: -webkit-linear-gradient(top, #fff, #fafafa);
-		.school-logo {
-			margin-right: 67px;
-			display: inline;
-			img {
-				margin-top: 13px;
-				vertical-align: middle;
-			}
+		text-align: center;
+		.nav-bar {
+			height: 66px;
+			margin: 0 auto 1px;
+			background-color: #fff;
+		    background-image: -moz-linear-gradient(top, #fff, #fafafa);
+		    background-image: -ms-linear-gradient(top, #fff, #fafafa);
+		    background-image: -webkit-linear-gradient(top, #fff, #fafafa);
+		    ul {
+		    	height: 100%;
+		    	width: 1000px;
+		    	padding: 0;
+		    	margin: 0 auto;
+		    	li {
+		    		float: left;
+		    		height: 100%;
+		    		padding: 0 17px;
+		    		cursor: pointer;
+		    		a {
+		    			line-height: 66px;
+		    			font-size: 18px;
+		    			color: #0b6ebb;
+		    		}
+		    	}
+		    	li:hover {
+		    		background: #079ae6;
+		    		background-image: -webkit-linear-gradient(top, #0ba0ed, #0699e5);
+		    		border-bottom: 1px solid #028cd3;
+		    		a {
+		    			color: #fffefe;
+		    		}
+		    	}
+		    	.school-logo {
+		    		margin-right: 67px;
+		    		padding: 0;
+		    		img {
+		    			vertical-align: middle;
+		    			padding-top: 13px;
+		    		}
+		    	}
+		    }
 		}
-		
+		.login-reg-btn {
+			height: 33px;
+			width: 1000px;
+			margin: 0 auto;
+			line-height: 33px;
+			color: #0a6aa7;
+			font-size: 18px;
+		}
 	}
 
 	#main {
-		width: 1000px;
-		background-color: red;
-		margin: 154px auto;
-		.login-reg-btn {
-			width: 100%;
-			height: 33px;
-		}
+		width: 1002px;
+		margin: 0 auto;
 		.teen-logo {
 			text-align: center;
 			margin-bottom: 154px;
@@ -47,46 +102,274 @@
 			}
 		}
 		.main-content {
-			padding: 0 percentage(201 / 1400) 0 percentage(198 / 1400);
-			height: 300px;
-			//background-color: red;
+			overflow: hidden;
+			margin-bottom: 50px;
+			// 左边侧栏
 			.left-sidebar {
 				float: left;
-				height: 200px;
-				width: percentage(170 / 1003);
-				//background-color: black;
+				width: 170px;
 				.add-question-container {
-					height: 140px;
-					padding: percentage(15 / 140);
-					//background: blue;
+					padding: 16px;
 					margin-bottom: 10px;
+					background-color: #f6f7f7;
+					p {
+						color: #333;
+						font-size: 15.72px;
+					}
+					// @提问
+					.at-question {
+						margin: 16px 0;
+					}
 					div {
-						height: percentage(33 / 140);
 						button {
+							height: 33px;
 							width: 100%;
-							height: 100%;
+							color: #f4f7fc;
+							font-size: 16px;
 							background-color: #7ecef4;
-							border-radius: 3px;
-							background-image: -moz-linear-gradient(top, #1f7ec5, #1a8ddf);
-						    background-image: -ms-linear-gradient(top, #1f7ec5, #1a8ddf);
-						    background-image: -webkit-linear-gradient(top, #1f7ec5, #1a8ddf);
+							background-image: -moz-linear-gradient(top, #1a8ddf, #1f7ec5);
+						    background-image: -ms-linear-gradient(top, #1a8ddf, #1f7ec5);
+						    background-image: -webkit-linear-gradient(top, #1a8ddf, #1f7ec5);
+							border-radius: 2px;
 						    box-shadow: 1px 1px 1px #64daf6;
+						    cursor: pointer;
+						}
+					}
+				}
+				.website-link {
+					padding: 16px;
+					background-color: #f6f7f7;
+					p {
+						color: #333;
+						font-size: 15.72px;
+					}
+					ul {
+						li {
+							margin: 8px 0;
+							a {
+								font-size: 14px;
+							}
 						}
 					}
 				}
 			}
-			.question-list {
+
+			// 中间主内容
+			.middle {
+				background-color: #f6f7f7;
 				float: left;
-				height: 500px;
-				width: percentage(558 / 1003);
-				//background: yellow;
-				padding: 0 percentage(20 / 1003);
+				margin: 0 20px;
+				width: 558px;
+				.list-title {
+					height: 43px;
+					background-color: #fff;
+					.all-question, .ask-me {
+						height: 42px;
+						width: 78px;
+						text-align: center;
+						font-size: 14px;
+						color: #545454;
+						float: left;
+						line-height: 43px;
+						cursor: pointer;
+					}
+					.all-question {
+						border-right: 1px solid #eee;
+					}
+					.on-focus {
+						color: #5e8bcc;
+						border-bottom: 1px solid #5e8cca;
+					}
+				}
+
+				.question-list {
+					.question {
+						margin-top: 10px;
+						padding: 14px 11px 22px;
+						background-color: #fff;
+						.question-header {
+							height: 47px;
+							border-bottom: 1px solid #f2f2f2;
+							.user-avatar {
+								float: left;
+								margin-right: 10px;
+							}
+							.user-name {
+								color: #262626;
+								font-size: 14px;
+								margin-bottom: 10px;
+							}
+							.post-date {
+								color: #999;
+								font-size: 12px;
+							}
+						}
+						.question-body {
+							padding-top: 17px;
+							padding-bottom: 14px;
+							.question-title {
+								font-size: 14px;
+								color: #333;
+								cursor: pointer;
+							}
+							.question-content {
+								font-size: 12px;
+								line-height: 18px;
+								color: #333;
+								padding-top: 12px;
+							}
+						}
+						.question-footer {
+							.question-praise {
+								width: 100%;
+								text-align: right;
+								padding-right: 10px;
+								color: #fc736b;
+							}
+							.question-reply {
+								width: 100%;
+								padding-top: 14px;
+								input {
+									width: 444px;
+									height: 30px;
+									border: 1px solid #ebebeb;
+									display: inline;
+									padding: 0 10px;
+									letter-spacing: 1px;
+									outline: none;
+								}
+								input::-webkit-input-placeholder {
+									color: #9a9a9a;
+								}
+								button {
+									height: 32px;
+									width: 60px;
+									color: #fff;
+									font-size: 12px;
+									letter-spacing: 1px;
+									line-height: 30px;
+									background-color: #3686c5;
+									cursor: pointer;
+								}
+							}
+						}
+					}
+				}
 			}
+
+			// 右边侧栏
 			.right-sidebar {
 				float: left;
-				height: 200px;
-				width: percentage(234 / 1003);
-				//background-color: black;
+				width: 234px;
+				// 微博链接
+				.weico-link-list {
+					background-color: #f6f7f7;
+					margin-bottom: 10px;
+					p {
+						padding: 16px 16px 0;
+						color: #333;
+						font-size: 15.72px;
+					}
+					.weico-avatar-list {
+						height: 100%;
+						padding: 16px 16px 11px;
+						li {
+							display: inline-block;
+							width: 60px;
+							margin-bottom: 3px;
+							text-align: center;
+							span {
+								color: #676767;
+								font-size: 14px;
+								margin-top: 3px;
+							}
+							img {
+								border-radius: 5px;
+								border: 1px solid #f6f7f7;
+								cursor: pointer;
+								&:hover {
+									border: 1px solid #3dc3f1;
+								}
+							}
+						}
+						.weico-avatar-middle {
+							margin: 0 7px;
+						}
+					}
+				}
+				.show-more-weico, .show-more-president {
+					width: 100%;
+					height: 32px;
+					line-height: 32px;
+					text-align: center;
+					background-color: #fff;
+					color: #676767;
+					cursor: pointer;
+					&:hover {
+						background-color: #eee;
+					}
+				}
+				
+				// 主席信息
+				.president-list {
+					background-color: #f6f7f7;
+					p {
+						padding: 16px 16px;
+						color: #333;
+						font-size: 15.72px;
+					}
+					ul {
+						li {
+							height: 43px;
+							padding: 10px 16px;
+							img {
+								float: left;
+							}
+							.president-info, .handle {
+								float: left;
+								margin-left: 10px;
+								height: 43px;
+								p {
+									margin: 0;
+									padding: 0;
+									font-size: 14px;
+									color: #333;
+								}
+							}
+							.president-name, .view-info {
+								height: 29px;
+							}
+							.president-dep, .at-me {
+								height: 14px;
+							}
+
+							.handle {
+								float: right;
+								p {
+									color: #3886c6;
+									cursor: pointer;
+								}
+							}
+						}
+						li:nth-child(odd) {
+							background-color: #fff;
+						}
+					}
+				}
+
 			}
+		}
+	}
+
+	#footer {
+		height: 70px;
+		width: 100%;
+		background-color: #167dbf;
+		padding: 30px 0;
+		text-align: center;
+		p {
+			margin: 7px 0;
+			color: #83c7f2;
+			font-size: 14px;
 		}
 	}

@@ -6,63 +6,274 @@ body {
   background-size: cover; }
 
 button {
-  border: 0; }
+  border: 0;
+  padding: 0;
+  margin: 0; }
+
+ul {
+  margin: 0;
+  padding: 0; }
+
+li {
+  list-style: none; }
+
+input {
+  padding: 0;
+  margin: 0; }
+
+a {
+  text-decoration: none; }
+
+p {
+  margin: 0;
+  padding: 0; }
 
 #header {
   width: 100%;
-  height: 66px;
-  padding: 0 16.85714% 0 14.07143%;
-  background-color: #fff;
-  background-image: -moz-linear-gradient(top, #fff, #fafafa);
-  background-image: -ms-linear-gradient(top, #fff, #fafafa);
-  background-image: -webkit-linear-gradient(top, #fff, #fafafa); }
-  #header .school-logo {
-    margin-right: 67px;
-    display: inline; }
-    #header .school-logo img {
-      margin-top: 13px;
-      vertical-align: middle; }
+  text-align: center; }
+  #header .nav-bar {
+    height: 66px;
+    margin: 0 auto 1px;
+    background-color: #fff;
+    background-image: -moz-linear-gradient(top, #fff, #fafafa);
+    background-image: -ms-linear-gradient(top, #fff, #fafafa);
+    background-image: -webkit-linear-gradient(top, #fff, #fafafa); }
+    #header .nav-bar ul {
+      height: 100%;
+      width: 1000px;
+      padding: 0;
+      margin: 0 auto; }
+      #header .nav-bar ul li {
+        float: left;
+        height: 100%;
+        padding: 0 17px;
+        cursor: pointer; }
+        #header .nav-bar ul li a {
+          line-height: 66px;
+          font-size: 18px;
+          color: #0b6ebb; }
+      #header .nav-bar ul li:hover {
+        background: #079ae6;
+        background-image: -webkit-linear-gradient(top, #0ba0ed, #0699e5);
+        border-bottom: 1px solid #028cd3; }
+        #header .nav-bar ul li:hover a {
+          color: #fffefe; }
+      #header .nav-bar ul .school-logo {
+        margin-right: 67px;
+        padding: 0; }
+        #header .nav-bar ul .school-logo img {
+          vertical-align: middle;
+          padding-top: 13px; }
+  #header .login-reg-btn {
+    height: 33px;
+    width: 1000px;
+    margin: 0 auto;
+    line-height: 33px;
+    color: #0a6aa7;
+    font-size: 18px; }
 
 #main {
-  width: 1000px;
-  background-color: red;
-  margin: 154px auto; }
-  #main .login-reg-btn {
-    width: 100%;
-    height: 33px; }
+  width: 1002px;
+  margin: 0 auto; }
   #main .teen-logo {
     text-align: center;
     margin-bottom: 154px; }
     #main .teen-logo img {
       text-align: center; }
   #main .main-content {
-    padding: 0 14.35714% 0 14.14286%;
-    height: 300px; }
+    overflow: hidden;
+    margin-bottom: 50px; }
     #main .main-content .left-sidebar {
       float: left;
-      height: 200px;
-      width: 16.94915%; }
+      width: 170px; }
       #main .main-content .left-sidebar .add-question-container {
-        height: 140px;
-        padding: 10.71429%;
-        margin-bottom: 10px; }
-        #main .main-content .left-sidebar .add-question-container div {
-          height: 23.57143%; }
-          #main .main-content .left-sidebar .add-question-container div button {
-            width: 100%;
-            height: 100%;
-            background-color: #7ecef4;
-            border-radius: 3px;
-            background-image: -moz-linear-gradient(top, #1f7ec5, #1a8ddf);
-            background-image: -ms-linear-gradient(top, #1f7ec5, #1a8ddf);
-            background-image: -webkit-linear-gradient(top, #1f7ec5, #1a8ddf);
-            box-shadow: 1px 1px 1px #64daf6; }
-    #main .main-content .question-list {
+        padding: 16px;
+        margin-bottom: 10px;
+        background-color: #f6f7f7; }
+        #main .main-content .left-sidebar .add-question-container p {
+          color: #333;
+          font-size: 15.72px; }
+        #main .main-content .left-sidebar .add-question-container .at-question {
+          margin: 16px 0; }
+        #main .main-content .left-sidebar .add-question-container div button {
+          height: 33px;
+          width: 100%;
+          color: #f4f7fc;
+          font-size: 16px;
+          background-color: #7ecef4;
+          background-image: -moz-linear-gradient(top, #1a8ddf, #1f7ec5);
+          background-image: -ms-linear-gradient(top, #1a8ddf, #1f7ec5);
+          background-image: -webkit-linear-gradient(top, #1a8ddf, #1f7ec5);
+          border-radius: 2px;
+          box-shadow: 1px 1px 1px #64daf6;
+          cursor: pointer; }
+      #main .main-content .left-sidebar .website-link {
+        padding: 16px;
+        background-color: #f6f7f7; }
+        #main .main-content .left-sidebar .website-link p {
+          color: #333;
+          font-size: 15.72px; }
+        #main .main-content .left-sidebar .website-link ul li {
+          margin: 8px 0; }
+          #main .main-content .left-sidebar .website-link ul li a {
+            font-size: 14px; }
+    #main .main-content .middle {
+      background-color: #f6f7f7;
       float: left;
-      height: 500px;
-      width: 55.6331%;
-      padding: 0 1.99402%; }
+      margin: 0 20px;
+      width: 558px; }
+      #main .main-content .middle .list-title {
+        height: 43px;
+        background-color: #fff; }
+        #main .main-content .middle .list-title .all-question, #main .main-content .middle .list-title .ask-me {
+          height: 42px;
+          width: 78px;
+          text-align: center;
+          font-size: 14px;
+          color: #545454;
+          float: left;
+          line-height: 43px;
+          cursor: pointer; }
+        #main .main-content .middle .list-title .all-question {
+          border-right: 1px solid #eee; }
+        #main .main-content .middle .list-title .on-focus {
+          color: #5e8bcc;
+          border-bottom: 1px solid #5e8cca; }
+      #main .main-content .middle .question-list .question {
+        margin-top: 10px;
+        padding: 14px 11px 22px;
+        background-color: #fff; }
+        #main .main-content .middle .question-list .question .question-header {
+          height: 47px;
+          border-bottom: 1px solid #f2f2f2; }
+          #main .main-content .middle .question-list .question .question-header .user-avatar {
+            float: left;
+            margin-right: 10px; }
+          #main .main-content .middle .question-list .question .question-header .user-name {
+            color: #262626;
+            font-size: 14px;
+            margin-bottom: 10px; }
+          #main .main-content .middle .question-list .question .question-header .post-date {
+            color: #999;
+            font-size: 12px; }
+        #main .main-content .middle .question-list .question .question-body {
+          padding-top: 17px;
+          padding-bottom: 14px; }
+          #main .main-content .middle .question-list .question .question-body .question-title {
+            font-size: 14px;
+            color: #333;
+            cursor: pointer; }
+          #main .main-content .middle .question-list .question .question-body .question-content {
+            font-size: 12px;
+            line-height: 18px;
+            color: #333;
+            padding-top: 12px; }
+        #main .main-content .middle .question-list .question .question-footer .question-praise {
+          width: 100%;
+          text-align: right;
+          padding-right: 10px;
+          color: #fc736b; }
+        #main .main-content .middle .question-list .question .question-footer .question-reply {
+          width: 100%;
+          padding-top: 14px; }
+          #main .main-content .middle .question-list .question .question-footer .question-reply input {
+            width: 444px;
+            height: 30px;
+            border: 1px solid #ebebeb;
+            display: inline;
+            padding: 0 10px;
+            letter-spacing: 1px;
+            outline: none; }
+          #main .main-content .middle .question-list .question .question-footer .question-reply input::-webkit-input-placeholder {
+            color: #9a9a9a; }
+          #main .main-content .middle .question-list .question .question-footer .question-reply button {
+            height: 32px;
+            width: 60px;
+            color: #fff;
+            font-size: 12px;
+            letter-spacing: 1px;
+            line-height: 30px;
+            background-color: #3686c5;
+            cursor: pointer; }
     #main .main-content .right-sidebar {
       float: left;
-      height: 200px;
-      width: 23.33001%; }
+      width: 234px; }
+      #main .main-content .right-sidebar .weico-link-list {
+        background-color: #f6f7f7;
+        margin-bottom: 10px; }
+        #main .main-content .right-sidebar .weico-link-list p {
+          padding: 16px 16px 0;
+          color: #333;
+          font-size: 15.72px; }
+        #main .main-content .right-sidebar .weico-link-list .weico-avatar-list {
+          height: 100%;
+          padding: 16px 16px 11px; }
+          #main .main-content .right-sidebar .weico-link-list .weico-avatar-list li {
+            display: inline-block;
+            width: 60px;
+            margin-bottom: 3px;
+            text-align: center; }
+            #main .main-content .right-sidebar .weico-link-list .weico-avatar-list li span {
+              color: #676767;
+              font-size: 14px;
+              margin-top: 3px; }
+            #main .main-content .right-sidebar .weico-link-list .weico-avatar-list li img {
+              border-radius: 5px;
+              border: 1px solid #f6f7f7;
+              cursor: pointer; }
+              #main .main-content .right-sidebar .weico-link-list .weico-avatar-list li img:hover {
+                border: 1px solid #3dc3f1; }
+          #main .main-content .right-sidebar .weico-link-list .weico-avatar-list .weico-avatar-middle {
+            margin: 0 7px; }
+      #main .main-content .right-sidebar .show-more-weico, #main .main-content .right-sidebar .show-more-president {
+        width: 100%;
+        height: 32px;
+        line-height: 32px;
+        text-align: center;
+        background-color: #fff;
+        color: #676767;
+        cursor: pointer; }
+        #main .main-content .right-sidebar .show-more-weico:hover, #main .main-content .right-sidebar .show-more-president:hover {
+          background-color: #eee; }
+      #main .main-content .right-sidebar .president-list {
+        background-color: #f6f7f7; }
+        #main .main-content .right-sidebar .president-list p {
+          padding: 16px 16px;
+          color: #333;
+          font-size: 15.72px; }
+        #main .main-content .right-sidebar .president-list ul li {
+          height: 43px;
+          padding: 10px 16px; }
+          #main .main-content .right-sidebar .president-list ul li img {
+            float: left; }
+          #main .main-content .right-sidebar .president-list ul li .president-info, #main .main-content .right-sidebar .president-list ul li .handle {
+            float: left;
+            margin-left: 10px;
+            height: 43px; }
+            #main .main-content .right-sidebar .president-list ul li .president-info p, #main .main-content .right-sidebar .president-list ul li .handle p {
+              margin: 0;
+              padding: 0;
+              font-size: 14px;
+              color: #333; }
+          #main .main-content .right-sidebar .president-list ul li .president-name, #main .main-content .right-sidebar .president-list ul li .view-info {
+            height: 29px; }
+          #main .main-content .right-sidebar .president-list ul li .president-dep, #main .main-content .right-sidebar .president-list ul li .at-me {
+            height: 14px; }
+          #main .main-content .right-sidebar .president-list ul li .handle {
+            float: right; }
+            #main .main-content .right-sidebar .president-list ul li .handle p {
+              color: #3886c6;
+              cursor: pointer; }
+        #main .main-content .right-sidebar .president-list ul li:nth-child(odd) {
+          background-color: #fff; }
+
+#footer {
+  height: 70px;
+  width: 100%;
+  background-color: #167dbf;
+  padding: 30px 0;
+  text-align: center; }
+  #footer p {
+    margin: 7px 0;
+    color: #83c7f2;
+    font-size: 14px; }
