@@ -1,0 +1,84 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+        <title>个人资料</title>
+        <link rel="stylesheet" href="__PUBLIC__/mobile/css/amazeui.min.css">
+        <style>
+            
+            body {
+                background: url('__PUBLIC__/mobile/images/texture.png');
+            }
+
+
+            .am-vertical-align-middle {
+                vertical-align: middle;
+                margin-top: 2px;
+            }
+            .am-panel-footer {
+                font-size: 13px;
+                color: #999;
+            }
+            .am-panel-footer span {
+                color: #999;
+                font-weight: lighter;
+                letter-spacing: -1.5px;
+            }
+            .am-panel-footer div {
+                margin: 0 3px;
+            }
+            .am-tabs-nav li {
+                width: 50%;
+                text-align: center;
+            }
+        </style>
+    </head>
+    <body>
+
+        <div class="am-g">
+            <div class="am-u-md-8 am-u-md-offset-2 am-text-center">            
+                <img src="http://f.hiphotos.baidu.com/baike/w%3D268/sign=2443a75bb11bb0518f24b42e0e7ada77/8b13632762d0f7031cbb3ea50afa513d2697c5ba.jpg" alt="">
+            </div>
+
+        </div>
+
+        <div class="am-g">
+
+            <div class="am-u-md-8 am-u-md-offset-2">
+                <form class="am-form am-form-horizontal" id="user-login-form">
+                    <div class="am-form-group">
+                        <div class="am-u-sm-12">
+                          <input type="text" name="user-name" placeholder="请输入发布者的学号" autocomplete="off">
+                        </div>
+                    </div>
+
+                    <div class="am-form-group">
+                        <div class="am-u-sm-12">
+                          <input type="password" name="user-pass" placeholder="请输入发布者的密码" autocomplete="off">
+                        </div>
+                    </div>
+                    <div class="am-form-group">
+                        <div class="am-u-sm-12">
+                            <button type="button" id="user-login-btn" class="am-btn am-btn-primary am-btn-block" data-am-loading="{spinner: 'circle-o-notch', loadingText: '登录中...', resetText: '登录'}">登录</button>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+
+        
+    </body>
+    <script src="__PUBLIC__/mobile/js/jquery.min.js"></script>
+    <script src="__PUBLIC__/mobile/js/amazeui.min.js"></script>
+    <script src="__PUBLIC__/mobile/js/app.js"></script>
+    <script>
+        $(function () {
+            $.AMUI.progress.start();
+            $('#user-login-btn').on('click', clickEvent.userLogin);
+            $.AMUI.progress.done();
+        });
+    </script>
+</html>

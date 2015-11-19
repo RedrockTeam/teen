@@ -1,0 +1,68 @@
+body {
+  margin: 0;
+  padding: 0;
+  background-image: url("../images/bg.png");
+  background-repeat: no-repeat;
+  background-size: cover; }
+
+button {
+  border: 0; }
+
+#header {
+  width: 100%;
+  height: 66px;
+  padding: 0 16.85714% 0 14.07143%;
+  background-color: #fff;
+  background-image: -moz-linear-gradient(top, #fff, #fafafa);
+  background-image: -ms-linear-gradient(top, #fff, #fafafa);
+  background-image: -webkit-linear-gradient(top, #fff, #fafafa); }
+  #header .school-logo {
+    margin-right: 67px;
+    display: inline; }
+    #header .school-logo img {
+      margin-top: 13px;
+      vertical-align: middle; }
+
+#main {
+  width: 1000px;
+  background-color: red;
+  margin: 154px auto; }
+  #main .login-reg-btn {
+    width: 100%;
+    height: 33px; }
+  #main .teen-logo {
+    text-align: center;
+    margin-bottom: 154px; }
+    #main .teen-logo img {
+      text-align: center; }
+  #main .main-content {
+    padding: 0 14.35714% 0 14.14286%;
+    height: 300px; }
+    #main .main-content .left-sidebar {
+      float: left;
+      height: 200px;
+      width: 16.94915%; }
+      #main .main-content .left-sidebar .add-question-container {
+        height: 140px;
+        padding: 10.71429%;
+        margin-bottom: 10px; }
+        #main .main-content .left-sidebar .add-question-container div {
+          height: 23.57143%; }
+          #main .main-content .left-sidebar .add-question-container div button {
+            width: 100%;
+            height: 100%;
+            background-color: #7ecef4;
+            border-radius: 3px;
+            background-image: -moz-linear-gradient(top, #1f7ec5, #1a8ddf);
+            background-image: -ms-linear-gradient(top, #1f7ec5, #1a8ddf);
+            background-image: -webkit-linear-gradient(top, #1f7ec5, #1a8ddf);
+            box-shadow: 1px 1px 1px #64daf6; }
+    #main .main-content .question-list {
+      float: left;
+      height: 500px;
+      width: 55.6331%;
+      padding: 0 1.99402%; }
+    #main .main-content .right-sidebar {
+      float: left;
+      height: 200px;
+      width: 23.33001%; }
