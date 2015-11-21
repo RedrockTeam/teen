@@ -6,7 +6,7 @@
 			praiseQue;
 
 		userLogin = function () {
-            if (verify.checkUserInfo($(this).parents('form'))) {
+            if (verify.userLoginVerify('#user-login-form')) {
 				var $button = $(this);
 	            $.ajax({
 	            	url: 'index.php?s=/Mobile/User/userLogin',
@@ -18,7 +18,7 @@
 	            	}
 	            }).done(function (response, status) {
 	            	if (response.status === 200 && status === 'success') {
-	            		location.href = response.data;
+	            		location.href = '?s=Mobile';
 	            	} else {
 	            		view.alert("你的账号或密码有误");
 	            	}
@@ -35,7 +35,7 @@
 		}
 
 		praiseQue = function () {
-			if ($.AMUI.utils.cookie.get('userId')) {
+			if ($.AMUI.utils.cookie.get('username')) {
 				alert();
 			} else {
 				view.confirm('点赞或评论是需要登录哦~');
@@ -56,11 +56,11 @@
 	            		$button.button('loading');
 	            	}
 	            }).done(function (response, status) {
-	            	if (response.status === 200 && status === 'success') {
-	            		location.href = response.data;
-	            	} else {
-	            		view.alert("你的账号或密码有误");
-	            	}
+	            	// if (response.status === 200 && status === 'success') {
+	            	// 	location.href = response.data;
+	            	// } else {
+	            	// 	view.alert("你的账号或密码有误");
+	            	// }
 	            }).fail(function (jqXHR, textStatus) {
 	            	view.alert('稍安勿躁, 好像出了点小问题=_=');
 	            }).always(function() {

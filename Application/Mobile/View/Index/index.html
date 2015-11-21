@@ -105,7 +105,7 @@
 
 		$(function () {
 
-
+            $.AMUI.progress.start();
 
 			$('.add-question').on('click', function () {
 				$(this).removeClass('closeChooseListAnimation').addClass('openChooseListAnimation').css({
@@ -122,7 +122,7 @@
 			$('.ensure-add-question').on('click', clickEvent.addQuestion);
 
 			$('.am-icon-user').on('click', function () {
-				if (!$.AMUI.utils.cookie.get('userId')) {
+				if (!$.AMUI.utils.cookie.get('username')) {
 					view.confirm('查看个人资料需要登录哦~');
 				}
 			});
@@ -162,6 +162,8 @@
 			$('.am-modal-actions-header:gt(1)').on('click', function () {
 				location.href = 'http://localhost/teen/index.php?s=/Mobile/User/userIndex';
 			});
+
+            $.AMUI.progress.done();
 
 		});
 
