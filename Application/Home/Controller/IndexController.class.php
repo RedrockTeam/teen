@@ -17,6 +17,7 @@ class IndexController extends Controller {
             session('sex', $user_message['userInfo']['gender']);
             $conf = array(
                 'username' => $user_message['userInfo']['real_name'],
+                'stunum' => $user_message['userInfo']['stu_num'],
                 'status' => '200',
                 'message' => true,
             );
