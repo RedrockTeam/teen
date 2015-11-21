@@ -92,10 +92,10 @@ class IndexController extends Controller {
     */
     public function commit_voice(){
         $config = array(
-            'postername' => session('username'),
-            'gettername' => I('get.gettername'),
+            'postername' => session('username').session('stunum'),
+            'gettername' => I('get.type'),
             'title' => I('get.title'),
-            'question' => I('get.question')
+            'question' => I('get.content')
         );      //设置需要插入数据库的参数数组
         if($config['postername'] && $config['gettername'] && $config['title'] && $config['question']){
             $config['time'] = date('y-m-d h:m:s', time() + 8 * 3600);

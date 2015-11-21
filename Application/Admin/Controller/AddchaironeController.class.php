@@ -13,17 +13,32 @@ class AddchaironeController extends Controller {
 	public function index(){
 		$this->display();
 	} 
+
 	public function add(){
 		if(session('manager')){
-			$picture = '__PUBLIC__/chairone'.$_FILES['myfile']['name'];
-			move_uploaded_file($_FILES['myfile']['tmp_name'] , $picture);
-			$where = array(
-				'chairname' => I('get.username'),
-				'password' => I('get.password'),
-				'information' => I('get.info'),
-				'sex' => I('get.sex'),
-				'picture' => 
+			$picture = C('__PUBLIC__').'/chairone'.$_FILES['pic']['name'];
+			var_dump($picture);
+			//move_uploaded_file($_FILES['pic']['tmp_name'] , $picture);
+			$data = array(
+				'chairname' => I('post.username'),
+				'password' => I('post.password'),
+				'sex' => I('post.sex'),
+				'information' => I('post.info'),
+				'picture' => $picture
 			);
+			if(M('chairman')->add($data)){
+				echo"<script>
+     			alert('添加成功');
+            	window.location.href='".U('Addchairone/index')."'</script>";
+			}else{
+				echo"<script>
+     			alert('信息不全');
+            	window.location.href='".U('Addchairone/index')."'</script>";
+			}
+		}else{
+			echo"<script>
+            alert('请先登录');
+            window.location.href='".U('Index/index')."'</script>";
 		}
 	}
 
