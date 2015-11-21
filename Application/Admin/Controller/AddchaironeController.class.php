@@ -14,6 +14,11 @@ class AddchaironeController extends Controller {
 		$this->display();
 	} 
 
+	/* 
+		傻逼代码，毫无维护性，作者表示，还是不要写备注了。。。
+	*/
+
+
 	public function add(){
 		if(session('manager')){
 			$picture = './Public/chairone/'.$_FILES['pic']['name'];
