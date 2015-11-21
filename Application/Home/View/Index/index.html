@@ -207,7 +207,9 @@
 
 	</body>
 	<script src="__PUBLIC__/home/js/jquery.min.js"></script>
+	<script src="http://cdn.staticfile.org/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
 	<script src="__PUBLIC__/home/js/layer.js"></script>
+
 	
 	<script>
 
@@ -235,17 +237,22 @@
 				});
 
 				$('.login button').click(function () {
+					event.preventDefault();
 					$.ajax({
 						url: 'index.php?s=/Home/Index/login',
 						type: 'POST',
 						dataType: 'json',
 						data: $('.login-form').serialize()
-					}).done(function() {
-						console.log("success");
+					}).done(function (response) {
+						if (response.status == 200) {
+							$('.login-reg-btn span').html(response.username);
+							$.cookie
+							layer.close();
+						} else {
+							alert('fail');
+						}
 					}).fail(function() {
-						console.log("error");
-					}).always(function() {
-						console.log("complete");
+						alert('cuowu');
 					});
 					
 				});
