@@ -198,12 +198,11 @@
 
 	
 		<div class="login" style="display: none">
-			
-			<p><input type="text" name="user_name"></p>
-			<p><input type="password" name="user_pass"></p>
-
-			<p><button>登录</button></p>
-
+			<form class="login-form">
+				<p><input type="text" name="username"></p>
+				<p><input type="password" name="password"></p>
+				<p><button>登录</button></p>
+			</form>
 		</div>
 
 	</body>
@@ -233,6 +232,22 @@
 					    area: ['420px', '240px'], //宽高
 					    content: $('.login')
 					});
+				});
+
+				$('.login button').click(function () {
+					$.ajax({
+						url: 'index.php?s=/Home/Index/login',
+						type: 'POST',
+						dataType: 'json',
+						data: $('.login-form').serialize()
+					}).done(function() {
+						console.log("success");
+					}).fail(function() {
+						console.log("error");
+					}).always(function() {
+						console.log("complete");
+					});
+					
 				});
 
 			})
