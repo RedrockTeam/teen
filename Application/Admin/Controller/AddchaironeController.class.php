@@ -14,11 +14,15 @@ class AddchaironeController extends Controller {
 		$this->display();
 	} 
 
+	/* 
+		傻逼代码，毫无维护性，作者表示，还是不要写备注了。。。
+	*/
+
+
 	public function add(){
 		if(session('manager')){
-			$picture = C('__PUBLIC__').'/chairone'.$_FILES['pic']['name'];
-			var_dump($picture);
-			//move_uploaded_file($_FILES['pic']['tmp_name'] , $picture);
+			$picture = './Public/chairone/'.$_FILES['pic']['name'];
+			dump(move_uploaded_file($_FILES['pic']['tmp_name'] , $picture));
 			$data = array(
 				'chairname' => I('post.username'),
 				'password' => I('post.password'),
