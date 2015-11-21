@@ -75,13 +75,13 @@
 					<div class="am-form-group">
 						<label>选择提问人</label>
 						<select name="type">
-							<option value="0" class="am-text-danger">公开提问</option>
+							<option value="public">公开提问</option>
 							<option value="1">校学生会</option>
 							<option value="2">软件学生会</option>
 							<option value="3">传媒学生会</option>
 						</select>
 					</div>
-					<div class="am-form-group am-form-icon am-form-feedback">
+					<div class="am-form-group">
 				      	<label for="title">问题标题</label>
 				      	<input type="text" placeholder="" name="title" id="title">
 				    </div>
@@ -105,28 +105,35 @@
 
 		$(function () {
 
-
+			$.AMUI.progress.start();
 
 			$('.add-question').on('click', function () {
-				$(this).removeClass('closeChooseListAnimation').addClass('openChooseListAnimation').css({
-					'webkitTransform': 'scale(0)',
-					'backgroundColor': '#0a628f'
-				});
-				setTimeout(function () {
-					$('#index').css('display', 'none');
-					$('#question').addClass('bounceInDown animated').css('display', 'block');
-					// $('#my-actions').modal();
-				}, 400);
+
+				if (!$.AMUI.utils.cookie.get('username')) {
+					view.confirm('请先登录!');
+				} else {
+					$(this).removeClass('closeChooseListAnimation').addClass('openChooseListAnimation').css({
+						'webkitTransform': 'scale(0)',
+						'backgroundColor': '#0a628f'
+					});
+					setTimeout(function () {
+						$('#index').css('display', 'none');
+						$('#question').addClass('bounceInDown animated').css('display', 'block');
+						// $('#my-actions').modal();
+					}, 400);
+				}
 			});
 
 			$('.ensure-add-question').on('click', clickEvent.addQuestion);
 
+			// 个人中心
 			$('.am-icon-user').on('click', function () {
-				if (!$.AMUI.utils.cookie.get('userId')) {
+				if (!$.AMUI.utils.cookie.get('username')) {
 					view.confirm('查看个人资料需要登录哦~');
 				}
 			});
 
+			// 主页Icon
 			$('.am-icon-home').on('click', function () {
 				location.href = "http://localhost/teen/index.php?s=/Mobile";
 			});
@@ -162,6 +169,8 @@
 			$('.am-modal-actions-header:gt(1)').on('click', function () {
 				location.href = 'http://localhost/teen/index.php?s=/Mobile/User/userIndex';
 			});
+
+			$.AMUI.progress.done();
 
 		});
 

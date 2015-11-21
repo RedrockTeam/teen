@@ -6,10 +6,10 @@
 			praiseQue;
 
 		userLogin = function () {
-            if (verify.checkUserInfo($(this).parents('form'))) {
+            if (verify.userLoginVerify('#user-login-form')) {
 				var $button = $(this);
 	            $.ajax({
-	            	url: 'index.php?s=/Mobile/User/userLogin',
+	            	url: 'index.php?s=/Home/Index/login',
 	            	type: 'POST',
 	            	dataType: 'json',
 	            	data: $('#user-login-form').serialize(),
@@ -17,8 +17,9 @@
 	            		$button.button('loading');
 	            	}
 	            }).done(function (response, status) {
-	            	if (response.status === 200 && status === 'success') {
-	            		location.href = response.data;
+	            	if (response.status == 200 && status === 'success') {
+	            		$.AMUI.utils.cookie.set('username', response.username);
+	            		location.href = '?s=/Mobile';
 	            	} else {
 	            		view.alert("你的账号或密码有误");
 	            	}
@@ -35,7 +36,7 @@
 		}
 
 		praiseQue = function () {
-			if ($.AMUI.utils.cookie.get('userId')) {
+			if ($.AMUI.utils.cookie.get('username')) {
 				alert();
 			} else {
 				view.confirm('点赞或评论是需要登录哦~');
@@ -57,9 +58,10 @@
 	            	}
 	            }).done(function (response, status) {
 	            	if (response.status === 200 && status === 'success') {
-	            		location.href = response.data;
+	            		// location.href = response.data;
+	            		alert();
 	            	} else {
-	            		view.alert("你的账号或密码有误");
+	            		view.alert("提问有问题");
 	            	}
 	            }).fail(function (jqXHR, textStatus) {
 	            	view.alert('稍安勿躁, 好像出了点小问题=_=');
@@ -73,7 +75,8 @@
 
 		return {
 			userLogin: userLogin,
-			praiseQue: praiseQue
+			praiseQue: praiseQue,
+			addQuestion: addQuestion
 		};
 	})();
 
@@ -97,8 +100,8 @@
 			questionAddVerify;
 
 		userLoginVerify = function (form) {
-			var userName = $.trim(form.find('input[name=user-name]').val());
-			var userPass = $.trim(form.find('input[name=user-pass]').val());
+			var userName = $.trim($(form).find('input[name=username]').val());
+			var userPass = $.trim($(form).find('input[name=password]').val());
 			if (!userName || !userPass) {
 				return false;
 			}
