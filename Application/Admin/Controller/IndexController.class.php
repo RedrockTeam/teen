@@ -11,6 +11,7 @@ class IndexController extends Controller {
         $password = I('password');
         if($manager == 'hongyanstaff' && $password == 'hongyanstaff'){
             session('manager', '红岩网校管理者');
+            session('username', '红岩网校管理者');
             $this->ajaxReturn("true");
         }
     }
