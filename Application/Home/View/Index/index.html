@@ -144,7 +144,8 @@
 								</div>
 								<div class="question-footer">
 									<div class="question-praise">
-										<i class="iconfont">&#xe590;</i>12345人赞同	
+										<i class="iconfont">&#xe600;</i>
+										<span><b>12345</b>人赞同</span>
 									</div>
 									<div class="question-reply">
 										<input type="text" name="question-reply" placeholder="请输入回复内容">
@@ -162,126 +163,37 @@
 					<div class="weico-link-list">
 						<p>微博链接</p>
 						<ul class="weico-avatar-list">
-							<li>
-								<img src="__PUBLIC__/home/images/face.png" height="59" width="59">
-								<span>大哥大</span>
-							</li>
-							<li class="weico-avatar-middle">
-								<img src="__PUBLIC__/home/images/face.png" height="59" width="59">
-								<span>大哥大</span>
-							</li>
-							<li>
-								<img src="__PUBLIC__/home/images/face.png" height="59" width="59">
-								<span>大哥大</span>
-							</li>
-							<li>
-								<img src="__PUBLIC__/home/images/face.png" height="59" width="59">
-								<span>大哥大</span>
-							</li>
-							<li class="weico-avatar-middle">
-								<img src="__PUBLIC__/home/images/face.png" height="59" width="59">
-								<span>大哥大</span>
-							</li>
-							<li>
-								<img src="__PUBLIC__/home/images/face.png" height="59" width="59">
-								<span>大哥大</span>
-							</li>
-							<li>
-								<img src="__PUBLIC__/home/images/face.png" height="59" width="59">
-								<span>大哥大</span>
-							</li>
-							<li class="weico-avatar-middle">
-								<img src="__PUBLIC__/home/images/face.png" height="59" width="59">
-								<span>大哥大</span>
-							</li>
-							<li>
-								<img src="__PUBLIC__/home/images/face.png" height="59" width="59">
-								<span>大哥大</span>
-							</li>
-							<li>
-								<img src="__PUBLIC__/home/images/face.png" height="59" width="59">
-								<span>大哥大</span>
-							</li>
-							<li class="weico-avatar-middle">
-								<img src="__PUBLIC__/home/images/face.png" height="59" width="59">
-								<span>大哥大</span>
-							</li>
-							<li>
-								<img src="__PUBLIC__/home/images/face.png" height="59" width="59">
-								<span>大哥大</span>
-							</li>
+							<?php 
+								for ($i = 0; $i < 9; $i++) { 
+									if ($i % 3 == 1) {
+							?>
+								<li class="weico-avatar-middle">
+							<?php 	} else { ?>
+								<li>
+							<?php 	}	?>
+									<img src="__PUBLIC__/home/images/face.png">
+									<span>大哥大</span>
+								</li>
+							<?php } ?>
 						</ul>
 						<div class="show-more-weico">查看更多</div>
 					</div>
 					<div class="president-list">
 						<p>主席信息</p>
 						<ul>
-							<li>
-								<img src="__PUBLIC__/home/images/face.png" height="43" width="43">
-								<div class="president-info">
-									<p class="president-name">刘晨凌</p>
-									<p class="president-dep">WEB研发部</p>
-								</div>
-								<div class="handle">
-									<p class="view-info">查看信息</p>
-									<p class="at-me">想他提问</p>
-								</div>
-							</li>
-							<li>
-								<img src="__PUBLIC__/home/images/face.png" height="43" width="43">
-								<div class="president-info">
-									<p class="president-name">刘晨凌</p>
-									<p class="president-dep">WEB研发部</p>
-								</div>
-								<div class="handle">
-									<p class="view-info">查看信息</p>
-									<p class="at-me">想他提问</p>
-								</div>
-							</li>
-							<li>
-								<img src="__PUBLIC__/home/images/face.png" height="43" width="43">
-								<div class="president-info">
-									<p class="president-name">刘晨凌</p>
-									<p class="president-dep">WEB研发部</p>
-								</div>
-								<div class="handle">
-									<p class="view-info">查看信息</p>
-									<p class="at-me">想他提问</p>
-								</div>
-							</li>
-							<li>
-								<img src="__PUBLIC__/home/images/face.png" height="43" width="43">
-								<div class="president-info">
-									<p class="president-name">刘晨凌</p>
-									<p class="president-dep">WEB研发部</p>
-								</div>
-								<div class="handle">
-									<p class="view-info">查看信息</p>
-									<p class="at-me">想他提问</p>
-								</div>
-							</li>
-							<li>
-								<img src="__PUBLIC__/home/images/face.png" height="43" width="43">
-								<div class="president-info">
-									<p class="president-name">刘晨凌</p>
-									<p class="president-dep">WEB研发部</p>
-								</div>
-								<div class="handle">
-									<p class="view-info">查看信息</p>
-									<p class="at-me">想他提问</p>
-								</div>
-							</li>
-							<li>
-								<img src="__PUBLIC__/home/images/face.png" height="43" width="43">
-								<div class="president-info">
-									<p class="president-name">刘晨凌</p>
-									<p class="president-dep">WEB研发部</p>
-								</div>
-								<div class="handle">
-									<p class="view-info">查看信息</p>
-									<p class="at-me">想他提问</p>
-								</div>
-							</li>
+							<?php for ($i = 0; $i < 6; $i++) { ?>
+								<li>
+									<img src="__PUBLIC__/home/images/face.png" height="43" width="43">
+									<div class="president-info">
+										<p class="president-name">刘晨凌</p>
+										<p class="president-dep">WEB研发部</p>
+									</div>
+									<div class="handle">
+										<p class="view-info">查看信息</p>
+										<p class="at-me">想他提问</p>
+									</div>
+								</li>
+							<?php } ?>
 						</ul>
 						<div class="show-more-president">查看更多</div>
 					</div>
@@ -297,7 +209,27 @@
 			<p>本网站由红岩网校工作站负责开发管理,不经红岩网校委员会书面同意,不得进行转载</p>	
 
 		</div>
-		
-		
 	</body>
+	<script src="__PUBLIC__/home/js/jquery.min.js"></script>
+	
+	<script>
+
+			$(function () {
+				var rightPosition = $('.nav-bar li:eq(7)').offset().left + 17 + $('.nav-bar li:eq(7)').width();
+				$('.login-reg-btn').css({
+					'opacity': 1,
+					'left': rightPosition - $('.login-reg-btn').width()
+				});
+
+				$('.question-list').on('click', '.question-praise i', function () {
+					$(this).css({
+						'transform': 'scale(1.2)'
+					});
+					$(this).html('&#xe602;');
+				})
+
+			})
+
+	</script>
+
 </html>
