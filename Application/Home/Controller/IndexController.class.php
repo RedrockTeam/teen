@@ -14,10 +14,19 @@ class IndexController extends Controller {
     	if($user_message['status'] == 200){
     		session('username', $user_message['userInfo']['real_name']);
     		session('stunum', $user_message['userInfo']['stu_num']);
-    		$this->ajaxReturn(true);
+            session('sex', $user_message['userInfo']['gender']);
+            $conf = array(
+                'username' => $user_message['userInfo']['real_name'],
+                'status' => '200',
+                'message' => true,
+            );
     	}else{
-    		$this->ajaxReturn(false);
+    		$conf = array(
+                'status' => '400',
+                'message' => false,
+            );
     	}
+        $this->ajaxReturn($conf);
     }
 
     private function curl_api($username, $password){		//登录验证接口
@@ -94,7 +103,6 @@ class IndexController extends Controller {
                 'message' => '数据不全',
             );
         }
-        var_dump($config);
         $this->ajaxReturn($info, 'json');
     }
 
