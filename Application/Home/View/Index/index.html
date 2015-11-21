@@ -4,17 +4,6 @@
 		<meta charset="UTF-8">
 		<title>青年之声</title>
 		<link rel="stylesheet" href="__PUBLIC__/home/css/index.css">
-		<style>
-			@font-face {
-				font-family: 'iconfont';
-				src: url('http://at.alicdn.com/t/font_1447931591_1980233.eot'); /* IE9*/
-				src: url('http://at.alicdn.com/t/font_1447931591_1980233.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-				url('http://at.alicdn.com/t/font_1447931591_1980233.woff') format('woff'), /* chrome、firefox */
-				url('http://at.alicdn.com/t/font_1447931591_1980233.ttf') format('truetype'), /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/
-				url('http://at.alicdn.com/t/font_1447931591_1980233.svg#iconfont') format('svg'); /* iOS 4.1- */
-				}
-				                
-		</style>
 	</head>
 	<body>
 		
@@ -49,8 +38,6 @@
 			</div>
 			<div class="login-reg-btn">
 				<span>登录</span>
-					|
-				<span>注册</span>
 			</div>
 		</div>
 		
@@ -207,10 +194,21 @@
 			<p>关于红岩网校 | 开发团队 | 指出错误 | 管理入口</p>
 			<p>地址:重庆市南岸区南山街道崇文路2号重庆邮电大学 联系电话:62461084/62487910</p>
 			<p>本网站由红岩网校工作站负责开发管理,不经红岩网校委员会书面同意,不得进行转载</p>	
+		</div>
+
+	
+		<div class="login" style="display: none">
+			
+			<p><input type="text" name="user_name"></p>
+			<p><input type="password" name="user_pass"></p>
+
+			<p><button>登录</button></p>
 
 		</div>
+
 	</body>
 	<script src="__PUBLIC__/home/js/jquery.min.js"></script>
+	<script src="__PUBLIC__/home/js/layer.js"></script>
 	
 	<script>
 
@@ -227,6 +225,15 @@
 					});
 					$(this).html('&#xe602;');
 				})
+
+				$('.login-reg-btn span').click(function () {
+					layer.open({
+					    type: 1,
+					    skin: 'layui-layer-rim', //加上边框
+					    area: ['420px', '240px'], //宽高
+					    content: $('.login')
+					});
+				});
 
 			})
 

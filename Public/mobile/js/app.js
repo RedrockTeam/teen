@@ -65,7 +65,7 @@
 		var checkUserInfo;
 
 		var alert,
-			confirm, _confirmHTML = '';
+			confirm;
 
 		checkUserInfo = function (form) {
 			var userName = $.trim(form.find('input[name=user-name]').val());
