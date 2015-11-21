@@ -6,7 +6,7 @@
 			praiseQue;
 
 		userLogin = function () {
-            if (util.checkUserInfo($(this).parents('form'))) {
+            if (verify.checkUserInfo($(this).parents('form'))) {
 				var $button = $(this);
 	            $.ajax({
 	            	url: 'index.php?s=/Mobile/User/userLogin',
@@ -20,17 +20,17 @@
 	            	if (response.status === 200 && status === 'success') {
 	            		location.href = response.data;
 	            	} else {
-	            		util.alert("你的账号或密码有误");
+	            		view.alert("你的账号或密码有误");
 	            	}
 	            }).fail(function (jqXHR, textStatus) {
-	            	util.alert('稍安勿躁, 好像出了点小问题=_=');
+	            	view.alert('稍安勿躁, 好像出了点小问题=_=');
 	            }).always(function() {
 	            	setTimeout(function () {
 	            		$button.button('reset');
 	            	}, 2000);
 	            });
             } else {
-            	util.alert('用户名或密码输入有误~');
+            	view.alert('用户名或密码输入有误~');
             }
 		}
 
@@ -38,9 +38,38 @@
 			if ($.AMUI.utils.cookie.get('userId')) {
 				alert();
 			} else {
-				util.confirm('点赞或评论是需要登录哦~');
+				view.confirm('点赞或评论是需要登录哦~');
 			}
-		}
+		};
+
+		addQuestion = function () {
+			event.preventDefault();
+			var $button = $(this);
+			var result = verify.questionAddVerify('#question-form');
+			if (result) {
+				$.ajax({
+	            	url: 'index.php?s=/Home/Index/commit_voice',
+	            	type: 'POST',
+	            	dataType: 'json',
+	            	data: result,
+	            	beforeSend: function () {
+	            		$button.button('loading');
+	            	}
+	            }).done(function (response, status) {
+	            	if (response.status === 200 && status === 'success') {
+	            		location.href = response.data;
+	            	} else {
+	            		view.alert("你的账号或密码有误");
+	            	}
+	            }).fail(function (jqXHR, textStatus) {
+	            	view.alert('稍安勿躁, 好像出了点小问题=_=');
+	            }).always(function() {
+	            	setTimeout(function () {
+	            		$button.button('reset');
+	            	}, 2000);
+	            });
+			}
+		};
 
 		return {
 			userLogin: userLogin,
@@ -60,14 +89,14 @@
 	})();
 
 
-	var util = (function () {
+	var verify = (function () {
 
-		var checkUserInfo;
 
-		var alert,
-			confirm;
 
-		checkUserInfo = function (form) {
+		var userLoginVerify,
+			questionAddVerify;
+
+		userLoginVerify = function (form) {
 			var userName = $.trim(form.find('input[name=user-name]').val());
 			var userPass = $.trim(form.find('input[name=user-pass]').val());
 			if (!userName || !userPass) {
@@ -77,7 +106,34 @@
 				return false;
 			}
 			return true;
+		};
+
+		questionAddVerify = function (form) {
+			var flag = true;
+			var formData = $(form).serialize();
+			var tempData = tool.parseArgs(formData);
+			for (var name in tempData) {
+				if (!$.trim(tempData[name])) {
+					flag = false;
+					$('#' + name).addClass('am-form-field');
+					$('#' + name).parent().addClass('am-form-error');
+				} else {
+					continue;
+				}
+			}
+			return flag == true ? formData : flag;
+		};
+
+		return {
+			userLoginVerify: userLoginVerify,
+			questionAddVerify: questionAddVerify
 		}
+	})();
+
+
+	var view = (function () {
+
+		var alert, confirm;
 
 		alert = function (text) {
 			if ($('#alert-modal').find('.am-modal-bd').html()) {
@@ -108,10 +164,33 @@
 
 		return {
 			alert: alert,
-			confirm: confirm,
-			checkUserInfo: checkUserInfo
+			confirm: confirm
 		};
 
+	})();
+
+
+	var tool = (function () {
+
+		parseArgs = function (formData) {
+			var args = {};
+			var pairs = formData.split("&"); 
+			for(var i = 0; i < pairs.length; i++) {
+	            var index = pairs[i].indexOf('=');
+	            if (index == -1) {
+	            	continue;
+	            } else {
+	                var name = pairs[i].substring(0, index);
+	                var value = decodeURIComponent(pairs[i].substring(index+1));
+	                args[name] = value;
+	            }
+	        }
+	        return args;
+		}
+
+		return {
+			parseArgs: parseArgs
+		}
 	})();
 
 
