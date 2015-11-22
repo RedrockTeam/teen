@@ -49,41 +49,37 @@
 		} 
 
 		add = function () {
-			view.alert('提问成功~', function () {
-				// 隐藏提问页面
-				view.addQuestionViewHide();
-				// 动态添加最新问题
-				view.addQuestionPanel();
-			})
-			// event.preventDefault();
-			// var $button = $(this);
-			// var result = verify.questionAddVerify('#question-form');
-			// if (result) {
-			// 	$.ajax({
-	  //           	url: 'index.php?s=/Home/Index/commit_voice',
-	  //           	type: 'POST',
-	  //           	dataType: 'json',
-	  //           	data: result,
-	  //           	beforeSend: function () {
-	  //           		$button.button('loading');
-	  //           	}
-	  //           }).done(function (response, status) {
-	  //           	console.log(response);
-	  //           	if (response.status === 200 && status === 'success') {
-	  //           		// location.href = response.data;
-	  //           		alert();
-	  //           	} else {
-	  //           		view.alert("提问有问题");
-	  //           	}
-	  //           }).fail(function (jqXHR, textStatus) {
-	  //           	view.alert('稍安勿躁, 好像出了点小问题=_=');
-	  //           }).always(function() {
-	  //           	setTimeout(function () {
-	  //           		$button.button('reset');
-	  //           	}, 2000);
-	  //           });
-			// }
-
+			
+			var $button = $(this);
+			var result = verify.questionAddVerify('#question-form');
+			if (result) {
+				$.ajax({
+	            	url: 'index.php?s=/Home/Index/commit_voice',
+	            	type: 'POST',
+	            	dataType: 'json',
+	            	data: result,
+	            	beforeSend: function () {
+	            		$button.button('loading');
+	            	}
+	            }).done(function (response, status) {
+	            	if (response.status === 200) {
+	            		view.alert('提问成功~', function () {
+							// 隐藏提问页面
+							view.addQuestionViewHide();
+							// 动态添加最新问题
+							view.addQuestionPanel(response.data);
+						});
+	            	} else {
+	            		view.alert("问题数据不完整, 请重新");
+	            	}
+	            }).fail(function (jqXHR, textStatus) {
+	            	view.alert('稍安勿躁, 好像出了点小问题=_=', function () {
+	            		$('form')[0].reset();
+	            	});
+	            }).always(function() {
+	            	$button.button('reset');
+	            });
+			}
 		};
 
 		praise = function () {
@@ -194,8 +190,8 @@
 			$('#index').css('display', 'block');
 		};
 
-		addQuestionPanel = function () {
-			var $questionPanel = $(template.question()).addClass('animated pulse');
+		addQuestionPanel = function (data) {
+			var $questionPanel = $(template.question(data)).addClass('animated pulse');
 			$('.am-g:eq(1)').prepend($questionPanel);
 			setTimeout(function () {
 				$questionPanel.removeClass('animated pulse');
@@ -243,26 +239,26 @@
 			confirmModal, _confirmModalHTML = '',
 			questionPanel, _questionPanelHTML = '';
 			
-		questionPanel = function () {
+		questionPanel = function (data) {
 			_questionPanelHTML += '<div class="am-panel am-panel-default">';
 			  	_questionPanelHTML += '<div class="am-panel-hd">';
 			  		_questionPanelHTML += '<span>';
 				  		_questionPanelHTML += '<img class="am-circle" src="Public/mobile/images/lufei.jpg" width="30" height="30">';
 				  	_questionPanelHTML += '</span>&nbsp;';
-				  	_questionPanelHTML += '<span class="am-vertical-align-middle">重庆邮电大学学生会</span>';
+				  	_questionPanelHTML += '<span class="am-vertical-align-middle">' + data.postername + '</span>';
 			  	_questionPanelHTML += '</div>';
 			  	_questionPanelHTML += '<div class="am-panel-bd">';
-			    	_questionPanelHTML += '<p>这里是问题的详情这里是问题的详情这里是问题的详情这里是问题的详情</p>';
+			    	_questionPanelHTML += '<p>' + data.question + '</p>';
 			  	_questionPanelHTML += '</div>';
 			  	_questionPanelHTML += '<div class="am-panel-footer">';
-			  		_questionPanelHTML += '<div class="post-time"><i class="am-icon-calendar"></i><span>7-12 15:30</span></div>';
+			  		_questionPanelHTML += '<div class="post-time"><i class="am-icon-calendar"></i><span>'+ data.time +'</span></div>';
 			  		_questionPanelHTML += '<div class="am-fr comment">';
 			  			_questionPanelHTML += '<i class="am-icon-comments"></i>';
-			  			_questionPanelHTML += '<span>10</span>';
+			  			_questionPanelHTML += '<span>0</span>';
 			  		_questionPanelHTML += '</div>';
 			  		_questionPanelHTML += '<div class="am-fr praise">';
 			  			_questionPanelHTML += '<i class="am-icon-thumbs-up"></i>';
-			  			_questionPanelHTML += '<span>20</span>';
+			  			_questionPanelHTML += '<span>0</span>';
 			  		_questionPanelHTML += '</div>';
 			  	_questionPanelHTML += '</div>';
 			_questionPanelHTML += '</div>';
