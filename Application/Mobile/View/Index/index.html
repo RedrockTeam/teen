@@ -5,20 +5,21 @@
 		<link rel="stylesheet" href="http://apps.bdimg.com/libs/animate.css/3.1.0/animate.min.css">
 	
 		<div class="am-g" style="padding: 10px 0;">
+            <volist name="voice" id="v">
                 <div class="am-panel am-panel-default">
 				  	<div class="am-panel-hd">
 				  		<span>
 					  		<img class="am-circle" src="__PUBLIC__/mobile/images/lufei.jpg" width="30" height="30">
 					  	</span>
-					  	<span class="am-vertical-align-middle">sadsa</span>
+					  	<span class="am-vertical-align-middle">{$v.postername}</span>
 				  	</div>
 				  	<div class="am-panel-bd">
-				    	<p>saddsa</p>
+				    	<p>{$v.question}</p>
 				  	</div>
 				  	<div class="am-panel-footer">
 				  		<div class="post-time">
 				  			<i class="am-icon-calendar"></i>
-				  			<span>asdsa</span>
+				  			<span>{$v.time|date="m-d H:i" ###}</span>
 				  		</div>
 				  		<div class="am-fr praise">
 				  			<i class="am-icon-thumbs-up"></i>
@@ -30,6 +31,7 @@
 				  		</div>
 				  	</div>
 				</div>
+            </volist>
 		</div>
 
 
@@ -74,7 +76,9 @@
 						<label>选择提问人</label>
 						<select name="type">
 							<option value="public">公开提问</option>
-								<option value="1">asdsa</option>
+							<volist name="chairman" id="v">
+								<option value="{$v.id}">{$v.chairname}</option>
+							</volist>
 						</select>
 					</div>
 					<div class="am-form-group">
