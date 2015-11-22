@@ -15,6 +15,11 @@ class IndexController extends Controller {
     		session('username', $user_message['userInfo']['real_name']);
     		session('stunum', $user_message['userInfo']['stu_num']);
             session('sex', $user_message['userInfo']['gender']);
+            if($user_message['userInfo']['gender'] == "男"){
+                session('touxiang', '__PUBLIC__/chairone/boy.jpg');
+            }else{
+                session('touxiang', '__PUBLIC__/chairone/girl.jpg');
+            }
             $conf = array(
                 'username' => $user_message['userInfo']['real_name'],
                 'stunum' => $user_message['userInfo']['stu_num'],
@@ -90,20 +95,30 @@ class IndexController extends Controller {
         加一变量type区分公开提问还是@提问
         在数据库里面只将getername设置为public就好
     */
+        //http://localhost/teen/?m=Home&c=Index&a=commit_voice&type=public&title=hehe&content=hehe 
     public function commit_voice(){
+        if(!session('username')){return;} 
         $config = array(
             'postername' => session('username').session('stunum'),
-            'gettername' => I('post.type'),
-            'title' => I('post.title'),
-            'question' => I('post.content')
+            'gettername' => I('get.type'),
+            'title' => I('get.title'),
+            'question' => I('get.content')
         );      //设置需要插入数据库的参数数组
         if($config['postername'] && $config['gettername'] && $config['title'] && $config['question']){
             $config['time'] = date('y-m-d h:m:s', time() + 8 * 3600);
-            var_dump(M('voice')->add($config));
-            $info = array(
-                'status' => 200,
-                'message' => 'ok',
-            );
+            if(M('voice')->add($config)){
+                $config['touxiang'] = session('touxiang');
+                $info = array(
+                    'status' => 200,
+                    'message' => 'ok',
+                    'data' => $config
+                );
+            }else{
+                $info = array(
+                'status' => 500,
+                'message' => '服务器错误',
+                );
+            }
         }else{
             $info = array(
                 'status' => 400,
