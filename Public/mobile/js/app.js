@@ -1,11 +1,10 @@
 
 
-	var clickEvent = (function () {
+	var user = (function () {
 
-		var userLogin,
-			praiseQue;
+		var login;
 
-		userLogin = function () {
+		login = function () {
             if (verify.userLoginVerify('#user-login-form')) {
 				var $button = $(this);
 	            $.ajax({
@@ -34,8 +33,60 @@
             	view.alert('用户名或密码输入有误~');
             }
 		}
+		return {
+			login: login
+		};
+	})();
 
-		praiseQue = function () {
+
+	var question = (function () {
+
+		var add,
+			praise;
+
+		addViewShow = function () {
+			view.addQuestionViewShow();
+		} 
+
+		add = function () {
+			view.alert('提问成功~', function () {
+				// 隐藏提问页面
+				view.addQuestionViewHide();
+				// 动态添加最新问题
+				view.addQuestionPanel();
+			})
+			// event.preventDefault();
+			// var $button = $(this);
+			// var result = verify.questionAddVerify('#question-form');
+			// if (result) {
+			// 	$.ajax({
+	  //           	url: 'index.php?s=/Home/Index/commit_voice',
+	  //           	type: 'POST',
+	  //           	dataType: 'json',
+	  //           	data: result,
+	  //           	beforeSend: function () {
+	  //           		$button.button('loading');
+	  //           	}
+	  //           }).done(function (response, status) {
+	  //           	console.log(response);
+	  //           	if (response.status === 200 && status === 'success') {
+	  //           		// location.href = response.data;
+	  //           		alert();
+	  //           	} else {
+	  //           		view.alert("提问有问题");
+	  //           	}
+	  //           }).fail(function (jqXHR, textStatus) {
+	  //           	view.alert('稍安勿躁, 好像出了点小问题=_=');
+	  //           }).always(function() {
+	  //           	setTimeout(function () {
+	  //           		$button.button('reset');
+	  //           	}, 2000);
+	  //           });
+			// }
+
+		};
+
+		praise = function () {
 			if ($.AMUI.utils.cookie.get('username')) {
 				alert();
 			} else {
@@ -43,53 +94,11 @@
 			}
 		};
 
-		addQuestion = function () {
-			event.preventDefault();
-			var $button = $(this);
-			var result = verify.questionAddVerify('#question-form');
-			if (result) {
-				$.ajax({
-	            	url: 'index.php?s=/Home/Index/commit_voice',
-	            	type: 'POST',
-	            	dataType: 'json',
-	            	data: result,
-	            	beforeSend: function () {
-	            		$button.button('loading');
-	            	}
-	            }).done(function (response, status) {
-	            	console.log(response);
-	            	if (response.status === 200 && status === 'success') {
-	            		// location.href = response.data;
-	            		alert();
-	            	} else {
-	            		view.alert("提问有问题");
-	            	}
-	            }).fail(function (jqXHR, textStatus) {
-	            	view.alert('稍安勿躁, 好像出了点小问题=_=');
-	            }).always(function() {
-	            	setTimeout(function () {
-	            		$button.button('reset');
-	            	}, 2000);
-	            });
-			}
-		};
-
 		return {
-			userLogin: userLogin,
-			praiseQue: praiseQue,
-			addQuestion: addQuestion
+			add: add,
+			praise: praise,
+			addViewShow: addViewShow
 		};
-	})();
-
-
-
-	var ajax = (function () {
-
-
-
-
-
-
 	})();
 
 	// 验证模块
@@ -135,15 +144,21 @@
 
 	var view = (function () {
 
-		var alert, confirm;
+		var alert, confirm, addQuestionPanel, addQuestionViewShow;
 
-		alert = function (text) {
+		alert = function (text, callback) {
 			if ($('#alert-modal').find('.am-modal-bd').html()) {
 				$('#alert-modal').find('.am-modal-bd').html(text);
-				$('#alert-modal').modal();
+				$('#alert-modal').modal({
+		    		relatedTarget: this,
+					onConfirm: callback
+				});
 			} else {
-		    	$('body').append(template.alert(text)) ;
-		    	$('#alert-modal').modal();
+		    	$('body').append(template.alert(text));
+		    	$('#alert-modal').modal({
+		    		relatedTarget: this,
+					onConfirm: callback
+				});
 		    }
 		}
 
@@ -164,9 +179,35 @@
 		    });
 		}
 
+		addQuestionViewShow = function () {
+			$(this).removeClass('closeChooseListAnimation').addClass('openChooseListAnimation').css('webkitTransform', 'scale(0)');
+			setTimeout(function () {
+				$('#index').css('display', 'none');
+				$('#question').removeClass('bounceOutUp').addClass('bounceInDown animated').css('display', 'block');
+			}, 310);
+		};
+
+		addQuestionViewHide = function () {
+			$('#question').removeClass('bounceInDown').addClass('bounceOutUp animated');
+			$('#question').css('display', 'none');
+			$('.add-question').removeClass('openChooseListAnimation').addClass('closeChooseListAnimation').css('-webkit-transform', 'scale(1)');
+			$('#index').css('display', 'block');
+		};
+
+		addQuestionPanel = function () {
+			var $questionPanel = $(template.question()).addClass('animated pulse');
+			$('.am-g:eq(1)').prepend($questionPanel);
+			setTimeout(function () {
+				$questionPanel.removeClass('animated pulse');
+			}, 1000);
+		};
+
 		return {
 			alert: alert,
-			confirm: confirm
+			confirm: confirm,
+			addQuestionPanel: addQuestionPanel,
+			addQuestionViewShow: addQuestionViewShow,
+			addQuestionViewHide: addQuestionViewHide
 		};
 
 	})();
@@ -201,8 +242,7 @@
 		var alertModal, _alertModalHTML = '',
 			confirmModal, _confirmModalHTML = '',
 			questionPanel, _questionPanelHTML = '';
-
-
+			
 		questionPanel = function () {
 			_questionPanelHTML += '<div class="am-panel am-panel-default">';
 			  	_questionPanelHTML += '<div class="am-panel-hd">';
@@ -239,7 +279,7 @@
 	      					_alertModalHTML += text;
 	    				_alertModalHTML += '</div>';
 	    			_alertModalHTML += '<div class="am-modal-footer">'
-	      		_alertModalHTML += '<span class="am-modal-btn">确定</span>';
+	      		_alertModalHTML += '<span class="am-modal-btn" data-am-modal-confirm>确定</span>';
 	    	_alertModalHTML += '</div></div></div>';
 	    	return _alertModalHTML;
 		}

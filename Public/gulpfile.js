@@ -46,6 +46,7 @@
 
 	gulp.task('backend-js-watch', ['backend-js'], browserSync.reload);
 	gulp.task('fontend-js-watch', ['fontend-js'], browserSync.reload);
+	gulp.task('mobile-js-watch', browserSync.reload);
 
 
 	/* 压缩图片
@@ -107,9 +108,7 @@
 	        proxy: "localhost:80"
 	    });
 	    // 后端文件变化
-	    gulp.watch('home/js/*.js', function () {
-	    	browserSync.reload;
-	    });
+	    gulp.watch('mobile/js/*.js', ['mobile-js-watch']);
 	    // 前端文件变化
 	    //gulp.watch('public/home/js/**/*.js', ['fontend-js-watch']);
 	    // sass 编译
