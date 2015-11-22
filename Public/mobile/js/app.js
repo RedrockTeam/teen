@@ -45,8 +45,12 @@
 			praise;
 
 		addViewShow = function () {
-			view.addQuestionViewShow();
-		} 
+			if ($.AMUI.utils.cookie.get('username')) {
+				view.addQuestionViewShow();
+			} else {
+				view.confirm('提问需要先登录!');
+			}
+		};
 
 		add = function () {
 			var $button = $(this);
