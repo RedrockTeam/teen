@@ -63,6 +63,7 @@
 	            }).done(function (response, status) {
 	            	if (response.status === 200) {
 	            		view.alert('提问成功~', function () {
+	            			response.data.time = tool.formatTime(response.data.time);
 							// 隐藏提问页面
 							view.addQuestionViewHide();
 							// 动态添加最新问题
@@ -220,9 +221,19 @@
 	        return args;
 		}
 
+		formatTime = function (timestamp) {
+			var time = new Date(timestamp * 1000);
+			var month = time.getMonth() + 1;
+			var day = time.getDay();
+			var hour =time.getHours();
+			var min = time.getMinutes();
+			return month + '-' + day + ' ' + hour + ':' + min;
+		};
+
 		return {
-			parseArgs: parseArgs
-		}
+			parseArgs: parseArgs,
+			formatTime: formatTime
+		};
 	})();
 
 
