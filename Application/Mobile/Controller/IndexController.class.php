@@ -7,8 +7,8 @@
 	    public function index(){
 	    	$chairman = M('chairman')->field('id, chairname')->select();
 	        $voice = $this->load_home_data();
-	    	$this->assgin('voice', $voice);          //这里缺少登陆状态和前端渲染的数据
-	        $this->assgin('chairman', $chairman);
+	    	$this->assign('voice', $voice);          //这里缺少登陆状态和前端渲染的数据
+	        $this->assign('chairman', $chairman);
 	    	$this->display();
 	    }
 
