@@ -7,10 +7,12 @@ class IndexController extends Controller {
         $this->display();
     }
 
-    public function login(){	//登录的方法
-    	$username = I('get.username');
-    	$password = I('get.password');
+    public function login(){	//普通用户和登录的方法
+    	$username = I('post.username');
+    	$password = I('post.password');
+        //这里还需要处理老师和学生的区分逻辑
     	$user_message = $this->curl_api($username, $password); //获取用户信息
+        //
     	if($user_message['status'] == 200){
     		session('username', $user_message['userInfo']['real_name']);
     		session('stunum', $user_message['userInfo']['stu_num']);
@@ -122,7 +124,36 @@ class IndexController extends Controller {
         $this->ajaxReturn($info, 'json');
     }
 
-
+    public function vote(){      //点赞接口
+        if(!session('username')){return;}
+        $id = I('get.id');
+        $where = array(
+            'voiceid' => $id,
+        );
+        if(!M('user_vote')->where($where)->select()){
+            //增加关联表的一条数据
+            $config = array(
+                'user' => session('stunum'), //这里可能是教师的职工号，也可能是主席学号
+                'voiceid' => $id,
+            );
+            M('user_vote')->add($config);
+            //修改vioce表的vote
+            $where = array(
+                'id' => $id,
+            );
+            M('voice')->where($where)->setInc('vote', 1);
+            $data = array(
+                'status' => 200,
+                'message' => 'ok',
+            );
+        }else{
+            $data = array(
+                'status' => 304,
+                'message' => '已经点过赞了哦亲!',
+            );
+        }
+        $this->ajaxReturn($data, 'json');
+    }
 
 
 }
