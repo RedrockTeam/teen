@@ -62,7 +62,7 @@ class IndexController extends Controller {
     			'voiceid' => $id,
     			'username' => $username,
     			'comment' => $comment,
-    			'time' => date('y-m-d h:m:s', time() + 8 * 3600), //获取当前时间
+    			'time' => time(), //获取当前时间戳
     		);
     		M('comment')->add($data);	
             $config = array(
@@ -94,14 +94,14 @@ class IndexController extends Controller {
         if(!session('username')){return;} 
         $config = array(
             'postername' => session('username').session('stunum'),
-            'gettername' => I('get.type'),
-            'title' => I('get.title'),
-            'question' => I('get.content')
+            'gettername' => I('post.type'),
+            'title' => I('post.title'),
+            'question' => I('post.content')
         );      //设置需要插入数据库的参数数组
         if($config['postername'] && $config['gettername'] && $config['title'] && $config['question']){
-            $config['time'] = date('y-m-d h:m:s', time() + 8 * 3600);
+            $config['time'] = time();
             if(M('voice')->add($config)){
-                $config['touxiang'] = session('touxiang');
+                $config['touxiang'] = session('touxiang');   //将头像地址添加进返回参数
                 $info = array(
                     'status' => 200,
                     'message' => 'ok',
