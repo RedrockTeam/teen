@@ -18,6 +18,10 @@
 	var browserSync = require('browser-sync').create();
 
 
+	var path = {
+		mobile: 'mobile/scss/'
+	};
+
 
 	// 前端js ES6=>ES5
 	gulp.task('fontend-js', () => {
@@ -42,6 +46,7 @@
 
 	gulp.task('backend-js-watch', ['backend-js'], browserSync.reload);
 	gulp.task('fontend-js-watch', ['fontend-js'], browserSync.reload);
+	gulp.task('mobile-js-watch', browserSync.reload);
 
 
 	/* 压缩图片
@@ -77,6 +82,14 @@
 	        .pipe(browserSync.reload({stream: true}));
 	});
 
+	gulp.task('m-sass', function() {
+	    gulp.src(path.mobile + '*.scss')
+	        .pipe(plumber())
+	        .pipe(sass())
+	        .pipe(gulp.dest('mobile/css'))
+	        .pipe(browserSync.reload({stream: true}));
+	});
+
 
 	/* 合并，压缩CSS
 		gulp.task('styles', function() {
@@ -95,13 +108,12 @@
 	        proxy: "localhost:80"
 	    });
 	    // 后端文件变化
-	    gulp.watch('home/js/*.js', function () {
-	    	browserSync.reload;
-	    });
+	    gulp.watch('mobile/js/*.js', ['mobile-js-watch']);
 	    // 前端文件变化
 	    //gulp.watch('public/home/js/**/*.js', ['fontend-js-watch']);
 	    // sass 编译
-	    gulp.watch("home/scss/*.scss", ['sass']);
+	    //gulp.watch("home/scss/*.scss", ['sass']);
+	    gulp.watch(path.mobile + "*.scss", ['m-sass']);
 	    // 页面改动监听
 	    gulp.watch("../Application/**/*.html").on('change', browserSync.reload);
 	    //gulp.watch('src/public/home/images/**/*.{png, jpg, gif, ico}', ['imagemin']);

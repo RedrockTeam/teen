@@ -1,126 +1,10 @@
 
 		<include file="Public/header" />
 
-		<style>
-			body {
-				background-color: rgb(245, 245, 245);
-			}
-			.am-vertical-align-middle {
-			    vertical-align: middle;
-			    margin-top: 2px;
-			}
-			.am-panel {
-    			margin-bottom: 10px;
-    			border: 0;
-    		}
-			.am-panel-footer {
-				border-top: none;
-				background-color: #fff;
-				font-size: 13px;
-				color: rgb(146, 146, 146);
-			    box-shadow: 1px 2px 1px;
-				padding-left: 0 !important;
-				padding-right: 0 !important;
-			}
-			.am-panel-footer div {
-				margin: 0;
-				display: inline-block;
-				width: 33.3%;
-				border-left: 1px solid rgb(218, 218, 218);
-				text-align: center;
-			}
-			.am-panel-footer div:first-child {
-				border-left: 0;
-			}
-			.am-panel-footer div i {
-				font-size: 14px;
-			}
-			.am-panel-footer div span {
-				margin-left: 3px;
-			}
-			.am-panel-footer div:first-child span {
-				color: #999;
-			    font-weight: lighter;
-			    letter-spacing: -1px;
-			}
-			.am-panel-default {
-				background-color: #fff;
-				border-top: none;
-				border-top: 1px solid #e6e6e6;
-			    border-bottom: 1px solid #d8d8d8;
-			}
-			.am-panel-default > .am-panel-hd {
-				background-color: transparent;
-			}
-			.am-popup-hd {
-				z-index: 1;
-				padding: 0;
-			}
-			.am-popup-bd {
-				padding: 0;
-			}
-			.add-question {
-				height: 4.5rem;
-				width: 4.5rem;
-				border-radius: 50%;
-				background-color: #0e90d2;
-				position: fixed;
-				bottom: 10px;
-				right: 10px;
-				-webkit-box-shadow: -1px 0px 11px;
-			}
-			.add-question i {
-				font-size: 20px;
-				width: 4.5rem;
-				height: 4.5rem;
-				line-height: 4.5rem;
-				text-align: center;
-				vertical-align: middle;
-				color: #eee;
-			}
-
-			.am-modal-actions-group {
-				margin: 0;
-			}
-
-			.loading-more span {
-				color: rgb(146, 146, 146);
-				font-size: 14px;
-			}
-
-			@-webkit-keyframes openChooseList {
-		        0% {
-		            -webkit-transform: scale(1);
-		        }
-		        100% {
-		            -webkit-transform: scale(1.2);
-		            background-color: #0a628f;
-		        }
-		    }
-
-		    @-webkit-keyframes closeChooseList {
-		        0% {
-		            -webkit-transform: scale(1.2);
-		        }
-		        100% {
-		            -webkit-transform: scale(1);
-		            background-color: #0e90d2;
-		        }
-		    }
-
-			.openChooseListAnimation {
-				-webkit-animation-name: openChooseList;
-                -webkit-animation-duration: .3s;
-			}
-			
-			.closeChooseListAnimation {
-				-webkit-animation-name: closeChooseList;
-                -webkit-animation-duration: .3s;
-			}
-
-		</style>
+		<link rel="stylesheet" href="__PUBLIC__/mobile/css/index.css">
+		<link rel="stylesheet" href="http://apps.bdimg.com/libs/animate.css/3.1.0/animate.min.css">
+	
 		<div class="am-g" style="padding: 10px 0;">
-            
             <?php for ($i = 0; $i < 6; $i++) { ?>
                 <div class="am-panel am-panel-default">
 				  	<div class="am-panel-hd">
@@ -155,116 +39,118 @@
 			<i class="am-icon-refresh am-icon-spin" style="font-size: 2rem; margin-bottom: 1.5rem"></i>
 			<span>加载更多</span>
 		</div>
-
 		<div class="add-question">
 			<i class="am-fr am-icon-pencil" style="margin-left: 0"></i>
 		</div>
+	</div>
+
 		
-		<div class="am-popup" id="my-actions">
-			  <div class="am-popup-inner">
-			    <div class="am-popup-hd">
-			      	<header data-am-widget="header" class="am-header am-header-default">
-				      	<div class="am-header-left am-header-nav">
-				          	<a href="left-link" data-am-modal-close>
-								<i class="am-header-icon am-icon-close"></i>
-				          	</a>
-				      	</div>
-				      	<h1 class="am-header-title">
-				          	<a href="#title-link" class="">
-				       			选择提问人
-				          	</a>
-				      	</h1>
-				      	<div class="am-header-right am-header-nav">
-				          	<a href="#right-link" class="">
-				                <i class="am-header-icon am-icon-check"></i>
-				          	</a>
-				      	</div>
-				  	</header>
-			    </div>
-			    <div class="am-popup-bd">
-			    	<ul class="am-list am-list-static am-list-border am-list-striped">
-					  	<li>校学生会</li>
-					  	<li>校学生会</li>
-					  	<li>校学生会</li>
-					  	<li>校学生会</li>
-					  	<li>校学生会</li>
-					  	<li>校学生会</li>
-					  	<li>校学生会</li>
-					  	<li>校学生会</li>
-					  	<li>校学生会</li>
-					  	<li>校学生会</li>
-					  	<li>校学生会</li>
-					  	<li>校学生会</li>
-					  	<li>校学生会</li>
-					  	<li>校学生会</li>
-					  	<li>校学生会</li>
-					  	<li>校学生会</li>
-					</ul>
-			    </div>
-			  </div>
+	<div id="question" style="display: none;">
+		
+		<div class="am-g">
+            <header data-am-widget="header" class="am-header am-header-default scrollspy-nav" data-am-scrollspy-nav="{offsetTop: 45}" data-am-sticky>
+		      	<div class="am-header-left am-header-nav">
+		          	<a href="javascript:void(0)">
+						<i class="am-header-icon am-icon-home"></i>
+		          	</a>
+		      	</div>
+
+		      	<h1 class="am-header-title">
+		          	<a href="javascript:void(0)">
+		       			最新提问
+		          	</a>
+		      	</h1>
+
+		      	<div class="am-header-right am-header-nav">
+		          	<a href="javascript:void(0)">
+		                <i class="am-header-icon am-icon-user"></i>
+		          	</a>
+		      	</div>
+		  	</header>
+        </div>
+
+		<div class="am-g">
+			<form class="am-form" id="question-form">
+	    		<fieldset>
+					<div class="am-form-group">
+						<label>选择提问人</label>
+						<select name="type">
+							<option value="public">公开提问</option>
+							<option value="1">校学生会</option>
+							<option value="2">软件学生会</option>
+							<option value="3">传媒学生会</option>
+						</select>
+					</div>
+					<div class="am-form-group">
+				      	<label for="title">问题标题</label>
+				      	<input type="text" placeholder="" name="title" id="title">
+				    </div>
+
+					<div class="am-form-group">
+				      	<label for="content">问题详情</label>
+				      	<textarea rows="5" name="content" id="content"></textarea>
+				    </div>
+
+				    <p>
+				    	<button type="button" class="am-btn am-btn-block am-btn-primary ensure-add-question" data-am-loading="{spinner: 'circle-o-notch', loadingText: '提问中.', resetText: '确认'}">确认</button>
+				    </p>
+	    		</fieldset>
+	    	</from>
 		</div>
-	
+	</div>
 
 	<include file="Public/footer" />
 
 	<script>
 
 		$(function () {
+            $.AMUI.progress.start();
 
+			$('.add-question').on('click', question.addViewShow);
 
+			$('.ensure-add-question').on('click', question.add);
 
-			$('.add-question').on('click', function () {
-				if (navigator.webkitVibrate) {
-					navigator.webkitVibrate(200);
-				} 
-				$(this).removeClass('closeChooseListAnimation').addClass('openChooseListAnimation').css({
-					'webkitTransform': 'scale(1.2)',
-					'backgroundColor': '#0a628f'
-				});
-				$('#my-actions').modal();
-			});
+			$('.am-g:eq(1)').on('click', '.comment', question.praise);
 
-			$('.am-icon-user').on('click', function () {
-				if (!$.AMUI.utils.cookie.get('userId')) {
-					util.confirm('查看个人资料需要登录哦~');
+			$('#title').add('#content').focus(function (event) {
+				if ($(this).parent().hasClass('am-form-error')) {
+					$(this).parent().removeClass('am-form-error');
 				}
 			});
 
+			// 个人中心
+			$('.am-icon-user').on('click', function () {
+				if (!$.AMUI.utils.cookie.get('username')) {
+					view.confirm('查看个人资料需要登录哦~');
+				}
+			});
+
+			// 主页Icon
 			$('.am-icon-home').on('click', function () {
-				window.location.href = "http://localhost/teen/index.php?s=/Mobile";
+				location.href = "http://localhost/teen/index.php?s=/Mobile";
 			});
 
-			$('#my-actions').on('closed.modal.amui', function(){
-			  	$('.add-question').removeClass('openChooseListAnimation').addClass('closeChooseListAnimation').css({
-					'-webkit-transform': 'scale(1)',
-					'backgroundColor': '#0e90d2'
-				});
-			});
+			// var flag = true;
+			// $(window).scroll(function(){ 
+			//     totalheight = parseFloat($(window).height()) + parseFloat($(window).scrollTop()); 
+			//     if($(document).height() <= totalheight){ 
+			//         $('.loading-more').css('display', 'block');
+			//         if (flag) {
+			//         	flag = false;
+			// 	        setTimeout(function () {
+			// 	        	$('.am-g:eq(1)').append(template.question());
+			// 	        	$(window).scroll(function () {
+			// 	        		return false;
+			// 	        	});
+			//         		flag = true;
+			// 	        }, 1500);
+			//         }
+			//     } else {
+			//     	$('.loading-more').css('display', 'none');
+			//     }
+			// });
 
-			$('.am-g:eq(1)').on('click', '.comment', clickEvent.praiseQue);
-			var flag = true;
-			$(window).scroll(function(){ 
-			    totalheight = parseFloat($(window).height()) + parseFloat($(window).scrollTop()); 
-			    if($(document).height() <= totalheight){ 
-			        $('.loading-more').css('display', 'block');
-			        if (flag) {
-			        	flag = false;
-				        setTimeout(function () {
-				        	$('.am-g:eq(1)').append(template.question());
-				        	$(window).scroll(function () {
-				        		return false;
-				        	});
-			        		flag = true;
-				        }, 1500);
-			        }
-			    } else {
-			    	$('.loading-more').css('display', 'none');
-			    }
-			});
-
-			$('.am-modal-actions-header:gt(1)').on('click', function () {
-				window.location.href = 'http://localhost/teen/index.php?s=/Mobile/User/userIndex';
-			});
+			$.AMUI.progress.done();
 
 		});
 
