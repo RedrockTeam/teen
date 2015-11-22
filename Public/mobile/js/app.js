@@ -211,7 +211,9 @@
 
 
 	var tool = (function () {
-
+		var parseArgs,
+			formatTime;
+			
 		parseArgs = function (formData) {
 			var args = {};
 			var pairs = formData.split("&"); 
@@ -231,10 +233,10 @@
 		formatTime = function (timestamp) {
 			var time = new Date(timestamp * 1000);
 			var month = time.getMonth() + 1;
-			var day = time.getDay();
-			var hour =time.getHours();
+			var day = time.getDate();
+			var hour = time.getHours();
 			var min = time.getMinutes();
-			return month + '-' + day + ' ' + hour + ':' + min;
+			return ' ' + month + '-' + day + ' ' + hour + ':' + min;
 		};
 
 		return {
