@@ -15,7 +15,7 @@
 	    //首页加载的方法
 	    public function load_home_data(){
 	        $id = I('get.id');                    //获取上一次查询的终点id
-	        $data = D('voice')->home_load_data($id);
+	        $data = M('voice')->home_load_data($id);
 	        if($id){
 	            $this->ajaxReturn($data, 'json');
 	        }else{
