@@ -49,7 +49,6 @@
 		} 
 
 		add = function () {
-			
 			var $button = $(this);
 			var result = verify.questionAddVerify('#question-form');
 			if (result) {
@@ -78,6 +77,7 @@
 	            	});
 	            }).always(function() {
 	            	$button.button('reset');
+	            	$('form')[0].reset();
 	            });
 			}
 		};
@@ -145,17 +145,13 @@
 		alert = function (text, callback) {
 			if ($('#alert-modal').find('.am-modal-bd').html()) {
 				$('#alert-modal').find('.am-modal-bd').html(text);
-				$('#alert-modal').modal({
-		    		relatedTarget: this,
-					onConfirm: callback
-				});
 			} else {
 		    	$('body').append(template.alert(text));
-		    	$('#alert-modal').modal({
-		    		relatedTarget: this,
-					onConfirm: callback
-				});
 		    }
+	    	$('#alert-modal').modal({
+	    		relatedTarget: this,
+				onConfirm: callback
+			});
 		}
 
 		confirm = function (text, onConfirm) {
@@ -168,9 +164,6 @@
 		        relatedTarget: this,
 		        onConfirm: function (options) {
 		          	location.href = '?s=/Mobile/User/userLogin';
-		        },
-		        onCancel: function() {
-		        	console.log('sds');
 		        }
 		    });
 		}

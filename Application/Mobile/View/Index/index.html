@@ -124,25 +124,25 @@
 				location.href = "http://localhost/teen/index.php?s=/Mobile";
 			});
 
-			var flag = true;
-			$(window).scroll(function(){ 
-			    totalheight = parseFloat($(window).height()) + parseFloat($(window).scrollTop()); 
-			    if($(document).height() <= totalheight){ 
-			        $('.loading-more').css('display', 'block');
-			        if (flag) {
-			        	flag = false;
-				        setTimeout(function () {
-				        	$('.am-g:eq(1)').append(template.question());
-				        	$(window).scroll(function () {
-				        		return false;
-				        	});
-			        		flag = true;
-				        }, 1500);
-			        }
-			    } else {
-			    	$('.loading-more').css('display', 'none');
-			    }
-			});
+			// var flag = true;
+			// $(window).scroll(function(){ 
+			//     totalheight = parseFloat($(window).height()) + parseFloat($(window).scrollTop()); 
+			//     if($(document).height() <= totalheight){ 
+			//         $('.loading-more').css('display', 'block');
+			//         if (flag) {
+			//         	flag = false;
+			// 	        setTimeout(function () {
+			// 	        	$('.am-g:eq(1)').append(template.question());
+			// 	        	$(window).scroll(function () {
+			// 	        		return false;
+			// 	        	});
+			//         		flag = true;
+			// 	        }, 1500);
+			//         }
+			//     } else {
+			//     	$('.loading-more').css('display', 'none');
+			//     }
+			// });
 
 
             $.AMUI.progress.done();
