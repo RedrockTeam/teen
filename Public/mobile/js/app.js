@@ -57,6 +57,7 @@
 	            		$button.button('loading');
 	            	}
 	            }).done(function (response, status) {
+	            	console.log(response);
 	            	if (response.status === 200 && status === 'success') {
 	            		// location.href = response.data;
 	            		alert();
@@ -91,14 +92,12 @@
 
 	})();
 
-
+	// 验证模块
 	var verify = (function () {
-
-
-
 		var userLoginVerify,
 			questionAddVerify;
 
+		// 用户登录验证
 		userLoginVerify = function (form) {
 			var userName = $.trim($(form).find('input[name=username]').val());
 			var userPass = $.trim($(form).find('input[name=password]').val());
