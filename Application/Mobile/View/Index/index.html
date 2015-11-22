@@ -75,13 +75,13 @@
 					<div class="am-form-group">
 						<label>选择提问人</label>
 						<select name="type">
-							<option value="0" class="am-text-danger">公开提问</option>
+							<option value="public">公开提问</option>
 							<option value="1">校学生会</option>
 							<option value="2">软件学生会</option>
 							<option value="3">传媒学生会</option>
 						</select>
 					</div>
-					<div class="am-form-group am-form-icon am-form-feedback">
+					<div class="am-form-group">
 				      	<label for="title">问题标题</label>
 				      	<input type="text" placeholder="" name="title" id="title">
 				    </div>
@@ -104,7 +104,6 @@
 	<script>
 
 		$(function () {
-
             $.AMUI.progress.start();
 
 			$('.add-question').on('click', question.addViewShow);
@@ -113,12 +112,20 @@
 
 			$('.am-g:eq(1)').on('click', '.comment', question.praise);
 
+			$('#title').add('#content').focus(function (event) {
+				if ($(this).parent().hasClass('am-form-error')) {
+					$(this).parent().removeClass('am-form-error');
+				}
+			});
+
+			// 个人中心
 			$('.am-icon-user').on('click', function () {
 				if (!$.AMUI.utils.cookie.get('username')) {
 					view.confirm('查看个人资料需要登录哦~');
 				}
 			});
 
+			// 主页Icon
 			$('.am-icon-home').on('click', function () {
 				location.href = "http://localhost/teen/index.php?s=/Mobile";
 			});
@@ -143,8 +150,7 @@
 			//     }
 			// });
 
-
-            $.AMUI.progress.done();
+			$.AMUI.progress.done();
 
 		});
 

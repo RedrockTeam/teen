@@ -123,7 +123,6 @@
 			for (var name in tempData) {
 				if (!$.trim(tempData[name])) {
 					flag = false;
-					$('#' + name).addClass('am-form-field');
 					$('#' + name).parent().addClass('am-form-error');
 				} else {
 					continue;
