@@ -66,12 +66,13 @@
 	            	}
 	            }).done(function (response, status) {
 	            	if (response.status === 200) {
+	            		var data = response.data;
+	            		data.time = tool.formatTime(data.time);
 	            		view.alert('提问成功~', function () {
-	            			response.data.time = tool.formatTime(response.data.time);
 							// 隐藏提问页面
 							view.addQuestionViewHide();
 							// 动态添加最新问题
-							view.addQuestionPanel(response.data);
+							view.addQuestionPanel(data);
 						});
 	            	} else {
 	            		view.alert("问题数据不完整, 请重新");
