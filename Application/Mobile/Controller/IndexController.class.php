@@ -32,9 +32,9 @@
 				$where = array(
 					'id' => array('gt', $id)
 				);
-				return $voice->where($where)->limit(5)->select();	//下拉加载
+				return $voice->where($where)->order('time desc')->limit(5)->select();	//下拉加载
 			}else{
-				return $voice->limit(5)->select();		//首页加载
+				return $voice->limit(5)->order('time desc')->select();		//首页加载
 			}
 		}
 
