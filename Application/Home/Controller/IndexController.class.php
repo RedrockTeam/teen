@@ -8,8 +8,8 @@ class IndexController extends Controller {
     }
 
     public function login(){	//登录的方法
-    	$username = I('get.username');
-    	$password = I('get.password');
+    	$username = I('post.username');
+    	$password = I('post.password');
     	$user_message = $this->curl_api($username, $password); //获取用户信息
     	if($user_message['status'] == 200){
     		session('username', $user_message['userInfo']['real_name']);
