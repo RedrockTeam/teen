@@ -112,6 +112,12 @@
 
 			$('.am-g:eq(1)').on('click', '.comment', question.praise);
 
+			$('#title').add('#content').focus(function (event) {
+				if ($(this).parent().hasClass('am-form-error')) {
+					$(this).parent().removeClass('am-form-error');
+				}
+			});
+
 			// 个人中心
 			$('.am-icon-user').on('click', function () {
 				if (!$.AMUI.utils.cookie.get('username')) {
@@ -143,9 +149,6 @@
 			//     	$('.loading-more').css('display', 'none');
 			//     }
 			// });
-
-
-            $.AMUI.progress.done();
 
 			$.AMUI.progress.done();
 
