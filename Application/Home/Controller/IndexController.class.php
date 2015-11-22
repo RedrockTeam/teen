@@ -93,7 +93,6 @@ class IndexController extends Controller {
         );      //设置需要插入数据库的参数数组
         if($config['postername'] && $config['gettername'] && $config['title'] && $config['question']){
             $config['time'] = date('y-m-d h:m:s', time() + 8 * 3600);
-            var_dump(M('voice')->add($config));
             $info = array(
                 'status' => 200,
                 'message' => 'ok',
