@@ -44,13 +44,7 @@ class IndexController extends Controller {
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);  
 		$info = curl_exec($ch);
 		$res = json_decode($info, true);		//解析json数据为数组
-		return $res = array(
-            'status' => 200,
-            'userInfo' => array(
-                'real_name' => '王洋辉',
-                'stu_num' => 2013214046
-            )
-        );
+		return $res;
     }
 
     //用户评论的方法
