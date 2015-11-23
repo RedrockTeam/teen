@@ -6,17 +6,17 @@ class IndexController extends Controller {
         $this->flash();
         $this->display();
     }
+
     private function flash(){           //首页的数据渲染
         $chairman = M('chairman')->field('id, chairname')->select();
         $voice = $this->load_home_data();
-        $this->assgin('voice', $voice);          
-        $this->assgin('chairman', $chairman);
+    	$this->assign('voice', $voice);          //这里缺少登陆状态和前端渲染的数据
+        $this->assign('chairman', $chairman);
     }
 
-    public function login(){	//普通用户和登录的方法
+    public function login(){	//登录的方法
     	$username = I('post.username');
     	$password = I('post.password');
-        //这里还需要处理老师和学生的区分逻辑
     	$user_message = $this->curl_api($username, $password); //获取用户信息
         //
     	if($user_message['status'] == 200){

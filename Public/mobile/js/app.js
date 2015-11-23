@@ -45,11 +45,14 @@
 			praise;
 
 		addViewShow = function () {
-			view.addQuestionViewShow();
-		} 
+			if ($.AMUI.utils.cookie.get('username')) {
+				view.addQuestionViewShow();
+			} else {
+				view.confirm('提问需要先登录!');
+			}
+		};
 
 		add = function () {
-			
 			var $button = $(this);
 			var result = verify.questionAddVerify('#question-form');
 			if (result) {
@@ -63,12 +66,13 @@
 	            	}
 	            }).done(function (response, status) {
 	            	if (response.status === 200) {
+	            		var data = response.data;
+	            		data.time = tool.formatTime(data.time);
 	            		view.alert('提问成功~', function () {
-	            			response.data.time = tool.formatTime(response.data.time);
 							// 隐藏提问页面
 							view.addQuestionViewHide();
 							// 动态添加最新问题
-							view.addQuestionPanel(response.data);
+							view.addQuestionPanel(data);
 						});
 	            	} else {
 	            		view.alert("问题数据不完整, 请重新");
@@ -79,6 +83,7 @@
 	            	});
 	            }).always(function() {
 	            	$button.button('reset');
+	            	$('form')[0].reset();
 	            });
 			}
 		};
@@ -91,17 +96,48 @@
 			}
 		};
 
+		commentViewShow = function () {
+			$('#question-comment-modal').modal({
+				width: $(window).width() * 0.8
+			});
+		};
+
+		comment = function () {
+			if (verify.questionCommentVerify($('#comment').val())) {
+				var data = {
+					id: $('input[name=voiceId]').val(),
+					comment: $('#comment').val()
+				}
+				// $('#question-comment-modal').modal('close');
+				$.ajax({
+					url: 'index.php?s=/Home/Index/commit_comment',
+					type: 'POST',
+					data: data
+				}).done(function() {
+					console.log("success");
+				}).fail(function() {
+					console.log("error");
+				}).always(function() {
+					console.log("complete");
+				});
+				
+			}
+		}
+
 		return {
 			add: add,
 			praise: praise,
-			addViewShow: addViewShow
+			comment: comment,
+			addViewShow: addViewShow,
+			commentViewShow: commentViewShow
 		};
 	})();
 
 	// 验证模块
 	var verify = (function () {
 		var userLoginVerify,
-			questionAddVerify;
+			questionAddVerify,
+			questionCommentVerify;
 
 		// 用户登录验证
 		userLoginVerify = function (form) {
@@ -131,9 +167,19 @@
 			return flag == true ? formData : flag;
 		};
 
+		questionCommentVerify = function (value) {
+			if (!$.trim(value)) {
+				$('#comment').addClass('am-form-field');
+				$('#comment').parent().addClass('am-form-error');
+				return false;
+			}
+			return true;
+		};
+
 		return {
 			userLoginVerify: userLoginVerify,
-			questionAddVerify: questionAddVerify
+			questionAddVerify: questionAddVerify,
+			questionCommentVerify: questionCommentVerify
 		}
 	})();
 
@@ -145,17 +191,13 @@
 		alert = function (text, callback) {
 			if ($('#alert-modal').find('.am-modal-bd').html()) {
 				$('#alert-modal').find('.am-modal-bd').html(text);
-				$('#alert-modal').modal({
-		    		relatedTarget: this,
-					onConfirm: callback
-				});
 			} else {
 		    	$('body').append(template.alert(text));
-		    	$('#alert-modal').modal({
-		    		relatedTarget: this,
-					onConfirm: callback
-				});
 		    }
+	    	$('#alert-modal').modal({
+	    		relatedTarget: this,
+				onConfirm: callback
+			});
 		}
 
 		confirm = function (text, onConfirm) {
@@ -168,26 +210,23 @@
 		        relatedTarget: this,
 		        onConfirm: function (options) {
 		          	location.href = '?s=/Mobile/User/userLogin';
-		        },
-		        onCancel: function() {
-		        	console.log('sds');
 		        }
 		    });
 		}
 
 		addQuestionViewShow = function () {
-			$(this).removeClass('closeChooseListAnimation').addClass('openChooseListAnimation').css('webkitTransform', 'scale(0)');
+			$('.add-question').removeClass('closeChooseListAnimation').addClass('openChooseListAnimation').css('-webkit-transform', 'scale(0)');
 			setTimeout(function () {
 				$('#index').css('display', 'none');
-				$('#question').removeClass('bounceOutUp').addClass('bounceInDown animated').css('display', 'block');
-			}, 310);
+				$('#question').removeClass('bounceOut').addClass('fadeIn animated').css('display', 'block');
+			}, 400);
 		};
 
 		addQuestionViewHide = function () {
-			$('#question').removeClass('bounceInDown').addClass('bounceOutUp animated');
+			$('#question').removeClass('fadeIn').addClass('bounceOut animated');
+			$('#index').css('display', 'block');
 			$('#question').css('display', 'none');
 			$('.add-question').removeClass('openChooseListAnimation').addClass('closeChooseListAnimation').css('-webkit-transform', 'scale(1)');
-			$('#index').css('display', 'block');
 		};
 
 		addQuestionPanel = function (data) {
@@ -282,7 +321,7 @@
 		alertModal = function (text) {
 			_alertModalHTML += '<div id="alert-modal" class="am-modal am-modal-alert" tabindex="-1">';
 	 	 		_alertModalHTML += '<div class="am-modal-dialog">';
-	    			_alertModalHTML += '<div class="am-modal-hd">友情提示</div>';
+	    			_alertModalHTML += '<div class="am-modal-hd">温馨提示</div>';
 	    				_alertModalHTML += '<div class="am-modal-bd">';
 	      					_alertModalHTML += text;
 	    				_alertModalHTML += '</div>';
@@ -295,7 +334,7 @@
 		confirmModal = function (text) {
 			_confirmModalHTML += '<div class="am-modal am-modal-confirm" tabindex="-1" id="confirm-modal">';
 			  	_confirmModalHTML += '<div class="am-modal-dialog">';
-				    _confirmModalHTML += '<div class="am-modal-hd">友情提示</div>';
+				    _confirmModalHTML += '<div class="am-modal-hd">温馨提示</div>';
 				    	_confirmModalHTML += '<div class="am-modal-bd">';
 				      		_confirmModalHTML += text;
 				    		_confirmModalHTML += '</div>';

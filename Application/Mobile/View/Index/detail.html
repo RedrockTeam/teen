@@ -1,0 +1,131 @@
+	
+	<include file="Public/header" />
+
+		<link rel="stylesheet" href="__PUBLIC__/mobile/css/index.css">
+		<link rel="stylesheet" href="__PUBLIC__/mobile/css/detail.css">
+		<link rel="stylesheet" href="http://apps.bdimg.com/libs/animate.css/3.1.0/animate.min.css">
+
+		<div class="am-g" id="question-detail-info">
+            <div class="am-panel am-panel-default">
+			  	<div class="am-panel-hd">
+			  		<span>
+				  		<img class="am-circle" src="__PUBLIC__/mobile/images/lufei.jpg" width="30" height="30">
+				  	</span>
+				  	<span class="am-vertical-align-middle">校学生会</span>
+			  	</div>
+			  	<div class="am-panel-bd">
+			    	<p>这里是问题的详情这里是问题的详情这里是问题的详情这里是问题的详情</p>
+			  	</div>
+			  	<div class="am-panel-footer">
+			  		<div class="post-time">
+			  			<i class="am-icon-calendar"></i>
+			  			<span>11-12 15:30</span>
+			  		</div>
+			  		<div class="question-comment-div">
+			  			<i class="am-icon-comments"></i>
+			  			<span>评论</span>
+			  		</div>
+			  		<div class="am-fr praise">
+			  			<i class="am-icon-thumbs-up"></i>
+			  			<span>赞</span>
+			  		</div>
+			  	</div>
+			</div>
+		</div>
+
+		<div class="am-g" id="user-comments-list">
+			<div class="am-panel am-panel-default">
+			  	<div class="am-panel-hd">
+			  		<span>评论&nbsp;<b>100</b></span>
+				  	<span class="am-fr">赞&nbsp;<b>200</b></span>
+			  	</div>
+			  	<div class="am-panel-bd commens-panel-body" style="background: rgb(254, 254, 254)">
+			    	<ul class="am-comments-list am-comments-list-flip">
+		                <?php for ($i = 0; $i < 3; $i++) { ?>
+		                    <li class="am-comment">
+		                        <article>
+		                            <a href="javascript:void(0)">
+		                                <img src="__PUBLIC__/mobile/images/wifi.jpg" class="am-comment-avatar" width="48" height="48"/>
+		                            </a>
+		                            <div class="am-comment-main">
+		                                <header class="am-comment-hd">
+		                                    <div class="am-comment-meta">
+		                                        <a href="javascript:void(0)" class="am-comment-author"> 王洋辉 </a>评论于
+		                                        <time>2014-7-12 15:30</time>
+		                                    </div>
+		                                </header>
+		                                <div class="am-comment-bd">
+											这是这个问题的第<?php echo $i + 1; ?>条评论，仅供测试
+											这是这个问题的第<?php echo $i + 1; ?>条评论，仅供测试
+											这是这个问题的第<?php echo $i + 1; ?>条评论，仅供测试
+		                                </div>
+		                            </div>
+		                        </article>
+		                    </li>
+		                <?php } ?>
+		            </ul>
+			  	</div>
+			</div>
+			
+		</div>
+
+
+		<div class="am-modal am-modal-no-btn" tabindex="-1" id="question-comment-modal">
+		  	<div class="am-modal-dialog">
+		    	<div class="am-modal-hd">
+		    		回复问题
+		    	</div>
+			    <div class="am-modal-bd">
+			      	<form class="am-form">
+			      		<fieldset>
+			      			<input type="hidden" name="voiceId" value="{$voiceId}">
+							<div class="am-form-group">
+						      	<textarea rows="5" name="comment" id="comment" placeholder="评论内容在140字以内"></textarea>
+						    </div>
+						    <p>
+						    	<button type="button" class="am-btn am-btn-block am-radius am-btn-primary ensure-comment-question" data-am-loading="{spinner: 'circle-o-notch', loadingText: '提问中.', resetText: '确认'}">确认</button>
+						    </p>
+			    		</fieldset>
+			      	</form>
+			    </div>
+		  	</div>
+		</div>
+
+	<include file="Public/footer" />
+	<style>
+		#question-comment-modal .am-modal {
+			display: block;
+		}
+		#question-comment-modal .am-modal-hd{
+			background-color: #fff;
+			padding: 10px;
+			font-weight: bold;
+		}
+		#question-comment-modal .am-modal-bd{
+			background-color: rgb(248, 248, 248);
+			margin-bottom: 0;
+		    padding-bottom: 0;
+		    padding-left: 0px;
+		    padding-right: 0;
+
+		}
+		#question-comment-modal fieldset {
+			margin-bottom: 0.2em;
+		}
+		#question-comment-modal fieldset p {
+			margin-bottom: 0;
+		}
+	</style>
+	<script>
+		$(function () {
+			$('.question-comment-div').on('click', question.commentViewShow);
+			$('.ensure-comment-question').on('click', question.comment);
+			$('#comment').focus(function () {
+				if ($(this).hasClass('am-form-field')) {
+					$(this).removeClass('am-form-field');
+				};
+			});
+		});
+	</script>
+
+

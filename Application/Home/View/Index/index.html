@@ -198,17 +198,18 @@
 
 	
 		<div class="login" style="display: none">
-			
-			<p><input type="text" name="user_name"></p>
-			<p><input type="password" name="user_pass"></p>
-
-			<p><button>登录</button></p>
-
+			<form class="login-form">
+				<p><input type="text" name="username"></p>
+				<p><input type="password" name="password"></p>
+				<p><button>登录</button></p>
+			</form>
 		</div>
 
 	</body>
 	<script src="__PUBLIC__/home/js/jquery.min.js"></script>
+	<script src="http://cdn.staticfile.org/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
 	<script src="__PUBLIC__/home/js/layer.js"></script>
+
 	
 	<script>
 
@@ -233,6 +234,28 @@
 					    area: ['420px', '240px'], //宽高
 					    content: $('.login')
 					});
+				});
+
+				$('.login button').click(function () {
+					event.preventDefault();
+					$.ajax({
+						url: 'index.php?s=/Home/Index/login',
+						type: 'POST',
+						dataType: 'json',
+						data: $('.login-form').serialize()
+					}).done(function (response) {
+						if (response.status == 200) {
+							$('.login-reg-btn span').html(response.username);
+							$.cookie('stunum', response.stunum);
+							$.cookie('username', response.username);
+							layer.close();
+						} else {
+							alert('fail');
+						}
+					}).fail(function() {
+						alert('cuowu');
+					});
+					
 				});
 
 			})

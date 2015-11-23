@@ -1,39 +1,67 @@
 
 		<include file="Public/header" />
 
-		<link rel="stylesheet" href="__PUBLIC__/mobile/css/index.css">
+		<link rel="stylesheet" href="__PUBLIC__/mobile/css/index.css?v=2222">
 		<link rel="stylesheet" href="http://apps.bdimg.com/libs/animate.css/3.1.0/animate.min.css">
 	
-		<div class="am-g" style="padding: 10px 0;">
-            <?php for ($i = 0; $i < 6; $i++) { ?>
+<!-- 		<div class="am-g" style="padding: 10px 0;">
+            <volist name="voice" id="v">
                 <div class="am-panel am-panel-default">
 				  	<div class="am-panel-hd">
 				  		<span>
 					  		<img class="am-circle" src="__PUBLIC__/mobile/images/lufei.jpg" width="30" height="30">
 					  	</span>
-					  	<span class="am-vertical-align-middle">校学生会</span>
+					  	<span class="am-vertical-align-middle">{$v.postername}</span>
 				  	</div>
 				  	<div class="am-panel-bd">
-				    	<p>这里是问题的详情这里是问题的详情这里是问题的详情这里是问题的详情</p>
+				    	<p>{$v.question}</p>
 				  	</div>
 				  	<div class="am-panel-footer">
 				  		<div class="post-time">
 				  			<i class="am-icon-calendar"></i>
-				  			<span>11-12 15:30</span>
+				  			<span>{$v.time|date="m-d H:i", ###}</span>
 				  		</div>
 				  		<div class="am-fr praise">
 				  			<i class="am-icon-thumbs-up"></i>
-				  			<span>20</span>
+				  			<span>0</span>
 				  		</div>
 				  		<div class="am-fr comment">
 				  			<i class="am-icon-comments"></i>
-				  			<span>10</span>
+				  			<span>0</span>
 				  		</div>
 				  	</div>
 				</div>
-            <?php } ?>
-		</div>
+            </volist>
+		</div> -->
 
+		<div class="am-g">
+			  <div data-am-widget="list_news" class="am-list-news am-list-news-default" >
+			  	
+			  	<div class="am-list-news-bd">
+
+				  	<ul class="am-list">
+				  	
+            			<volist name="voice" id="v">
+							<li class="am-g am-list-item-desced am-list-item-thumbed am-list-item-thumb-left">
+						        <div class="am-u-sm-4 am-list-thumb">
+						          	<a href="http://www.douban.com/online/11624755/" class="">
+						            	<img src="http://img3.douban.com/lpic/o637240.jpg" alt="我最喜欢的一张画"/>
+						          	</a>
+						        </div>
+						        <div class="am-u-sm-8 am-list-main">
+						            <h3 class="am-list-item-hd">
+						            	<a href="__CONTROLLER__/detail/id/{$v.id}" class="">{$v.title}</a>
+						            </h3>
+						            <div class="am-list-item-text">{$v.question}</div>
+						        </div>
+						    </li>
+						</volist>
+
+				  	</ul>
+			  	</div>
+
+			</div>
+		</div>
 
 		<div class="am-g am-text-center loading-more" style="display: none"> 
 			<i class="am-icon-refresh am-icon-spin" style="font-size: 2rem; margin-bottom: 1.5rem"></i>
@@ -76,9 +104,9 @@
 						<label>选择提问人</label>
 						<select name="type">
 							<option value="public">公开提问</option>
-							<option value="1">校学生会</option>
-							<option value="2">软件学生会</option>
-							<option value="3">传媒学生会</option>
+							<volist name="chairman" id="v">
+								<option value="1">校学生会</option>
+							</volist>
 						</select>
 					</div>
 					<div class="am-form-group">
@@ -92,7 +120,7 @@
 				    </div>
 
 				    <p>
-				    	<button type="button" class="am-btn am-btn-block am-btn-primary ensure-add-question" data-am-loading="{spinner: 'circle-o-notch', loadingText: '提问中.', resetText: '确认'}">确认</button>
+				    	<button type="button" class="am-btn am-btn-block am-radius am-btn-primary ensure-add-question" data-am-loading="{spinner: 'circle-o-notch', loadingText: '提问中.', resetText: '确认'}">确认</button>
 				    </p>
 	    		</fieldset>
 	    	</from>
