@@ -75,21 +75,16 @@
 	            		view.alert("问题数据不完整, 请重新");
 	            	}
 	            }).fail(function (jqXHR, textStatus) {
-	            	view.alert('稍安勿躁, 好像出了点小问题=_=', function () {
-	            		$('form')[0].reset();
-	            	});
+	            	view.alert('稍安勿躁, 好像出了点小问题=_=');
 	            }).always(function() {
 	            	$button.button('reset');
+	            	$('form')[0].reset();
 	            });
 			}
 		};
 
 		praise = function () {
-			if ($.AMUI.utils.cookie.get('username')) {
-				alert();
-			} else {
-				view.confirm('点赞或评论是需要登录哦~');
-			}
+			
 		};
 
 		commentViewShow = function () {
@@ -104,17 +99,30 @@
 					id: $('input[name=voiceId]').val(),
 					comment: $('#comment').val()
 				}
-				// $('#question-comment-modal').modal('close');
 				$.ajax({
 					url: 'index.php?s=/Home/Index/commit_comment',
 					type: 'POST',
 					data: data
-				}).done(function() {
-					console.log("success");
+				}).done(function (response, status) {
+					if (response.status == 200 && status === 'success') {
+						view.alert('评论成功', function () {
+							// 关闭评论Modal
+							$('#question-comment-modal').modal('close');
+							// 添加最新评论
+							view.addQuestionCommentLi(response.data);
+							// 评论数字加一
+							view.questionCommentInc();
+						})
+					} else {
+						view.alert('评论失败');
+					}
 				}).fail(function() {
-					console.log("error");
+					view.alert('系统出了点小问题, 刷新试试');
 				}).always(function() {
-					console.log("complete");
+					// 情况评论表单
+					$('form')[0].reset();
+					// 关闭评论Modal
+					$('#question-comment-modal').modal('close');
 				});
 				
 			}
@@ -148,6 +156,7 @@
 			return true;
 		};
 
+		// 提问验证
 		questionAddVerify = function (form) {
 			var flag = true;
 			var formData = $(form).serialize();
@@ -164,6 +173,7 @@
 			return flag == true ? formData : flag;
 		};
 
+		// 问题评论验证
 		questionCommentVerify = function (value) {
 			if (!$.trim(value)) {
 				$('#comment').addClass('am-form-field');
@@ -183,7 +193,11 @@
 
 	var view = (function () {
 
-		var alert, confirm, addQuestionPanel, addQuestionViewShow;
+		var alert, 
+			confirm, 
+			addQuestionPanel, 
+			addQuestionViewShow,
+			addQuestionCommentLi;
 
 		alert = function (text, callback) {
 			if ($('#alert-modal').find('.am-modal-bd').html()) {
@@ -218,6 +232,7 @@
 		    });
 		}
 
+		// 提问页面显示
 		addQuestionViewShow = function () {
 			$('.add-question').removeClass('closeChooseListAnimation').addClass('openChooseListAnimation').css('-webkit-transform', 'scale(0)');
 			setTimeout(function () {
@@ -226,6 +241,7 @@
 			}, 400);
 		};
 
+		// 提问页面隐藏
 		addQuestionViewHide = function () {
 			$('#question').removeClass('fadeIn').addClass('bounceOut animated');
 			$('#index').css('display', 'block');
@@ -233,6 +249,7 @@
 			$('.add-question').removeClass('openChooseListAnimation').addClass('closeChooseListAnimation').css('-webkit-transform', 'scale(1)');
 		};
 
+		// 
 		addQuestionPanel = function (data) {
 			var $questionPanel = $(template.question(data)).addClass('animated pulse');
 			$('.am-g:eq(1)').prepend($questionPanel);
@@ -241,12 +258,29 @@
 			}, 1000);
 		};
 
+		// 动态添加问题评论
+		addQuestionCommentLi = function (data) {
+			var $questionCommentLi = $(template.comment(data)).addClass('animated pulse');
+			$('.am-comments-list').prepend($questionCommentLi);
+			setTimeout(function () {
+				$questionCommentLi.removeClass('animated pulse');
+			}, 1000);
+		}
+
+		// 问题评论数增1
+		questionCommentInc = function () {
+			var count = $('#user-comments-list span:eq(0) b').text();
+			$('#user-comments-list span:eq(0) b').text(++count);
+		}
+
 		return {
 			alert: alert,
 			confirm: confirm,
 			addQuestionPanel: addQuestionPanel,
+			questionCommentInc: questionCommentInc,
 			addQuestionViewShow: addQuestionViewShow,
-			addQuestionViewHide: addQuestionViewHide
+			addQuestionViewHide: addQuestionViewHide,
+			addQuestionCommentLi: addQuestionCommentLi
 		};
 
 	})();
@@ -289,11 +323,33 @@
 
 
 	var template = (function () {
-
-		var alertModal, _alertModalHTML = '',
+		var commentLi, _commentLiHTML = '',
+			alertModal, _alertModalHTML = '',
 			confirmModal, _confirmModalHTML = '',
 			questionPanel, _questionPanelHTML = '';
-			
+		
+		commentLi = function (data) {
+			_commentLiHTML += '<li class="am-comment">';
+                _commentLiHTML += '<article>';
+                    _commentLiHTML += '<a href="javascript:void(0)">';
+                        _commentLiHTML += '<img src="'+ data.face +'" class="am-comment-avatar" width="48" height="48"/>';
+                    _commentLiHTML += '</a>';
+                    _commentLiHTML += '<div class="am-comment-main">';
+                        _commentLiHTML += '<header class="am-comment-hd">';
+                            _commentLiHTML += '<div class="am-comment-meta">';
+                                _commentLiHTML += '<a href="javascript:void(0)" class="am-comment-author">'+ data.username +'&nbsp;</a>评论于';
+                                _commentLiHTML += '<time>'+ data.time +'</time>';
+                            _commentLiHTML += '</div>';
+                        _commentLiHTML += '</header>';
+                        _commentLiHTML += '<div class="am-comment-bd">'+ data.comment +'</div>'
+                    _commentLiHTML += '</div>';
+                _commentLiHTML += '</article>';
+            _commentLiHTML += '</li>';
+            commentLiHTML = _commentLiHTML;
+            _commentLiHTML = '';
+            return commentLiHTML;
+		}
+
 		questionPanel = function (data) {
 			_questionPanelHTML += '<div class="am-panel am-panel-default">';
 			  	_questionPanelHTML += '<div class="am-panel-hd">';
@@ -351,6 +407,7 @@
 
 		return {
 			alert: alertModal,
+			comment: commentLi,
 			confirm: confirmModal,
 			question: questionPanel
 		};
