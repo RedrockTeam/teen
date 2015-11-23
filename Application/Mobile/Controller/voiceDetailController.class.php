@@ -10,7 +10,7 @@ class voiceDtailController extends Controller {
 	public function index(){
 		$data = $this->get_voice_detail();
 		$this->assign('info', $data);
-		var_dump($data);
+		print_r($data);
 		$this->display();
 	}
 
