@@ -24,9 +24,9 @@ class IndexController extends Controller {
     		session('stunum', $user_message['userInfo']['stu_num']);
             session('sex', $user_message['userInfo']['gender']);
             if($user_message['userInfo']['gender'] == "男"){
-                session('touxiang', '__PUBLIC__/chairone/boy.jpg');
+                session('touxiang', 'Public/chairone/boy.jpg');
             }else{
-                session('touxiang', '__PUBLIC__/chairone/girl.jpg');
+                session('touxiang', 'Public/chairone/girl.jpg');
             }
             $conf = array(
                 'username' => $user_message['userInfo']['real_name'],
@@ -69,6 +69,7 @@ class IndexController extends Controller {
     		$data = array(
     			'voiceid' => $id,
     			'username' => $username,
+                'userid' => session('stunum'),
     			'comment' => $comment,
     			'time' => time(), //获取当前时间戳
     		);
@@ -105,7 +106,8 @@ class IndexController extends Controller {
     public function commit_voice(){
         if(!session('username')){return;} 
         $config = array(
-            'postername' => session('username').session('stunum'),
+            'postername' => session('username'),
+            'posterid' => session('stunum'),
             'gettername' => I('post.type'),
             'title' => I('post.title'),
             'question' => I('post.content')
@@ -164,6 +166,4 @@ class IndexController extends Controller {
         }
         $this->ajaxReturn($data, 'json');
     }
-
-
 }
