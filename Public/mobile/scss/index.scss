@@ -1,75 +1,23 @@
 	body {
 		background-color: rgb(245, 245, 245);
 	}
-	.am-vertical-align-middle {
-	    vertical-align: middle;
-	    margin-top: 2px;
-	}
-	.am-panel {
-			margin-bottom: 10px;
-			border: 0;
-		}
-	.am-panel-footer {
-		border-top: none;
-		background-color: #fff;
-		font-size: 13px;
-		color: rgb(146, 146, 146);
-	    box-shadow: 1px 1px 1px;
-		padding-left: 0 !important;
-		padding-right: 0 !important;
-	}
-	.am-panel-footer div {
-		margin: 0;
-		display: inline-block;
-		width: 33.3%;
-		border-left: 1px solid rgb(218, 218, 218);
-		text-align: center;
-	}
-	.am-panel-footer div:first-child {
-		border-left: 0;
-	}
-	.am-panel-footer div i {
-		font-size: 14px;
-	}
-	.am-panel-footer div span {
-		margin-left: 3px;
-	}
-	.am-panel-footer div:first-child span {
-		color: #999;
-	    font-weight: lighter;
-	    letter-spacing: -1px;
-	}
-	.am-panel-default {
-		background-color: #fff;
-		border-top: none;
-		border-top: 1px solid #e6e6e6;
-	    border-bottom: 1px solid #d8d8d8;
-	}
-	.am-panel-default > .am-panel-hd {
-		background-color: transparent;
-	}
-	.am-popup-hd {
-		z-index: 1;
-		padding: 0;
-	}
-	/* .am-popup-bd {
-		padding: 0;
-	} */
+	
 	.add-question {
-		height: 4.5rem;
-		width: 4.5rem;
+		height: 5rem;
+		width: 5rem;
 		border-radius: 50%;
 		background-color: #0e90d2;
 		position: fixed;
-		bottom: 10px;
-		right: 10px;
+		bottom: 16px;
+		right: 16px;
 		-webkit-box-shadow: -1px 0px 6px;
 	}
+
 	.add-question i {
 		font-size: 20px;
-		width: 4.5rem;
-		height: 4.5rem;
-		line-height: 4.5rem;
+		width: 5rem;
+		height: 5rem;
+		line-height: 5rem;
 		text-align: center;
 		vertical-align: middle;
 		color: #eee;
@@ -77,6 +25,13 @@
 
 	.am-modal-actions-group {
 		margin: 0;
+	}
+
+	.am-list-news-default {
+		margin: 0;
+	}
+	.am-list-item-desced {
+		padding: 1rem;
 	}
 
 	.loading-more span {

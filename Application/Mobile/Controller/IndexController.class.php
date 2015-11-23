@@ -10,4 +10,9 @@
 
 	    }
 
+	    public function detail() {
+	    	$voiceId = I('get.id');
+	    	$this->assign('voiceId', $voiceId);
+	    	$this->display();
+	    }
 	}
