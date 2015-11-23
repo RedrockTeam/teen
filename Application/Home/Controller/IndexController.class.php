@@ -167,3 +167,4 @@ class IndexController extends Controller {
         $this->ajaxReturn($data, 'json');
     }
 }
+
