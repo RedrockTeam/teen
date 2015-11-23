@@ -11,7 +11,7 @@ class VoiceDtailController extends Controller {
 		$data = $this->get_voice_detail();
 		$this->assign('info', $data);
 		print_r($data);
-		$this->display();
+		$this->display('Index/detail');
 	}
 
 	private function get_voice_detail(){
