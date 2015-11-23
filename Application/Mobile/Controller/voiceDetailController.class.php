@@ -8,14 +8,16 @@ class VoiceDtailController extends Controller {
 		}
 	}
 	public function index(){
-		$data = $this->get_voice_detail();
+		$id = I('get.id');
+		echo $id;
+		return;
+		$data = $this->get_voice_detail($id);
 		$this->assign('info', $data);
 		print_r($data);
 		$this->display('Index/detail');
 	}
 
-	private function get_voice_detail(){
-		$id = I('get.id');
+	private function get_voice_detail($id){
 		if(!$id){
 			$data = array(
 				'status' => 300,
