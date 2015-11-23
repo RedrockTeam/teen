@@ -1,0 +1,101 @@
+		
+		body {
+			background-color: rgb(245, 245, 245);
+		}
+
+		#question-detail-info {
+			.am-panel {
+				background-color: #fff;
+				margin-bottom: 10px;
+				border: 0;
+				border-top: 1px solid #e6e6e6;
+			    border-bottom: 1px solid #d8d8d8;
+				.am-panel-hd {
+					background-color: transparent;
+					.am-vertical-align-middle {
+					    vertical-align: middle;
+					    margin-top: 2px;
+					}
+				}
+				.am-panel-footer {
+					border-top: none;
+					background-color: #fff;
+					font-size: 13px;
+					color: rgb(146, 146, 146);
+				    box-shadow: 1px 1px 1px;
+					padding-left: 0 !important;
+					padding-right: 0 !important;
+					div {
+						margin: 0;
+						display: inline-block;
+						width: 32.6%;
+						border-left: 1px solid rgb(218, 218, 218);
+						text-align: center;
+						i {
+							font-size: 14px;
+						}
+						span {
+							margin-left: 3px;
+						}
+					}
+					div:first-child {
+						border-left: 0;
+						span {
+						color: #999;
+					    font-weight: lighter;
+					    letter-spacing: -1px;
+					}
+					}
+				}
+			}
+		}
+	
+		#user-comments-list {
+			background: rgb(254, 254, 254);
+			.am-panel {
+				margin-bottom: 0;
+
+				.am-panel-hd {
+					background-color: #fff;
+					padding-left: 10px;
+					padding-right: 10px;
+					span {
+						color: #999;
+				    	font-weight: lighter;
+				    	font-size: 14px;
+				    }
+				}
+				
+				.am-panel-bd {
+					padding-left: 0;
+					padding-right: 0;
+					padding-bottom: 0;
+					.am-comments-list {
+						margin-bottom: 0;
+						.am-comment {
+							margin-top: .3rem;
+							padding: 0 10px;
+							border-bottom: 1px solid rgb(218, 218, 218);
+							.am-comment-avatar {
+								border-radius: 0;
+								width: 37px;
+					    		height: 37px;
+							}
+							.am-comment-main {
+								border: none;
+								.am-comment-hd {
+									.am-comment-meta {
+										padding-left: 5px;
+									}
+								}
+								.am-comment-bd {
+									padding: 10px 0 10px 5px;
+									color: #5d5d5d;
+									font-size: 14px;
+								}
+							}
+						}
+					}
+				}
+			}
+		}
