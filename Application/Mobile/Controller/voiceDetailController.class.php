@@ -1,7 +1,7 @@
 <?php
 namespace Mobile\Controller;
 use Think\Controller;
-class voiceDtailController extends Controller {
+class VoiceDtailController extends Controller {
 	public function _before_index(){
 		if($session('username')){
 			$this->error('请先登陆！');
