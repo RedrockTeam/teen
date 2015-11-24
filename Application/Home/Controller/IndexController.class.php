@@ -14,7 +14,7 @@ class IndexController extends Controller {
         $this->assign('chairman', $chairman);
     }
 
-    public function login(){	//登录的方法
+    public function login(){	//学生和老师登录的方法
     	$username = I('post.username');
     	$password = I('post.password');
     	$user_message = $this->curl_api($username, $password); //获取用户信息
