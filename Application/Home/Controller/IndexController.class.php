@@ -2,16 +2,18 @@
 namespace Home\Controller;
 use Think\Controller;
 class IndexController extends Controller {
+
     public function index(){
-        $this->flash();
+        
+        $chairman = M('chairman')->field('id, chairname')->select();
+        $voice = $this->load_home_data();
+        $this->assign('voice', $voice);          //这里缺少登陆状态和前端渲染的数据
+        $this->assign('chairman', $chairman);
         $this->display();
     }
 
     private function flash(){           //首页的数据渲染
-        $chairman = M('chairman')->field('id, chairname')->select();
-        $voice = $this->load_home_data();
-    	$this->assign('voice', $voice);          //这里缺少登陆状态和前端渲染的数据
-        $this->assign('chairman', $chairman);
+        
     }
 
     public function login(){	//登录的方法

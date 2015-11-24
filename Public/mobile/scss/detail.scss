@@ -99,3 +99,26 @@
 				}
 			}
 		}
+
+		@-webkit-keyframes praiseAnimate {
+	        0% {
+	            -webkit-transform: scale(1);
+	        }
+	        50% {
+	            -webkit-transform: scale(4);
+	            -webkit-transform: rotate(20deg);
+	            color: #dd514c;
+	        }
+	        100% {
+	            -webkit-transform: scale(1);
+	            -webkit-transform: rotate(0deg);
+	            color: #dd514c;
+	        }
+	    }
+
+	    .praiseAnimate {
+	    	-webkit-animation-name: praiseAnimate;
+         	-webkit-animation-duration: 1s;
+	    }
+
+

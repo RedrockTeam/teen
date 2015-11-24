@@ -24,8 +24,8 @@
 			  			<i class="am-icon-comments"></i>
 			  			<span>评论</span>
 			  		</div>
-			  		<div class="am-fr praise">
-			  			<i class="am-icon-thumbs-up"></i>
+			  		<div class="am-fr question-praise-div">
+			  			<i class="am-icon-thumbs-o-up"></i>
 			  			<span>赞</span>
 			  		</div>
 			  	</div>
@@ -118,6 +118,7 @@
 	<script>
 		$(function () {
 			$('.question-comment-div').on('click', question.commentViewShow);
+			$('.question-praise-div').on('click', question.praise);
 			$('.ensure-comment-question').on('click', question.comment);
 			$('#comment').focus(function () {
 				if ($(this).hasClass('am-form-field')) {

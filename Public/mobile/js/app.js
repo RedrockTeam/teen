@@ -1,4 +1,6 @@
 
+	
+
 
 	var user = (function () {
 
@@ -41,6 +43,13 @@
 
 	var question = (function () {
 
+		var postMap = {
+			add: 'index.php?s=/Home/Index/commit_voice',
+			praise: 'index.php?s=/Home/Index/vote',
+			comment: 'index.php?s=/Home/Index/commit_comment'
+		};
+
+
 		var add,
 			praise;
 
@@ -57,7 +66,7 @@
 			var result = verify.questionAddVerify('#question-form');
 			if (result) {
 				$.ajax({
-	            	url: 'index.php?s=/Home/Index/commit_voice',
+	            	url: postMap.add,
 	            	type: 'POST',
 	            	dataType: 'json',
 	            	data: result,
@@ -87,7 +96,23 @@
 		};
 
 		praise = function () {
-			
+			var data = {id: $('input[name=voiceId]').val()};
+			$.post(postMap.praise, data, function(response, textStatus) {
+				if (response.status == 200) {
+					view.alert('点赞成功', function () {
+						// 点赞动画
+						view.praiseQuestion();
+						// 点赞数增一
+						view.questionPraiseInc();
+					});
+				} else if (response.status == 100) {
+					view.alert('不能重复点赞');
+				} else {
+					view.alert('稍安勿躁, 好像出了点小问题=_=');
+				}
+			}).error(function () {
+				view.alert('稍安勿躁, 好像出了点小问题=_=');
+			});
 		};
 
 		commentViewShow = function () {
@@ -103,7 +128,7 @@
 					comment: $('#comment').val()
 				}
 				$.ajax({
-					url: 'index.php?s=/Home/Index/commit_comment',
+					url: postMap.comment,
 					type: 'POST',
 					data: data
 				}).done(function (response, status) {
@@ -268,10 +293,26 @@
 			$('#user-comments-list span:eq(0) b').text(++count);
 		}
 
+		// 点赞数增1
+		questionPraiseInc = function () {
+			var count = $('#user-comments-list span:eq(1) b').text();
+			$('#user-comments-list span:eq(1) b').text(++count);
+		}
+
+		// 点赞动画
+		praiseQuestion = function () {
+			$('.question-praise-div i').addClass('praiseAnimate');
+			setTimeout(function () {
+				$('.question-praise-div i').css('color', '#dd514c').removeClass('praiseAnimate am-icon-thumbs-o-up').addClass('am-icon-thumbs-up');
+			}, 1005);
+		}
+
 		return {
 			alert: alert,
 			confirm: confirm,
+			praiseQuestion: praiseQuestion,
 			addQuestionPanel: addQuestionPanel,
+			questionPraiseInc: questionPraiseInc,
 			questionCommentInc: questionCommentInc,
 			addQuestionViewShow: addQuestionViewShow,
 			addQuestionViewHide: addQuestionViewHide,
