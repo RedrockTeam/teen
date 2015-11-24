@@ -14,11 +14,11 @@
 	    }
 
 	    public function detail() {
-	  //   	$id = I('get.id');
-			// $data = $this->get_voice_detail($id);
-			// $this->assign('info', $data);
-			// print_r($data);
-			// $this->display('detail');
+	    	$id = I('get.id');
+			$data = $this->get_voice_detail($id);
+			$this->assign('info', $data);
+			print_r($data);
+			$this->display('detail');
 	    }
 
 	    private function get_voice_detail($id){
