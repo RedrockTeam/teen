@@ -19,4 +19,10 @@
 	    		)
 	    	));
 	    }
+
+	    public function vote() {
+	    	$this->ajaxReturn(array(
+	    		'status' => 0
+	    	));
+	    }
 	}
