@@ -101,6 +101,28 @@
 			}
 		}
 
+		#question-comment-modal .am-modal {
+			display: block;
+			.am-modal-hd {
+				background-color: #fff;
+				padding: 10px;
+				font-weight: bold;
+			}
+			.am-modal-bd{
+				background-color: rgb(248, 248, 248);
+				margin-bottom: 0;
+			    padding-bottom: 0;
+			    padding-left: 0px;
+			    padding-right: 0;
+				fieldset {
+					margin-bottom: 0.2em;
+					p {
+						margin-bottom: 0;
+					}
+				}
+			}
+		}
+
 		@-webkit-keyframes praiseAnimate {
 	        0% {
 	            -webkit-transform: scale(1);
