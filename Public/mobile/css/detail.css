@@ -57,6 +57,9 @@ body {
       min-height: 300px; }
       #user-comments-list .am-panel .am-panel-bd .sad-face {
         text-align: center; }
+        #user-comments-list .am-panel .am-panel-bd .sad-face p {
+          margin-bottom: 0;
+          color: silver; }
         #user-comments-list .am-panel .am-panel-bd .sad-face i {
           font-size: 10rem;
           color: silver; }

@@ -280,6 +280,10 @@
 
 		// 动态添加问题评论
 		addQuestionCommentLi = function (data) {
+			if ($('.sad-face')) {
+				$('.am-comments-list').css('display', 'block');
+				$('.sad-face').remove();
+			}
 			var $questionCommentLi = $(template.comment(data)).addClass('animated pulse');
 			$('.am-comments-list').prepend($questionCommentLi);
 			setTimeout(function () {

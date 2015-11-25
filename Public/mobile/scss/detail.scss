@@ -74,6 +74,10 @@
 					min-height: 300px;
 					.sad-face {
 						text-align: center;
+						p {
+							margin-bottom: 0;
+							color: rgb(192, 192, 192);
+						}
 						i {
 							font-size: 10rem;
 							color: rgb(192, 192, 192);
