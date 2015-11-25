@@ -108,6 +108,12 @@
 
 			$.AMUI.progress.start();
 
+			if ($('.sad-face')) {
+				$('#user-comments-list .am-panel-bd').css({
+					'min-height': $(window).height() - $('#user-comments-list .am-panel-bd').offset().top
+				});
+			}
+
 			$('.question-comment-div').on('click', question.commentViewShow);
 			$('.question-praise-div').on('click', question.praise);
 			$('.ensure-comment-question').on('click', question.comment);
