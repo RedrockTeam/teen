@@ -59,7 +59,6 @@
 					background-color: #fff;
 					padding-left: 10px;
 					padding-right: 10px;
-					min-height: 300px;
 					span {
 						color: #999;
 				    	font-weight: lighter;
@@ -72,6 +71,7 @@
 					padding-right: 0;
 					padding-bottom: 0;
 					background: rgb(254, 254, 254);
+					min-height: 300px;
 					.am-comments-list {
 						margin-bottom: 0;
 						.am-comment {
