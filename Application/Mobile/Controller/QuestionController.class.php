@@ -74,8 +74,8 @@
 
     	//提交评论的方法
         public function commit_comment(){			//评论方法
-            $comment = I('get.comment');
-            $id = I('get.id');
+            $comment = I('post.comment');
+            $id = I('post.id');
         	if(!$username = session('username')){
         		$config = array(
         			'status' => 401,
@@ -148,7 +148,7 @@
         //点赞的接口
         public function vote(){      //点赞接口
             if(!session('username')){return;}
-            $id = I('get.id');
+            $id = I('post.id');
             $where = array(
                 'voiceid' => $id,
             );
@@ -179,7 +179,7 @@
 
         //删除自己提问的问题
         public function delete_vioce(){
-            $id = I('get.id');
+            $id = I('post.id');
             $where = array(
                 'id' => $id,
             );
