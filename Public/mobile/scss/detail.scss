@@ -113,7 +113,7 @@
 			}
 		}
 
-		#question-comment-modal .am-modal {
+		#question-comment-modal {
 			display: block;
 			.am-modal-hd {
 				background-color: #fff;
@@ -124,12 +124,14 @@
 				background-color: rgb(248, 248, 248);
 				margin-bottom: 0;
 			    padding-bottom: 0;
-			    padding-left: 0px;
+			    padding-left: 0;
 			    padding-right: 0;
-				fieldset {
-					margin-bottom: 0.2em;
-					p {
-						margin-bottom: 0;
+			    .am-form {
+					fieldset {
+						margin-bottom: 0.2em;
+						p {
+							margin-bottom: 0;
+						}
 					}
 				}
 			}
