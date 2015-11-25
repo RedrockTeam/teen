@@ -25,12 +25,13 @@
 			  			<span>评论</span>
 			  		</div>
 			  		<div class="am-fr question-praise-div">
-			  			<if condition="$info.voice.is_voted">
-			  				<i class="am-icon-thumbs-up" style="color: #dd514c"></i>
-			  			<else/>
-			  				<i class="am-icon-thumbs-o-up"></i>
-			  			</if>
-			  			<span>赞</span>
+			  		<?php if ($info['voice']['is_voted']) { ?>
+			  			<i class="am-icon-thumbs-up" style="color: #dd514c"></i>
+			  			<span>已赞</span>
+			  		<?php } else { ?>
+			  			<i class="am-icon-thumbs-o-up"></i>
+			  			<span>点赞</span>
+			  		<?php } ?>
 			  		</div>
 			  	</div>
 			</div>
