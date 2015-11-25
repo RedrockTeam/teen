@@ -73,8 +73,15 @@ class IndexController extends Controller {
     			'comment' => $comment,
     			'time' => time(), //获取当前时间戳
     		);
-    		M('comment')->add($data);	
+    		M('comment')->add($data);
+            $message = array(
+                'comment' => $data['comment'],
+                'time' => $data['time'],
+                'username' => $data['username'],
+                'touxiang' => session('touxiang'),
+            );
             $config = array(
+                'data' => $message,
                 'status' => 200,
                 'message' => 'ok'
             );
