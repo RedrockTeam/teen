@@ -37,7 +37,8 @@
 						$where = array(
 							'id' => $value['userid']
 						);
-						$commentData[$key]['image'] = M('chairman')->field('picture')->where($where)->select()[0]['picture'];
+						$_data = M('chairman')->field('picture')->where($where)->select();
+						$commentData[$key]['image'] = $_data[0]['picture'];
 					}else{
 						$commentData[$key]['image'] = 'public/chairone/man.jpg';
 					}
