@@ -319,6 +319,7 @@
 		praiseQuestion = function () {
 			$('.question-praise-div i').addClass('praiseAnimate');
 			setTimeout(function () {
+				$('.question-praise-div span').text('已赞');
 				$('.question-praise-div i').css('color', '#dd514c').removeClass('praiseAnimate am-icon-thumbs-o-up').addClass('am-icon-thumbs-up');
 			}, 1005);
 		}
