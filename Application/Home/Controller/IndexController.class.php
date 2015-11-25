@@ -76,7 +76,7 @@ class IndexController extends Controller {
     		M('comment')->add($data);
             $message = array(
                 'comment' => $data['comment'],
-                'time' => time('Y-m-d H:i:s', $data['time'],
+                'time' => date('Y-m-d H:i:s', $data['time']),
                 'username' => $data['username'],
                 'touxiang' => session('touxiang'),
             );
