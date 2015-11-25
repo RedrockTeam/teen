@@ -40,7 +40,7 @@
 			  	</div>
 			  	<div class="am-panel-bd commens-panel-body" style="background: rgb(254, 254, 254)">
 			    	<ul class="am-comments-list am-comments-list-flip">
-		                <?php for ($i = 0; $i < 3; $i++) { ?>
+		                <volist name="info['comment']" id="v">
 		                    <li class="am-comment">
 		                        <article>
 		                            <a href="javascript:void(0)">
@@ -49,19 +49,15 @@
 		                            <div class="am-comment-main">
 		                                <header class="am-comment-hd">
 		                                    <div class="am-comment-meta">
-		                                        <a href="javascript:void(0)" class="am-comment-author"> 王洋辉 </a>评论于
-		                                        <time>2014-7-12 15:30</time>
+		                                        <a href="javascript:void(0)" class="am-comment-author">&nbsp;{$v.username}</a>评论于
+		                                        <time>{$v.time|date="Y-m-d: H:i:s", ###}</time>
 		                                    </div>
 		                                </header>
-		                                <div class="am-comment-bd">
-											这是这个问题的第<?php echo $i + 1; ?>条评论，仅供测试
-											这是这个问题的第<?php echo $i + 1; ?>条评论，仅供测试
-											这是这个问题的第<?php echo $i + 1; ?>条评论，仅供测试
-		                                </div>
+		                                <div class="am-comment-bd">{$v.comment}</div>
 		                            </div>
 		                        </article>
 		                    </li>
-		                <?php } ?>
+		                </volist>
 		            </ul>
 			  	</div>
 			</div>
