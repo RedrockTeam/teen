@@ -21,7 +21,7 @@ class chairinfoController extends Controller {
                 	'message' => '登陆成功' 
             	);
             	session('username', $message['chairname']);
-    			session('stunum', 'chairman');
+    			session('stunum', $message['id']);
             	session('sex', $message['sex']);
             	session('touxiang', $message['picture']);
         	}else{
@@ -32,5 +32,44 @@ class chairinfoController extends Controller {
         	}
         }
         $this->ajaxReturn($data);
+    }
+
+    /*  
+    获取学生会主席个人信息页面的被提问还有
+    自己的提问栏目，分为首次加载和下拉加载
+    每次取五条数据，首次加载为模板渲染，其
+    余为ajax接口
+    */
+
+    public function get_voice(){        //获取学生主席的@提问
+        $id = I('get.id');
+        if(!$id){
+            $id = 0;
+            return $this->loadData($id);                //根据是否有id判断是首次加载还是下拉加载
+        }else{
+            $this->ajaxReturn($this->loadData($id));
+        }
+    }
+    private function loadData($id){    //下拉加载问题
+        $data['be_question'] = $this->load_be_question($id);  //加载被提问数据
+        $data['question'] = $this->load_question($id);  //加载提问数据
+        return $data;
+    }
+    private function load_be_question($id = 0){     
+        $where = array(
+            'gettername' => session('username'),
+            'id' => ['gt', $id],
+        );
+        $res = M('voice')->where($where)->limit(5)->select();
+        dump(session());
+        return $res;
+    }
+    private function load_question($id = 0){
+        $where = array(
+            'posterid' => session('stunum'),    //这里是主席的id
+            'id' => ['gt', $id],
+        );
+        $res = M('voice')->where($where)->limit(5)->select();
+        return $res;
     }
 }
