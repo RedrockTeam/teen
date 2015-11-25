@@ -38,28 +38,32 @@
 			  		<span>评论&nbsp;<b><?php echo count($info['comment']); ?></b></span>
 				  	<span class="am-fr">赞&nbsp;<b>{$info.voice.vote}</b></span>
 			  	</div>
-			  	<div class="am-panel-bd commens-panel-body" style="background: rgb(254, 254, 254)">
-			    	<ul class="am-comments-list am-comments-list-flip">
-		                <volist name="info['comment']" id="v">
-		                    <li class="am-comment">
-		                        <article>
-		                            <a href="javascript:void(0)">
-		                                <img src="__PUBLIC__/mobile/images/wifi.jpg" class="am-comment-avatar" width="48" height="48"/>
-		                            </a>
-		                            <div class="am-comment-main">
-		                                <header class="am-comment-hd">
-		                                    <div class="am-comment-meta">
-		                                        <a href="javascript:void(0)" class="am-comment-author">&nbsp;{$v.username}&nbsp;</a>评论于
-		                                        <time>{$v.time|date="Y-m-d H:i:s", ###}</time>
-		                                    </div>
-		                                </header>
-		                                <div class="am-comment-bd">{$v.comment}</div>
-		                            </div>
-		                        </article>
-		                    </li>
-		                </volist>
-		            </ul>
-			  	</div>
+			  	<if condition="$info['comment'] eq ''">
+					<i class="am-icon-frown-o"></i>
+			  	<else />
+				  	<div class="am-panel-bd commens-panel-body" style="background: rgb(254, 254, 254)">
+				    	<ul class="am-comments-list am-comments-list-flip">
+			                <volist name="info['comment']" id="v">
+			                    <li class="am-comment">
+			                        <article>
+			                            <a href="javascript:void(0)">
+			                                <img src="__PUBLIC__/mobile/images/wifi.jpg" class="am-comment-avatar" width="48" height="48"/>
+			                            </a>
+			                            <div class="am-comment-main">
+			                                <header class="am-comment-hd">
+			                                    <div class="am-comment-meta">
+			                                        <a href="javascript:void(0)" class="am-comment-author">&nbsp;{$v.username}&nbsp;</a>评论于
+			                                        <time>{$v.time|date="Y-m-d H:i:s", ###}</time>
+			                                    </div>
+			                                </header>
+			                                <div class="am-comment-bd">{$v.comment}</div>
+			                            </div>
+			                        </article>
+			                    </li>
+			                </volist>
+			            </ul>
+				  	</div>
+			  	</if>
 			</div>
 			
 		</div>
