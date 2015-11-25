@@ -68,7 +68,6 @@
     				$data['is_voted'] = false;
     			}
     			//查看是否已经对该问题点过赞
-    			dump($data);
     			return $data;
     		}
     	}
