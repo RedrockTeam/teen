@@ -177,20 +177,32 @@ class questionController extends Controller {
 
     //删除自己提问的问题
     public function delete_vioce(){
-        $id = I('get.id');
-        $where = array(
-            'id' => $id,
-        );
-        M('voice')->where($where)->delete();
-        $where = array(
-            'voice_id' => $id, 
-        );
-        M('vote')->where($where)->delete();
-        M('comment')->where($where)->delete();
-        $data = array(
-            'status' => '200', 
-            'message' => '删除成功'
-        );
-        $this->ajaxReturn($data, 'json');
+    	$stunum = session('stunum');
+    	$where = array(
+    		'id' => I('get.id'),  //问题的id
+    	);
+    	$voice_stunum = M('voice')->field('posterid')->where($where)->select();	//查看是否是本人提的问题
+    	if($stunum == $voice_stunum){
+        	$id = I('get.id');
+        	$where = array(
+            	'id' => $id,
+        	);
+        	M('voice')->where($where)->delete();
+        	$where = array(
+            	'voice_id' => $id, 
+        	);
+        	M('vote')->where($where)->delete();
+        	M('comment')->where($where)->delete();
+        	$data = array(
+            	'status' => '200', 
+            	'message' => '删除成功'
+        	);
+    	}else{
+    		$data = array(
+            	'status' => '403', 
+            	'message' => '没有权限'
+        	);
+    	}
+    	$this->ajaxReturn($data, 'json');
     }
 }
