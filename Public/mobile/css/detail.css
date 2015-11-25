@@ -52,7 +52,17 @@ body {
     #user-comments-list .am-panel .am-panel-bd {
       padding-left: 0;
       padding-right: 0;
-      padding-bottom: 0; }
+      padding-bottom: 0;
+      background: #fefefe;
+      min-height: 300px; }
+      #user-comments-list .am-panel .am-panel-bd .sad-face {
+        text-align: center; }
+        #user-comments-list .am-panel .am-panel-bd .sad-face p {
+          margin-bottom: 0;
+          color: silver; }
+        #user-comments-list .am-panel .am-panel-bd .sad-face i {
+          font-size: 10rem;
+          color: silver; }
       #user-comments-list .am-panel .am-panel-bd .am-comments-list {
         margin-bottom: 0; }
         #user-comments-list .am-panel .am-panel-bd .am-comments-list .am-comment {
@@ -71,3 +81,36 @@ body {
               padding: 10px 0 10px 5px;
               color: #5d5d5d;
               font-size: 14px; }
+
+#question-comment-modal {
+  display: block; }
+  #question-comment-modal .am-modal-hd {
+    background-color: #fff;
+    padding: 10px;
+    font-weight: bold; }
+  #question-comment-modal .am-modal-bd {
+    background-color: #f8f8f8;
+    margin-bottom: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+    padding-right: 0; }
+    #question-comment-modal .am-modal-bd .am-form fieldset {
+      margin-bottom: 0.2em; }
+      #question-comment-modal .am-modal-bd .am-form fieldset p {
+        margin-bottom: 0; }
+
+@-webkit-keyframes praiseAnimate {
+  0% {
+    -webkit-transform: scale(1); }
+  50% {
+    -webkit-transform: scale(4);
+    -webkit-transform: rotate(20deg);
+    color: #dd514c; }
+  100% {
+    -webkit-transform: scale(1);
+    -webkit-transform: rotate(0deg);
+    color: #dd514c; } }
+
+.praiseAnimate {
+  -webkit-animation-name: praiseAnimate;
+  -webkit-animation-duration: 1s; }

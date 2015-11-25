@@ -3,36 +3,6 @@
 
 		<link rel="stylesheet" href="__PUBLIC__/mobile/css/index.css?v=2222">
 		<link rel="stylesheet" href="http://apps.bdimg.com/libs/animate.css/3.1.0/animate.min.css">
-	
-<!-- 		<div class="am-g" style="padding: 10px 0;">
-            <volist name="voice" id="v">
-                <div class="am-panel am-panel-default">
-				  	<div class="am-panel-hd">
-				  		<span>
-					  		<img class="am-circle" src="__PUBLIC__/mobile/images/lufei.jpg" width="30" height="30">
-					  	</span>
-					  	<span class="am-vertical-align-middle">{$v.postername}</span>
-				  	</div>
-				  	<div class="am-panel-bd">
-				    	<p>{$v.question}</p>
-				  	</div>
-				  	<div class="am-panel-footer">
-				  		<div class="post-time">
-				  			<i class="am-icon-calendar"></i>
-				  			<span>{$v.time|date="m-d H:i", ###}</span>
-				  		</div>
-				  		<div class="am-fr praise">
-				  			<i class="am-icon-thumbs-up"></i>
-				  			<span>0</span>
-				  		</div>
-				  		<div class="am-fr comment">
-				  			<i class="am-icon-comments"></i>
-				  			<span>0</span>
-				  		</div>
-				  	</div>
-				</div>
-            </volist>
-		</div> -->
 
 		<div class="am-g">
 			  <div data-am-widget="list_news" class="am-list-news am-list-news-default" >
@@ -50,7 +20,7 @@
 						        </div>
 						        <div class="am-u-sm-8 am-list-main">
 						            <h3 class="am-list-item-hd">
-						            	<a href="__CONTROLLER__/detail/id/{$v.id}" class="">{$v.title}</a>
+						            	<a href="__MODULE__/Question/detail/id/{$v.id}" class="">{$v.title}</a>
 						            </h3>
 						            <div class="am-list-item-text">{$v.question}</div>
 						        </div>
