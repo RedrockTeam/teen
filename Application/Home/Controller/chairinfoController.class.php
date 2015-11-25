@@ -20,10 +20,11 @@ class chairinfoController extends Controller {
                 	'status' => '200',
                 	'message' => '登陆成功' 
             	);
-            	session('username', $message['chairname']);
-    			session('stunum', $message['id']);
-            	session('sex', $message['sex']);
-            	session('touxiang', $message['picture']);
+                session('userType', 'chairman');
+            	session('username', $message[0]['chairname']);
+    			session('stunum', $message[0]['id']);
+            	session('sex', $message[0]['sex']);
+            	session('touxiang', $message[0]['picture']);
         	}else{
         		$data = array(
                 	'status' => '400',
@@ -61,7 +62,6 @@ class chairinfoController extends Controller {
             'id' => ['gt', $id],
         );
         $res = M('voice')->where($where)->limit(5)->select();
-        dump(session());
         return $res;
     }
     private function load_question($id = 0){
@@ -71,5 +71,31 @@ class chairinfoController extends Controller {
         );
         $res = M('voice')->where($where)->limit(5)->select();
         return $res;
+    }
+
+
+    public function delete_vioce(){
+        if(!$session('userType')){
+            $data = array(
+                'status' => 403,
+                'message' => '没有权限'
+            );
+        }else{
+            $id = I('get.id');
+            $where = array(
+                'id' => $id,
+            );
+            M('voice')->where($where)->delete();
+            $where = array(
+                'voice_id' => $id, 
+            );
+            M('vote')->where($where)->delete();
+            M('comment')->where($where)->delete();
+            $data = array(
+                'status' => '200', 
+                'message' => '删除成功'
+            );
+        }
+        $this->ajaxReturn($data, 'json');
     }
 }
