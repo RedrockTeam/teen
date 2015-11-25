@@ -1,26 +1,38 @@
-.am-panel {
+#user-info .am-panel {
   border: none; }
 
-.am-panel-hd {
+#user-info .am-panel-hd {
   padding: 0;
   border: none;
   background-color: #fff; }
+  #user-info .am-panel-hd .user-face {
+    height: 150px;
+    width: 100%;
+    background-image: url("../images/user_face_bg.jpg");
+    background-size: cover;
+    opacity: 0.8;
+    text-align: center; }
+    #user-info .am-panel-hd .user-face img {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      margin-top: 35px;
+      box-shadow: -1px 2px 40px #333; }
 
-.am-panel-bd p {
+#user-info .am-panel-bd p {
   text-align: center;
   margin-bottom: 1rem;
   text-shadow: 1px #333; }
 
-.user-face {
-  height: 150px;
-  width: 100%;
-  background-image: url("../images/user_face_bg.jpg");
-  background-size: cover;
-  opacity: 0.8;
-  text-align: center; }
-  .user-face img {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    margin-top: 35px;
-    box-shadow: -1px 2px 40px #333; }
+#user-question-list [data-am-widget=tabs] {
+  margin: 0; }
+
+#user-question-list .am-tab-panel {
+  padding: 0; }
+  #user-question-list .am-tab-panel .am-list-news-default {
+    margin: 0; }
+    #user-question-list .am-tab-panel .am-list-news-default li {
+      padding: 10px 1.25rem; }
+
+#user-question-list .am-tab-panel[data-tab-panel-0] li:first-child, #user-question-list .am-tab-panel[data-tab-panel-1] li:first-child {
+  border-top: 0; }
