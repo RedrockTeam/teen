@@ -9,12 +9,12 @@
     			$this->error('请先登陆！');
     		}
     	}
-        
-    	public function detail(){
+
+    	public function detail() {
             $id = I('get.id');
     		$data = $this->get_voice_detail($id);
     		$this->assign('info', $data);
-    		$this->display();
+    		$this->display('detail');
     	}
 
         // 问题详情接口
