@@ -53,7 +53,8 @@
 					$where = array(
 						'id' => $voiceData[0]['posterid']
 					);
-					$data['voice']['image'] = M('chairman')->field('picture')->where($where)->select()[0]['picture'];
+					$_data = M('chairman')->field('picture')->where($where)->select();
+					$data['voice']['image'] = $_data[0]['picture'];
 				}else{
 					$data['voice']['image'] = 'public/chairone/man.jpg';
 				}
