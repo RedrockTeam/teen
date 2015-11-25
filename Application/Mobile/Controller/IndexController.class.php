@@ -100,6 +100,68 @@
 
 	   
 	    public function personal() {
+	    	$data = $this->get_voice();
+	    	var_dump($data);
+	    	$this->assign('data', $data);
 	    	$this->display();
 	    }
+
+
+	    public function get_voice(){        //获取学生主席的@提问
+	        $id = I('get.id');
+	        if(!$id){
+	            $id = 0;
+	            return $this->loadData($id);                //根据是否有id判断是首次加载还是下拉加载
+	        }else{
+	            $this->ajaxReturn($this->loadData($id));
+	        }
+	    }
+	    private function loadData($id){    //下拉加载问题
+	        $data['be_question'] = $this->load_be_question($id);  //加载被提问数据
+	        $data['question'] = $this->load_question($id);  //加载提问数据
+	        return $data;
+	    }
+	    private function load_be_question($id = 0){     
+	        $where = array(
+	            'gettername' => session('username'),
+	            'id' => ['gt', $id],
+	        );
+	        $res = M('voice')->where($where)->limit(5)->select();
+	        return $res;
+	    }
+	    private function load_question($id = 0){
+	        $where = array(
+	            'posterid' => session('stunum'),    //这里是主席的id
+	            'id' => ['gt', $id],
+	        );
+	        $res = M('voice')->where($where)->limit(5)->select();
+	        return $res;
+	    }
+
+
+	    public function delete_vioce(){
+	        if(!$session('userType')){
+	            $data = array(
+	                'status' => 403,
+	                'message' => '没有权限'
+	            );
+	        }else{
+	            $id = I('get.id');
+	            $where = array(
+	                'id' => $id,
+	            );
+	            M('voice')->where($where)->delete();
+	            $where = array(
+	                'voice_id' => $id, 
+	            );
+	            M('vote')->where($where)->delete();
+	            M('comment')->where($where)->delete();
+	            $data = array(
+	                'status' => '200', 
+	                'message' => '删除成功'
+	            );
+	        }
+	        $this->ajaxReturn($data, 'json');
+	    }
+
 	}

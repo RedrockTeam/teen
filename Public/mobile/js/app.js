@@ -106,9 +106,7 @@
 						view.questionPraiseInc();
 					});
 				} else if (response.status == 304) {
-					view.alert('不能重复点赞', function () {
-						return;
-					});
+					view.alert('不能重复点赞');
 				} else {
 					view.alert('稍安勿躁, 好像出了点小问题=_=');
 				}
@@ -228,18 +226,21 @@
 			addQuestionViewShow,
 			addQuestionCommentLi;
 
+		// 重写Alert方法
 		alert = function (text, callback) {
 			if ($('#alert-modal').find('.am-modal-bd').html()) {
 				$('#alert-modal').find('.am-modal-bd').html(text);
 			} else {
 		    	$('body').append(template.alert(text));
 		    }
+		    callback = Boolean(callback) ? callback : function () { return; };
 	    	$('#alert-modal').modal({
 	    		relatedTarget: this,
 				onConfirm: callback
 			});
 		}
 
+		// 重写Confirm方法
 		confirm = function (text, onConfirm) {
 			if ($('#confirm-modal').find('.am-modal-bd').html()) {
 				$('#confirm-modal').find('.am-modal-bd').html(text);
@@ -256,7 +257,10 @@
 
 		// 提问页面显示
 		addQuestionViewShow = function () {
-			$('.add-question').removeClass('closeChooseListAnimation').addClass('openChooseListAnimation').css('-webkit-transform', 'scale(0)');
+			$('.add-question').removeClass('closeChooseListAnimation').addClass('openChooseListAnimation').css({
+				'-webkit-transform': 'scale(0)'
+			});
+			// FAB按钮的动画是300ms, 为了炫一点, 在动画完成之后再显示, 你可以选择打我T_T
 			setTimeout(function () {
 				$('#index').css('display', 'none');
 				$('#question').removeClass('bounceOut').addClass('fadeIn animated').css('display', 'block');
@@ -268,7 +272,9 @@
 			$('#question').removeClass('fadeIn').addClass('bounceOut animated');
 			$('#index').css('display', 'block');
 			$('#question').css('display', 'none');
-			$('.add-question').removeClass('openChooseListAnimation').addClass('closeChooseListAnimation').css('-webkit-transform', 'scale(1)');
+			$('.add-question').removeClass('openChooseListAnimation').addClass('closeChooseListAnimation').css({
+				'-webkit-transform': 'scale(1)'
+			});
 		};
 
 		// 
