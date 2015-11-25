@@ -146,7 +146,7 @@ class IndexController extends Controller {
 
     public function vote(){      //点赞接口
         if(!session('username')){return;}
-        $id = I('get.id');
+        $id = I('post.id');
         $where = array(
             'voiceid' => $id,
         );
