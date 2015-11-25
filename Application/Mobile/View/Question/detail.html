@@ -1,155 +1,131 @@
+	
+	<include file="Public/header" />
 
-		<include file="Public/header" />
-
-		<link rel="stylesheet" href="__PUBLIC__/mobile/css/index.css?v=2222">
+		<link rel="stylesheet" href="__PUBLIC__/mobile/css/detail.css">
 		<link rel="stylesheet" href="http://apps.bdimg.com/libs/animate.css/3.1.0/animate.min.css">
 
-		<div class="am-g">
-			  <div data-am-widget="list_news" class="am-list-news am-list-news-default" >
-			  	
-			  	<div class="am-list-news-bd">
-
-				  	<ul class="am-list">
-				  	
-            			<volist name="voice" id="v">
-							<li class="am-g am-list-item-desced am-list-item-thumbed am-list-item-thumb-left">
-						        <div class="am-u-sm-4 am-list-thumb">
-						          	<a href="http://www.douban.com/online/11624755/" class="">
-						            	<img src="http://img3.douban.com/lpic/o637240.jpg" alt="我最喜欢的一张画"/>
-						          	</a>
-						        </div>
-						        <div class="am-u-sm-8 am-list-main">
-						            <h3 class="am-list-item-hd">
-						            	<a href="__MODULE__/Question/detail/id/{$v.id}" class="">{$v.title}</a>
-						            </h3>
-						            <div class="am-list-item-text">{$v.question}</div>
-						        </div>
-						    </li>
-						</volist>
-
-				  	</ul>
+		<div class="am-g" id="question-detail-info">
+            <div class="am-panel am-panel-default">
+			  	<div class="am-panel-hd">
+			  		<span>
+				  		<img class="am-circle" src="__PUBLIC__/mobile/images/lufei.jpg" width="30" height="30">
+				  	</span>
+				  	<span class="am-vertical-align-middle">{$info.voice.postername}</span>
 			  	</div>
-
+			  	<div class="am-panel-bd">
+			    	<p>{$info.voice.question}</p>
+			  	</div>
+			  	<div class="am-panel-footer">
+			  		<div class="post-time">
+			  			<i class="am-icon-calendar"></i>
+			  			<span>{$info.voice.time|date="m-d H:i", ###}</span>
+			  		</div>
+			  		<div class="question-comment-div">
+			  			<i class="am-icon-comments"></i>
+			  			<span>评论</span>
+			  		</div>
+			  		<div class="am-fr question-praise-div">
+			  		<?php if ($info['is_voted']) { ?>
+			  			<i class="am-icon-thumbs-up" style="color: #dd514c"></i>
+			  			<span>已赞</span>
+			  		<?php } else { ?>
+			  			<i class="am-icon-thumbs-o-up"></i>
+			  			<span>点赞</span>
+			  		<?php } ?>
+			  		</div>
+			  	</div>
 			</div>
 		</div>
 
-		<div class="am-g am-text-center loading-more" style="display: none"> 
-			<i class="am-icon-refresh am-icon-spin" style="font-size: 2rem; margin-bottom: 1.5rem"></i>
-			<span>加载更多</span>
+		<div class="am-g" id="user-comments-list">
+			<div class="am-panel am-panel-default">
+			  	<div class="am-panel-hd">
+			  		<span>评论&nbsp;<b><?php echo count($info['comment']); ?></b></span>
+				  	<span class="am-fr">赞&nbsp;<b>{$info.voice.vote}</b></span>
+			  	</div>
+				<div class="am-panel-bd">
+			  		<if condition="count($info['comment']) neq 0">
+					    <!-- 无评论时隐藏 -->
+				    	<ul class="am-comments-list am-comments-list-flip">
+				    <else />
+					    <!-- 无评论时显示 -->
+			  			<div class="sad-face">
+							<p><i class="am-icon-frown-o"></i></p>
+							<p>点击上面评论按钮来抢吧沙发</p>
+			  			</div>
+				    	<ul class="am-comments-list am-comments-list-flip" style="display: none">
+				    </if>
+		                <volist name="info['comment']" id="v">
+		                    <li class="am-comment">
+		                        <article>
+		                            <a href="javascript:void(0)">
+		                                <img src="__PUBLIC__/mobile/images/wifi.jpg" class="am-comment-avatar" width="48" height="48"/>
+		                            </a>
+		                            <div class="am-comment-main">
+		                                <header class="am-comment-hd">
+		                                    <div class="am-comment-meta">
+		                                        <a href="javascript:void(0)" class="am-comment-author">&nbsp;{$v.username}&nbsp;</a>评论于
+		                                        <time>{$v.time|date="Y-m-d H:i:s", ###}</time>
+		                                    </div>
+		                                </header>
+		                                <div class="am-comment-bd">{$v.comment}</div>
+		                            </div>
+		                        </article>
+		                    </li>
+		                </volist>
+		            </ul>
+
+				</div>
+			</div>
+			
 		</div>
-		<div class="add-question">
-			<i class="am-fr am-icon-pencil" style="margin-left: 0"></i>
+
+
+		<div class="am-modal am-modal-no-btn" tabindex="-1" id="question-comment-modal">
+		  	<div class="am-modal-dialog">
+		    	<div class="am-modal-hd">
+		    		回复问题
+		    	</div>
+			    <div class="am-modal-bd">
+			      	<form class="am-form">
+			      		<fieldset>
+			      			<input type="hidden" name="voiceId" value="{$info.voice.id}">
+							<div class="am-form-group">
+						      	<textarea rows="5" name="comment" id="comment" placeholder="评论内容在140字以内"></textarea>
+						    </div>
+						    <p>
+						    	<button type="button" class="am-btn am-btn-block am-radius am-btn-primary ensure-comment-question" data-am-loading="{spinner: 'circle-o-notch', loadingText: '提问中.', resetText: '确认'}">确认</button>
+						    </p>
+			    		</fieldset>
+			      	</form>
+			    </div>
+		  	</div>
 		</div>
-	</div>
-
-		
-	<div id="question" style="display: none;">
-		
-		<div class="am-g">
-            <header data-am-widget="header" class="am-header am-header-default scrollspy-nav" data-am-scrollspy-nav="{offsetTop: 45}" data-am-sticky>
-		      	<div class="am-header-left am-header-nav">
-		          	<a href="javascript:void(0)">
-						<i class="am-header-icon am-icon-home"></i>
-		          	</a>
-		      	</div>
-
-		      	<h1 class="am-header-title">
-		          	<a href="javascript:void(0)">
-		       			最新提问
-		          	</a>
-		      	</h1>
-
-		      	<div class="am-header-right am-header-nav">
-		          	<a href="javascript:void(0)">
-		                <i class="am-header-icon am-icon-user"></i>
-		          	</a>
-		      	</div>
-		  	</header>
-        </div>
-
-		<div class="am-g">
-			<form class="am-form" id="question-form">
-	    		<fieldset>
-					<div class="am-form-group">
-						<label>选择提问人</label>
-						<select name="type">
-							<option value="public">公开提问</option>
-							<volist name="chairman" id="v">
-								<option value="1">校学生会</option>
-							</volist>
-						</select>
-					</div>
-					<div class="am-form-group">
-				      	<label for="title">问题标题</label>
-				      	<input type="text" placeholder="" name="title" id="title">
-				    </div>
-
-					<div class="am-form-group">
-				      	<label for="content">问题详情</label>
-				      	<textarea rows="5" name="content" id="content"></textarea>
-				    </div>
-
-				    <p>
-				    	<button type="button" class="am-btn am-btn-block am-radius am-btn-primary ensure-add-question" data-am-loading="{spinner: 'circle-o-notch', loadingText: '提问中.', resetText: '确认'}">确认</button>
-				    </p>
-	    		</fieldset>
-	    	</from>
-		</div>
-	</div>
 
 	<include file="Public/footer" />
-
 	<script>
-
 		$(function () {
-            $.AMUI.progress.start();
 
-			$('.add-question').on('click', question.addViewShow);
+			$.AMUI.progress.start();
 
-			$('.ensure-add-question').on('click', question.add);
+			if ($('.sad-face')) {
+				$('#user-comments-list .am-panel-bd').css({
+					'min-height': $(window).height() - $('#user-comments-list .am-panel-bd').offset().top
+				});
+			}
 
-			$('.am-g:eq(1)').on('click', '.comment', question.praise);
-
-			$('#title').add('#content').focus(function (event) {
-				if ($(this).parent().hasClass('am-form-error')) {
-					$(this).parent().removeClass('am-form-error');
+			$('.question-comment-div').on('click', question.commentViewShow);
+			$('.question-praise-div').on('click', question.praise);
+			$('.ensure-comment-question').on('click', question.comment);
+			$('#comment').focus(function () {
+				if ($(this).hasClass('am-form-field')) {
+					$(this).removeClass('am-form-field');
 				}
 			});
-
-			// 个人中心
-			$('.am-icon-user').on('click', function () {
-				if (!$.AMUI.utils.cookie.get('username')) {
-					view.confirm('查看个人资料需要登录哦~');
-				}
-			});
-
-			// 主页Icon
-			$('.am-icon-home').on('click', function () {
-				location.href = "http://localhost/teen/index.php?s=/Mobile";
-			});
-
-			// var flag = true;
-			// $(window).scroll(function(){ 
-			//     totalheight = parseFloat($(window).height()) + parseFloat($(window).scrollTop()); 
-			//     if($(document).height() <= totalheight){ 
-			//         $('.loading-more').css('display', 'block');
-			//         if (flag) {
-			//         	flag = false;
-			// 	        setTimeout(function () {
-			// 	        	$('.am-g:eq(1)').append(template.question());
-			// 	        	$(window).scroll(function () {
-			// 	        		return false;
-			// 	        	});
-			//         		flag = true;
-			// 	        }, 1500);
-			//         }
-			//     } else {
-			//     	$('.loading-more').css('display', 'none');
-			//     }
-			// });
 
 			$.AMUI.progress.done();
 
 		});
-
 	</script>
+
+
