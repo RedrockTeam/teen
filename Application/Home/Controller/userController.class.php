@@ -94,8 +94,10 @@ class userController extends Controller {
     private function loadData($id){    //下拉加载问题
         if(session('userType') == 'chairman'){
             $data['be_question'] = $this->load_be_question($id);  //加载被提问数据
+            $data['is_chairman'] = true;
         }
         $data['question'] = $this->load_question($id);  //加载提问数据
+        $data['is_chairman'] = false;
         return $data;
     }
     private function load_be_question($id = 0){     
