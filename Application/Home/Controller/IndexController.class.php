@@ -32,7 +32,7 @@
             $voice = M('voice');
             if($id){
                 $where = array(
-                    'id' => ['gt', $id],
+                    'id' => array('gt' => $id)
                 );
                 return $voice->where($where)->order('time desc')->limit(5)->select();   //下拉加载
             }else{
