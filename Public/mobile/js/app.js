@@ -105,7 +105,7 @@
 						// 点赞数增一
 						view.questionPraiseInc();
 					});
-				} else if (response.status == 100) {
+				} else if (response.status == 304) {
 					view.alert('不能重复点赞');
 				} else {
 					view.alert('稍安勿躁, 好像出了点小问题=_=');
