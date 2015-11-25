@@ -113,7 +113,4 @@ class userController extends Controller {
         return $res;
     }
 
-
-
-    
 }

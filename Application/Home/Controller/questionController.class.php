@@ -72,6 +72,7 @@ class questionController extends Controller {
 
 	//提交评论的方法
     public function commit_comment(){			//评论方法
+        if(!session('username')){return;}
         $comment = I('get.comment');
         $id = I('get.id');
     	if(!$username = session('username')){
