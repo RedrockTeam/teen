@@ -44,9 +44,9 @@
 	var question = (function () {
 
 		var postMap = {
-			add: 'index.php?s=/Home/Question/commit_voice',
-			praise: 'index.php?s=/Home/Question/vote',
-			comment: 'index.php?s=/Home/Question/commit_comment'
+			add: 'index.php?s=/Mobile/Question/commit_voice',
+			praise: 'index.php?s=/Mobile/Question/vote',
+			comment: 'index.php?s=/Mobile/Question/commit_comment'
 		};
 
 
