@@ -55,6 +55,11 @@ body {
       padding-bottom: 0;
       background: #fefefe;
       min-height: 300px; }
+      #user-comments-list .am-panel .am-panel-bd .sad-face {
+        text-align: center; }
+        #user-comments-list .am-panel .am-panel-bd .sad-face i {
+          font-size: 10rem;
+          color: silver; }
       #user-comments-list .am-panel .am-panel-bd .am-comments-list {
         margin-bottom: 0; }
         #user-comments-list .am-panel .am-panel-bd .am-comments-list .am-comment {

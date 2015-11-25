@@ -72,6 +72,13 @@
 					padding-bottom: 0;
 					background: rgb(254, 254, 254);
 					min-height: 300px;
+					.sad-face {
+						text-align: center;
+						i {
+							font-size: 10rem;
+							color: rgb(192, 192, 192);
+						}
+					}
 					.am-comments-list {
 						margin-bottom: 0;
 						.am-comment {
