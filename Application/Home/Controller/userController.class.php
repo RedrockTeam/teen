@@ -112,4 +112,8 @@ class userController extends Controller {
         $res = M('voice')->where($where)->limit(5)->select();
         return $res;
     }
+
+
+
+    
 }
