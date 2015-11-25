@@ -25,7 +25,11 @@
 			  			<span>评论</span>
 			  		</div>
 			  		<div class="am-fr question-praise-div">
-			  			<i class="am-icon-thumbs-o-up"></i>
+			  			<if condition="info.is_voted">
+			  				<i class="am-icon-thumbs-up" style="color: #dd514c"></i>
+			  			</else>
+			  				<i class="am-icon-thumbs-o-up"></i>
+			  			</if>
 			  			<span>赞</span>
 			  		</div>
 			  	</div>
