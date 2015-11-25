@@ -10,15 +10,15 @@
 			  		<span>
 				  		<img class="am-circle" src="__PUBLIC__/mobile/images/lufei.jpg" width="30" height="30">
 				  	</span>
-				  	<span class="am-vertical-align-middle">{$data.voice.postername}</span>
+				  	<span class="am-vertical-align-middle">{$info.voice.postername}</span>
 			  	</div>
 			  	<div class="am-panel-bd">
-			    	<p>{$data.voice.question}</p>
+			    	<p>{$info.voice.question}</p>
 			  	</div>
 			  	<div class="am-panel-footer">
 			  		<div class="post-time">
 			  			<i class="am-icon-calendar"></i>
-			  			<span>{$data.voice.time|date="m-d H:i", ###}</span>
+			  			<span>{$info.voice.time|date="m-d H:i", ###}</span>
 			  		</div>
 			  		<div class="question-comment-div">
 			  			<i class="am-icon-comments"></i>
@@ -35,8 +35,8 @@
 		<div class="am-g" id="user-comments-list">
 			<div class="am-panel am-panel-default">
 			  	<div class="am-panel-hd">
-			  		<span>评论&nbsp;<b><?php echo count($data['comment']); ?></b></span>
-				  	<span class="am-fr">赞&nbsp;<b>{$data.voice.vote}</b></span>
+			  		<span>评论&nbsp;<b><?php echo count($info['comment']); ?></b></span>
+				  	<span class="am-fr">赞&nbsp;<b>{$info.voice.vote}</b></span>
 			  	</div>
 			  	<div class="am-panel-bd commens-panel-body" style="background: rgb(254, 254, 254)">
 			    	<ul class="am-comments-list am-comments-list-flip">
