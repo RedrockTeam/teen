@@ -1,35 +1,39 @@
 <?php
     namespace Mobile\Controller;
     use Think\Controller;
-    class userController extends Controller {
+    class UserController extends Controller {
     	//学生和老师登录的方法
-    	public function login(){	
-        	$username = I('post.username');
-        	$password = I('post.password');
-        	$user_message = $this->curl_api($username, $password); //获取用户信息
-            //
-        	if($user_message['status'] == 200){
-        		session('username', $user_message['userInfo']['real_name']);	//姓名
-        		session('stunum', $user_message['userInfo']['stu_num']);	//学号或者教职工号
-                session('sex', $user_message['userInfo']['gender']);	//性别
-                if($user_message['userInfo']['gender'] == "男"){
-                    session('touxiang', 'Public/chairone/boy.jpg');		//根据不同性别设置头像
-                }else{
-                    session('touxiang', 'Public/chairone/girl.jpg');
-                }
-                $conf = array(
-                    'username' => $user_message['userInfo']['real_name'],
-                    'stunum' => $user_message['userInfo']['stu_num'],
-                    'status' => '200',
-                    'message' => true,
-                );
-        	}else{
-        		$conf = array(
-                    'status' => '400',
-                    'message' => false,
-                );
-        	}
-            $this->ajaxReturn($conf);
+    	public function login(){
+            if (IS_GET) {
+                $this->display('login');
+            } else {
+            	$username = I('post.username');
+            	$password = I('post.password');
+            	$user_message = $this->curl_api($username, $password); //获取用户信息
+                //
+            	if($user_message['status'] == 200){
+            		session('username', $user_message['userInfo']['real_name']);	//姓名
+            		session('stunum', $user_message['userInfo']['stu_num']);	//学号或者教职工号
+                    session('sex', $user_message['userInfo']['gender']);	//性别
+                    if($user_message['userInfo']['gender'] == "男"){
+                        session('touxiang', 'Public/chairone/boy.jpg');		//根据不同性别设置头像
+                    }else{
+                        session('touxiang', 'Public/chairone/girl.jpg');
+                    }
+                    $conf = array(
+                        'username' => $user_message['userInfo']['real_name'],
+                        'stunum' => $user_message['userInfo']['stu_num'],
+                        'status' => '200',
+                        'message' => true,
+                    );
+            	}else{
+            		$conf = array(
+                        'status' => '400',
+                        'message' => false,
+                    );
+            	}
+                $this->ajaxReturn($conf);
+            }
         }
 
         //学生会主席的登陆方法
