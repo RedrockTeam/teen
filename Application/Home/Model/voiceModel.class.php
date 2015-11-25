@@ -9,9 +9,9 @@ class voiceModel extends Model {
 			$where = array(
 				'id' => ['gt', $id],
 			);
-			return $voice->where($where)->limit(5)->select();	//下拉加载
+			return $voice->where($where)->order('time desc')->limit(5)->select();	//下拉加载
 		}else{
-			return $voice->limit(5)->select();		//首页加载
+			return $voice->order('time desc')->limit(5)->select();		//首页加载
 		}
 	}
 }

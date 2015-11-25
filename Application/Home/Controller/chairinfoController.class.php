@@ -75,7 +75,7 @@ class chairinfoController extends Controller {
 
 
     public function delete_vioce(){
-        if(!$session('userType')){
+        if(!session('userType')){
             $data = array(
                 'status' => 403,
                 'message' => '没有权限'
