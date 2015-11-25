@@ -103,7 +103,7 @@ class userController extends Controller {
     private function load_be_question($id = 0){     
         $where = array(
             'gettername' => session('username'),    //这里是主席的id
-            'id' => ['gt', $id],
+            'id' => array('gt' => $id)
         );
         $res = M('voice')->where($where)->limit(5)->select();
         return $res;
@@ -111,7 +111,7 @@ class userController extends Controller {
     private function load_question($id = 0){
         $where = array(
             'posterid' => session('stunum'),    
-            'id' => ['gt', $id],
+            'id' => array('gt' => $id)
         );
         $res = M('voice')->where($where)->limit(5)->select();
         return $res;
