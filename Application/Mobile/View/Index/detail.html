@@ -10,15 +10,15 @@
 			  		<span>
 				  		<img class="am-circle" src="__PUBLIC__/mobile/images/lufei.jpg" width="30" height="30">
 				  	</span>
-				  	<span class="am-vertical-align-middle">校学生会</span>
+				  	<span class="am-vertical-align-middle">{$data.voice.postername}</span>
 			  	</div>
 			  	<div class="am-panel-bd">
-			    	<p>这里是问题的详情这里是问题的详情这里是问题的详情这里是问题的详情</p>
+			    	<p>{$data.voice.question}</p>
 			  	</div>
 			  	<div class="am-panel-footer">
 			  		<div class="post-time">
 			  			<i class="am-icon-calendar"></i>
-			  			<span>11-12 15:30</span>
+			  			<span>{$data.voice.time|date="m-d H:i", ###}</span>
 			  		</div>
 			  		<div class="question-comment-div">
 			  			<i class="am-icon-comments"></i>
@@ -35,8 +35,8 @@
 		<div class="am-g" id="user-comments-list">
 			<div class="am-panel am-panel-default">
 			  	<div class="am-panel-hd">
-			  		<span>评论&nbsp;<b>100</b></span>
-				  	<span class="am-fr">赞&nbsp;<b>200</b></span>
+			  		<span>评论&nbsp;<b><?php echo count($data['comment']); ?></b></span>
+				  	<span class="am-fr">赞&nbsp;<b>{$data.voice.vote}</b></span>
 			  	</div>
 			  	<div class="am-panel-bd commens-panel-body" style="background: rgb(254, 254, 254)">
 			    	<ul class="am-comments-list am-comments-list-flip">
