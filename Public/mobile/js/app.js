@@ -368,7 +368,7 @@
 			_commentLiHTML += '<li class="am-comment">';
                 _commentLiHTML += '<article>';
                     _commentLiHTML += '<a href="javascript:void(0)">';
-                        _commentLiHTML += '<img src="'+ data.face +'" class="am-comment-avatar" width="48" height="48"/>';
+                        _commentLiHTML += '<img src="'+ data.touxiang +'" class="am-comment-avatar" width="48" height="48"/>';
                     _commentLiHTML += '</a>';
                     _commentLiHTML += '<div class="am-comment-main">';
                         _commentLiHTML += '<header class="am-comment-hd">';
