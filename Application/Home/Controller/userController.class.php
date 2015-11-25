@@ -79,7 +79,7 @@ class userController extends Controller {
     }
 
 
-    //获取用户(主席和普通用户的都有)自己的提问和@提问
+    //获取主席自己的提问和@提问
     public function get_voice(){        
         $id = I('get.id');
         if(!$id){
@@ -92,13 +92,15 @@ class userController extends Controller {
         }
     }
     private function loadData($id){    //下拉加载问题
-        $data['be_question'] = $this->load_be_question($id);  //加载被提问数据
+        if(session('userType') == 'chairman'){
+            $data['be_question'] = $this->load_be_question($id);  //加载被提问数据
+        }
         $data['question'] = $this->load_question($id);  //加载提问数据
         return $data;
     }
     private function load_be_question($id = 0){     
         $where = array(
-            'gettername' => session('username'),
+            'gettername' => session('username'),    //这里是主席的id
             'id' => ['gt', $id],
         );
         $res = M('voice')->where($where)->limit(5)->select();
@@ -106,11 +108,10 @@ class userController extends Controller {
     }
     private function load_question($id = 0){
         $where = array(
-            'posterid' => session('stunum'),    //这里是主席的id
+            'posterid' => session('stunum'),    
             'id' => ['gt', $id],
         );
         $res = M('voice')->where($where)->limit(5)->select();
         return $res;
     }
-
 }
