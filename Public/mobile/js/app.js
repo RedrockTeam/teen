@@ -233,7 +233,11 @@
 			} else {
 		    	$('body').append(template.alert(text));
 		    }
-		    callback = Boolean(callback) ? callback : function () { return; };
+		    if (!callback) {
+		    	callback = function () {
+		    		return;
+		    	}
+		    }
 	    	$('#alert-modal').modal({
 	    		relatedTarget: this,
 				onConfirm: callback
