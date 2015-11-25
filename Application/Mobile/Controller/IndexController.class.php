@@ -63,13 +63,12 @@
 					'voiceid' => $id,
 					'user' => session('stunum'),
 				);
+				//查看是否已经对该问题点过赞
 				if(M('user_vote')->where($where)->select()){
 					$data['is_voted'] = true;
 				}else{
 					$data['is_voted'] = false;
 				}
-				//查看是否已经对该问题点过赞
-				dump($data);
 				return $data;
 			}
 		}
