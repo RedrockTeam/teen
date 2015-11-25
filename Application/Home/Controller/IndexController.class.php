@@ -58,8 +58,8 @@ class IndexController extends Controller {
 
     //用户评论的方法
     public function commit_comment(){			//评论方法
-        $comment = I('get.comment');
-        $id = I('get.id');
+        $comment = I('post.comment');
+        $id = I('post.id');
     	if(!$username = session('username')){
     		$config = array(
     			'status' => 401,
