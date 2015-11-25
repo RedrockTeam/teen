@@ -2,7 +2,6 @@
 	namespace Mobile\Controller;
 	use Think\Controller;
 	class IndexController extends Controller {
-	    sadsasa
 
 	    public function index(){
 	    	$chairman = M('chairman')->field('id, chairname')->select();
@@ -78,4 +77,7 @@
 		}
 
 	   
+	    public function personal() {
+	    	$this->display();
+	    }
 	}
