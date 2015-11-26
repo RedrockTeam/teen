@@ -15,6 +15,7 @@
             		session('username', $user_message['userInfo']['real_name']);	//姓名
             		session('stunum', $user_message['userInfo']['stu_num']);	//学号或者教职工号
                     session('sex', $user_message['userInfo']['gender']);	//性别
+                    cookie('stunum',$user_message['userInfo']['stu_num']);
                     if($user_message['userInfo']['gender'] == "男"){
                         session('touxiang', 'Public/chairone/boy.jpg');		//根据不同性别设置头像
                     }else{
@@ -59,7 +60,8 @@
         			session('stunum', $message[0]['id']);	//主席的id生成的5位随机数
                 	session('sex', $message[0]['sex']);		//性别
                 	session('touxiang', $message[0]['picture']);	//头像的地址
-            	}else{
+                    cookie('stunum',$message[0]['id']);
+                }else{
             		$data = array(
                     	'status' => '400',
                     	'message' => '用户名或密码错误', 
