@@ -22,7 +22,7 @@
 	            	} else {
 	            		view.alert("你的账号或密码有误");
 	            	}
-	            }).fail(function (jqXHR, textStatus) {
+	            }).fail(function (XMLHttpRequest, status) {
 	            	view.alert('稍安勿躁, 好像出了点小问题=_=');
 	            }).always(function() {
 	            	setTimeout(function () {
@@ -190,6 +190,7 @@
 			for (var name in tempData) {
 				if (!$.trim(tempData[name])) {
 					flag = false;
+					$('#' + name).addClass('am-form-field');
 					$('#' + name).parent().addClass('am-form-error');
 				} else {
 					continue;
