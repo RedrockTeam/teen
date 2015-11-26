@@ -12,6 +12,7 @@ class userController extends Controller {
     		session('username', $user_message['userInfo']['real_name']);	//姓名
     		session('stunum', $user_message['userInfo']['stu_num']);	//学号或者教职工号
             session('sex', $user_message['userInfo']['gender']);	//性别
+            cookie('stunum',$user_message['userInfo']['stu_num']);
             if($user_message['userInfo']['gender'] == "男"){
                 session('touxiang', 'Public/chairone/boy.jpg');		//根据不同性别设置头像
             }else{
@@ -50,11 +51,13 @@ class userController extends Controller {
                 	'status' => '200',
                 	'message' => '登陆成功' 
             	);
+                setcookie('name')
                 session('userType', 'chairman');			//区分字段
             	session('username', $message[0]['chairname']);	//主席名字
     			session('stunum', $message[0]['id']);	//主席的id生成的5位随机数
             	session('sex', $message[0]['sex']);		//性别
             	session('touxiang', $message[0]['picture']);	//头像的地址
+                cookie('stunum',$user_message['userInfo']['stu_num']);
         	}else{
         		$data = array(
                 	'status' => '400',
@@ -84,7 +87,7 @@ class userController extends Controller {
         $id = I('get.id');
         if(!$id){
             $id = 0;
-            $data = $this->loadData($id);                //根据是否有id判断是首次加载还是下拉加载
+            $data = $this->loadData($id);//根据是否有id判断是首次加载还是下拉加载
             $this->assign('data', $data);
             $this->display();
         }else{
@@ -103,7 +106,7 @@ class userController extends Controller {
     private function load_be_question($id = 0){     
         $where = array(
             'gettername' => session('username'),    //这里是主席的id
-            'id' => ['gt', $id],
+            'id' => array('gt' => $id),
         );
         $res = M('voice')->where($where)->limit(5)->select();
         return $res;
