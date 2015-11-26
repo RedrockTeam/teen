@@ -10,7 +10,7 @@
             if (verify.userLoginVerify('#user-login-form')) {
 				var $button = $(this);
 	            $.ajax({
-	            	url: 'User/login',
+	            	url: 'login',
 	            	type: 'POST',
 	            	dataType: 'json',
 	            	data: $('#user-login-form').serialize(),
