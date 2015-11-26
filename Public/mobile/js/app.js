@@ -20,7 +20,7 @@
 	            }).done(function (response, status) {
 	            	if (response.status == 200 && status === 'success') {
 	            		$.AMUI.utils.cookie.set('username', response.username);
-	            		location.href = '/';
+	            		location.href = 'Index/index';
 	            	} else {
 	            		view.alert("你的账号或密码有误");
 	            	}
