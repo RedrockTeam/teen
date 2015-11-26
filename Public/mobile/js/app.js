@@ -10,7 +10,7 @@
             if (verify.userLoginVerify('#user-login-form')) {
 				var $button = $(this);
 	            $.ajax({
-	            	url: 'index.php?s=/Mobile/User/login',
+	            	url: 'User/login',
 	            	type: 'POST',
 	            	dataType: 'json',
 	            	data: $('#user-login-form').serialize(),
@@ -20,7 +20,7 @@
 	            }).done(function (response, status) {
 	            	if (response.status == 200 && status === 'success') {
 	            		$.AMUI.utils.cookie.set('username', response.username);
-	            		location.href = '?s=/Mobile';
+	            		location.href = '/';
 	            	} else {
 	            		view.alert("你的账号或密码有误");
 	            	}
@@ -44,9 +44,9 @@
 	var question = (function () {
 
 		var postMap = {
-			add: 'index.php?s=/Mobile/Question/commit_voice',
-			praise: 'index.php?s=/Mobile/Question/vote',
-			comment: 'index.php?s=/Mobile/Question/commit_comment'
+			add: 'Question/commit_voice',
+			praise: 'Question/vote',
+			comment: 'Question/commit_comment'
 		};
 
 
@@ -254,7 +254,7 @@
 			$('#confirm-modal').modal({
 		        relatedTarget: this,
 		        onConfirm: function (options) {
-		          	location.href = '?s=/Mobile/User/userLogin';
+		          	location.href = 'User/login';
 		        }
 		    });
 		};
