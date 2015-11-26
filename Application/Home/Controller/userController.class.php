@@ -57,7 +57,7 @@ class userController extends Controller {
     			session('stunum', $message[0]['id']);	//主席的id生成的5位随机数
             	session('sex', $message[0]['sex']);		//性别
             	session('touxiang', $message[0]['picture']);	//头像的地址
-                cookie('stunum',$user_message['userInfo']['stu_num']);
+                cookie('stunum',$message[0]['id']);
         	}else{
         		$data = array(
                 	'status' => '400',
