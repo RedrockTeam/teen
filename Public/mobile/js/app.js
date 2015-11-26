@@ -81,7 +81,7 @@
 							// 隐藏提问页面
 							view.addQuestionViewHide();
 							// 动态添加最新问题
-							view.addQuestionPanel(data);
+							view.addQuestionLi(data);
 						});
 	            	} else {
 	            		view.alert("问题数据不完整, 请重新");
@@ -147,7 +147,7 @@
 				}).fail(function() {
 					view.alert('系统出了点小问题, 刷新试试');
 				}).always(function() {
-					// 情况评论表单
+					// 清空评论表单
 					$('form')[0].reset();
 					// 关闭评论Modal
 					$('#question-comment-modal').modal('close');
@@ -222,7 +222,7 @@
 
 		var alert, 
 			confirm, 
-			addQuestionPanel, 
+			addQuestionLi, 
 			addQuestionViewShow,
 			addQuestionCommentLi;
 
@@ -257,7 +257,7 @@
 		          	location.href = '?s=/Mobile/User/userLogin';
 		        }
 		    });
-		}
+		};
 
 		// 提问页面显示
 		addQuestionViewShow = function () {
@@ -281,12 +281,12 @@
 			});
 		};
 
-		// 
-		addQuestionPanel = function (data) {
-			var $questionPanel = $(template.question(data)).addClass('animated pulse');
-			$('.am-g:eq(1)').prepend($questionPanel);
+		// 动态添加问题
+		addQuestionLi = function (data) {
+			var $questionLi = $(template.question(data)).addClass('animated pulse');
+			$('.am-list-news ul').prepend($questionLi);
 			setTimeout(function () {
-				$questionPanel.removeClass('animated pulse');
+				$questionLi.removeClass('animated pulse');
 			}, 1000);
 		};
 
@@ -301,19 +301,19 @@
 			setTimeout(function () {
 				$questionCommentLi.removeClass('animated pulse');
 			}, 1000);
-		}
+		};
 
 		// 问题评论数增1
 		questionCommentInc = function () {
 			var count = $('#user-comments-list span:eq(0) b').text();
 			$('#user-comments-list span:eq(0) b').text(++count);
-		}
+		};
 
 		// 点赞数增1
 		questionPraiseInc = function () {
 			var count = $('#user-comments-list span:eq(1) b').text();
 			$('#user-comments-list span:eq(1) b').text(++count);
-		}
+		};
 
 		// 点赞动画
 		praiseQuestion = function () {
@@ -322,13 +322,13 @@
 				$('.question-praise-div span').text('已赞');
 				$('.question-praise-div i').css('color', '#dd514c').removeClass('praiseAnimate am-icon-thumbs-o-up').addClass('am-icon-thumbs-up');
 			}, 1005);
-		}
+		};
 
 		return {
 			alert: alert,
 			confirm: confirm,
+			addQuestionLi: addQuestionLi,
 			praiseQuestion: praiseQuestion,
-			addQuestionPanel: addQuestionPanel,
 			questionPraiseInc: questionPraiseInc,
 			questionCommentInc: questionCommentInc,
 			addQuestionViewShow: addQuestionViewShow,
@@ -377,9 +377,9 @@
 
 	var template = (function () {
 		var commentLi, _commentLiHTML = '',
+			questionLi, _questionLiHTML = '',
 			alertModal, _alertModalHTML = '',
-			confirmModal, _confirmModalHTML = '',
-			questionPanel, _questionPanelHTML = '';
+			confirmModal, _confirmModalHTML = '';
 		
 		commentLi = function (data) {
 			_commentLiHTML += '<li class="am-comment">';
@@ -403,32 +403,15 @@
             return commentLiHTML;
 		}
 
-		questionPanel = function (data) {
-			_questionPanelHTML += '<div class="am-panel am-panel-default">';
-			  	_questionPanelHTML += '<div class="am-panel-hd">';
-			  		_questionPanelHTML += '<span>';
-				  		_questionPanelHTML += '<img class="am-circle" src="Public/mobile/images/lufei.jpg" width="30" height="30">';
-				  	_questionPanelHTML += '</span>&nbsp;';
-				  	_questionPanelHTML += '<span class="am-vertical-align-middle">' + data.postername + '</span>';
-			  	_questionPanelHTML += '</div>';
-			  	_questionPanelHTML += '<div class="am-panel-bd">';
-			    	_questionPanelHTML += '<p>' + data.question + '</p>';
-			  	_questionPanelHTML += '</div>';
-			  	_questionPanelHTML += '<div class="am-panel-footer">';
-			  		_questionPanelHTML += '<div class="post-time"><i class="am-icon-calendar"></i><span>'+ data.time +'</span></div>';
-			  		_questionPanelHTML += '<div class="am-fr comment">';
-			  			_questionPanelHTML += '<i class="am-icon-comments"></i>';
-			  			_questionPanelHTML += '<span>0</span>';
-			  		_questionPanelHTML += '</div>';
-			  		_questionPanelHTML += '<div class="am-fr praise">';
-			  			_questionPanelHTML += '<i class="am-icon-thumbs-up"></i>';
-			  			_questionPanelHTML += '<span>0</span>';
-			  		_questionPanelHTML += '</div>';
-			  	_questionPanelHTML += '</div>';
-			_questionPanelHTML += '</div>';
-			questionPanelHTML = _questionPanelHTML;
-			_questionPanelHTML = '';
-			return questionPanelHTML;
+		questionLi = function (data) {
+			_questionLiHTML += '<li class="am-g am-list-item-desced">';
+	          	_questionLiHTML += '<a href="__MODULE__/Question/detail/id/22">'+ data.title +'</a>';
+	          	_questionLiHTML += '<span class="am-list-date">发表日期: '+ data.time +'</span>';
+	          	_questionLiHTML += '<div class="am-list-item-text">'+ data.question +'</div>';
+	      	_questionLiHTML += '</li>';
+			_tempQuestionLiHTML = _questionLiHTML;
+			_questionLiHTML = '';
+			return _tempQuestionLiHTML;
 		}
 
 		alertModal = function (text) {
@@ -461,7 +444,7 @@
 		return {
 			alert: alertModal,
 			comment: commentLi,
-			confirm: confirmModal,
-			question: questionPanel
+			question: questionLi,
+			confirm: confirmModal
 		};
 	})();

@@ -6,30 +6,17 @@
 
 		<div class="am-g">
 			  <div data-am-widget="list_news" class="am-list-news am-list-news-default" >
-			  	
 			  	<div class="am-list-news-bd">
-
 				  	<ul class="am-list">
-				  	
             			<volist name="voice" id="v">
-							<li class="am-g am-list-item-desced am-list-item-thumbed am-list-item-thumb-left">
-						        <div class="am-u-sm-4 am-list-thumb">
-						          	<a href="http://www.douban.com/online/11624755/" class="">
-						            	<img src="http://img3.douban.com/lpic/o637240.jpg" alt="我最喜欢的一张画"/>
-						          	</a>
-						        </div>
-						        <div class="am-u-sm-8 am-list-main">
-						            <h3 class="am-list-item-hd">
-						            	<a href="__MODULE__/Question/detail/id/{$v.id}" class="">{$v.title}</a>
-						            </h3>
-						            <div class="am-list-item-text">{$v.question}</div>
-						        </div>
-						    </li>
+	            			<li class="am-g am-list-item-desced">
+					          	<a href="__MODULE__/Question/detail/id/{$v.id}" class="">{$v.title}</a>
+					          	<span class="am-list-date">发表日期: {$v.time|date="m-d H:i", ###}</span>
+					          	<div class="am-list-item-text">{$v.question}</div>
+					      	</li>
 						</volist>
-
 				  	</ul>
 			  	</div>
-
 			</div>
 		</div>
 
@@ -79,14 +66,15 @@
 							</volist>
 						</select>
 					</div>
+					
 					<div class="am-form-group">
 				      	<label for="title">问题标题</label>
-				      	<input type="text" placeholder="" name="title" id="title">
+				      	<input type="text" name="title" id="title" placeholder="问题标题在30字以内">
 				    </div>
 
 					<div class="am-form-group">
 				      	<label for="content">问题详情</label>
-				      	<textarea rows="5" name="content" id="content"></textarea>
+				      	<textarea rows="5" name="content" id="content" placeholder="问题内容在20字以上"></textarea>
 				    </div>
 
 				    <p>
