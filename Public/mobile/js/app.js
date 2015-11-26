@@ -20,7 +20,7 @@
 	            }).done(function (response, status) {
 	            	if (response.status == 200 && status === 'success') {
 	            		$.AMUI.utils.cookie.set('username', response.username);
-	            		location.href = 'Index/index';
+	            		// window.location.href = $('html').attr('data-index');
 	            	} else {
 	            		view.alert("你的账号或密码有误");
 	            	}
@@ -44,9 +44,9 @@
 	var question = (function () {
 
 		var postMap = {
-			add: 'Question/commit_voice',
-			praise: 'Question/vote',
-			comment: 'Question/commit_comment'
+			add: $('html').attr('data-add'),
+			praise: $('html').attr('data-praise'),
+			comment: $('html').attr('data-comment')
 		};
 
 
@@ -254,7 +254,7 @@
 			$('#confirm-modal').modal({
 		        relatedTarget: this,
 		        onConfirm: function (options) {
-		          	location.href = 'User/login';
+		          	location.href = $('html').attr('data-login');
 		        }
 		    });
 		};
