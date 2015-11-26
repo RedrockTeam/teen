@@ -10,17 +10,15 @@
             if (verify.userLoginVerify('#user-login-form')) {
 				var $button = $(this);
 	            $.ajax({
-	            	url: 'login',
+	            	url: $('html').attr('data-login'),
 	            	type: 'POST',
-	            	dataType: 'json',
 	            	data: $('#user-login-form').serialize(),
 	            	beforeSend: function () {
 	            		$button.button('loading');
 	            	}
 	            }).done(function (response, status) {
 	            	if (response.status == 200 && status === 'success') {
-	            		$.AMUI.utils.cookie.set('stunum', response.stunum);
-	            		// window.location.href = $('html').attr('data-index');
+	            		window.location.href = $('html').attr('data-index');
 	            	} else {
 	            		view.alert("你的账号或密码有误");
 	            	}
@@ -54,7 +52,7 @@
 			praise;
 
 		addViewShow = function () {
-			if ($.AMUI.utils.cookie.get('username')) {
+			if ($.AMUI.utils.cookie.get('stunum')) {
 				view.addQuestionViewShow();
 			} else {
 				view.confirm('提问需要先登录!');
