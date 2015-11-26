@@ -51,7 +51,6 @@ class userController extends Controller {
                 	'status' => '200',
                 	'message' => '登陆成功' 
             	);
-                setcookie('name')
                 session('userType', 'chairman');			//区分字段
             	session('username', $message[0]['chairname']);	//主席名字
     			session('stunum', $message[0]['id']);	//主席的id生成的5位随机数
