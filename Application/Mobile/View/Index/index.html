@@ -106,14 +106,14 @@
 
 			// 个人中心
 			$('.am-icon-user').on('click', function () {
-				if (!$.AMUI.utils.cookie.get('username')) {
+				if (!$.AMUI.utils.cookie.get('stunum')) {
 					view.confirm('查看个人资料需要登录哦~');
 				}
 			});
 
 			// 主页Icon
 			$('.am-icon-home').on('click', function () {
-				location.href = "http://localhost/teen/index.php?s=/Mobile";
+				location.href = $('html').attr('data-personal');
 			});
 
 			// var flag = true;
