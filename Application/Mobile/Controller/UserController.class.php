@@ -85,35 +85,39 @@
         }
 
 
-        //获取用户(主席和普通用户的都有)自己的提问和@提问
+        //获取主席自己的提问和@提问
         public function get_voice(){        
             $id = I('get.id');
             if(!$id){
                 $id = 0;
-                $data = $this->loadData($id);                //根据是否有id判断是首次加载还是下拉加载
-                $this->assign('data', $data);
+                $data = $this->loadData($id);//根据是否有id判断是首次加载还是下拉加载
                 var_dump($data);
-                $this->display('personal');
+                $this->assign('data', $data);
+                $this->display();
             }else{
                 $this->ajaxReturn($this->loadData($id));
             }
         }
         private function loadData($id){    //下拉加载问题
-            $data['be_question'] = $this->load_be_question($id);  //加载被提问数据
+            if(session('userType') == 'chairman'){
+                $data['be_question'] = $this->load_be_question($id);  //加载被提问数据
+                $data['is_chairman'] = true;
+            }
             $data['question'] = $this->load_question($id);  //加载提问数据
+            $data['is_chairman'] = false;
             return $data;
         }
         private function load_be_question($id = 0){     
             $where = array(
-                'gettername' => session('username'),
-                'id' => array('gt' => $id)
+                'gettername' => session('username'),    //这里是主席的id
+                'id' => array('gt' => $id),
             );
             $res = M('voice')->where($where)->limit(5)->select();
             return $res;
         }
         private function load_question($id = 0){
             $where = array(
-                'posterid' => session('stunum'),    //这里是主席的id
+                'posterid' => session('stunum'),    
                 'id' => array('gt' => $id)
             );
             $res = M('voice')->where($where)->limit(5)->select();
