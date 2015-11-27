@@ -88,7 +88,9 @@ class userController extends Controller {
             $id = 0;
             $data = $this->loadData($id);//根据是否有id判断是首次加载还是下拉加载
             $this->assign('data', $data);
-            $this->display();
+            dump(session());
+            dump($data);
+            //$this->display();
         }else{
             $this->ajaxReturn($this->loadData($id));
         }
@@ -97,14 +99,15 @@ class userController extends Controller {
         if(session('userType') == 'chairman'){
             $data['be_question'] = $this->load_be_question($id);  //加载被提问数据
             $data['is_chairman'] = true;
+        }else{
+            $data['is_chairman'] = false;
         }
         $data['question'] = $this->load_question($id);  //加载提问数据
-        $data['is_chairman'] = false;
         return $data;
     }
     private function load_be_question($id = 0){     
         $where = array(
-            'gettername' => session('username'),    //这里是主席的id
+            'posterid' => session('stunum'),    //这里是主席的id
             'id' => array('gt' => $id),
         );
         $res = M('voice')->where($where)->limit(5)->select();
@@ -113,7 +116,7 @@ class userController extends Controller {
     private function load_question($id = 0){
         $where = array(
             'posterid' => session('stunum'),    
-            'id' => array('gt' => $id)
+            'id' => array('gt', $id),
         );
         $res = M('voice')->where($where)->limit(5)->select();
         return $res;
