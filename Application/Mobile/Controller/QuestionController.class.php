@@ -125,6 +125,11 @@
                 $config['time'] = time();
                 if(M('voice')->add($config)){
                     $config['touxiang'] = session('touxiang');   //将头像地址添加进返回参数
+                    $where = array(
+                        'title' => $config['title'],
+                        'stunum' => $config['posterid']
+                    );
+                    $config['id'] = M('voice')->where($where)->field('id')->select();
                     $info = array(
                         'status' => 200,
                         'message' => 'ok',
