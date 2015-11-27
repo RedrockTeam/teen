@@ -15,7 +15,10 @@ class questionController extends Controller {
 		$this->display();
 	}
 
-//问题详情接口
+/**
+ * [get_voice_detail description]
+ * @return [type] [description]
+ */
 	public function get_voice_detail(){
 		$id = I('get.id');
 		if(!$id){
@@ -124,6 +127,11 @@ class questionController extends Controller {
             $config['time'] = time();
             if(M('voice')->add($config)){
                 $config['touxiang'] = session('touxiang');   //将头像地址添加进返回参数
+                $where = array(
+                    'title' => $config['title'],
+                    'stunum' => $config['posterid']
+                );
+                $config['id'] = M('voice')->where($where)->field('id')->select();
                 $info = array(
                     'status' => 200,
                     'message' => 'ok',
