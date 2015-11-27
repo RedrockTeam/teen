@@ -93,7 +93,7 @@
                 $data = $this->loadData($id);//根据是否有id判断是首次加载还是下拉加载
                 var_dump($data);
                 $this->assign('data', $data);
-                $this->display();
+                $this->display('personal');
             }else{
                 $this->ajaxReturn($this->loadData($id));
             }
