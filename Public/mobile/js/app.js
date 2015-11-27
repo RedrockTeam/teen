@@ -1,6 +1,20 @@
 
 	
+	(function init () {
+		// 个人中心
+		$('.am-icon-user').on('click', function () {
+			if (!$.AMUI.utils.cookie.get('stunum')) {
+				view.confirm('你还未登陆');
+			} else {
+				location.href = $('html').attr('data-personal');	
+			}
+		});
 
+		// 主页Icon
+		$('.am-icon-home').on('click', function () {
+			location.href = $('html').attr('data-index');
+		});
+	})()
 
 	var user = (function () {
 
