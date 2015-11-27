@@ -187,10 +187,11 @@ class questionController extends Controller {
     //删除自己提问的问题
     public function delete_vioce(){
     	$stunum = session('stunum');
+        dump(session());
     	$where = array(
     		'id' => I('get.id'),  //问题的id
     	);
-    	$voice_stunum = M('voice')->field('posterid')->where($where)->select();	//查看是否是本人提的问题
+    	$voice_stunum = M('voice')->where($where)->getField('posterid');	//查看是否是本人提的问题
     	if($stunum == $voice_stunum){
         	$id = I('get.id');
         	$where = array(
@@ -200,7 +201,7 @@ class questionController extends Controller {
         	$where = array(
             	'voice_id' => $id, 
         	);
-        	M('vote')->where($where)->delete();
+        	M('user_vote')->where($where)->delete();
         	M('comment')->where($where)->delete();
         	$data = array(
             	'status' => '200', 
