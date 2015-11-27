@@ -192,7 +192,7 @@
             $where = array(
                 'voice_id' => $id, 
             );
-            M('vote')->where($where)->delete();
+            // M('vote')->where($where)->delete();
             M('comment')->where($where)->delete();
             $data = array(
                 'status' => '200', 

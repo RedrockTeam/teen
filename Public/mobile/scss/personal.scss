@@ -43,14 +43,39 @@
 			padding: 0;
 			.am-list-news-default {
 				margin: 0;
-				li {
-					padding: 10px 1.25rem;
+				ul {
+					margin-bottom: 0;
+					li {
+						padding: 8px 1rem;
+					}
 				}
 			}
 		}
-		.am-tab-panel[data-tab-panel-0], .am-tab-panel[data-tab-panel-1] {
+		.am-tab-panel[data-tab-panel-question], .am-tab-panel[data-tab-panel-be-question] {
 			li:first-child {
 				border-top: 0;
+			}
+		}
+	}
+
+	 #normal-user-question-list {
+		.am-list-news-default {
+			margin: 0;
+			ul {
+				margin-bottom: 0;
+				li {
+					padding: 8px 1rem;
+				}
+			}
+		}
+	}
+
+
+	#user-question-list, #normal-user-question-list {
+		.am-list-item-title {
+			i {
+				color: rgb(217, 217, 217);
+				font-weight: 100;
 			}
 		}
 	}

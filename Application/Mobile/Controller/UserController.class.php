@@ -91,7 +91,7 @@
             if(!$id){
                 $id = 0;
                 $data = $this->loadData($id);//根据是否有id判断是首次加载还是下拉加载
-                var_dump($data);
+                // print_r($data);
                 $this->assign('data', $data);
                 $this->display('personal');
             }else{

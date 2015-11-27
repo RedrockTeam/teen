@@ -4,15 +4,12 @@
 		// 个人中心
 		$('.am-icon-user').on('click', function () {
 			if (!$.AMUI.utils.cookie.get('stunum')) {
-				view.confirm('你还未登陆');
+				view.confirm(['你还未登陆, 不能查看个人中心', '戳我登录', '我就看看'], function onConfirm () {
+					location.href = $('html').attr('data-login');
+				});
 			} else {
 				location.href = $('html').attr('data-personal');	
 			}
-		});
-
-		// 主页Icon
-		$('.am-icon-home').on('click', function () {
-			location.href = $('html').attr('data-index');
 		});
 	})()
 
@@ -57,13 +54,16 @@
 
 		var postMap = {
 			add: $('html').attr('data-add'),
+			del: $('html').attr('data-del'),
 			praise: $('html').attr('data-praise'),
 			comment: $('html').attr('data-comment')
 		};
 
 
 		var add,
-			praise;
+			del,
+			praise,
+			comment;
 
 		addViewShow = function () {
 			if ($.AMUI.utils.cookie.get('stunum')) {
@@ -107,9 +107,26 @@
 			}
 		};
 
+		del = function () {
+			var self = this;
+			view.confirm('此操作将删除问题和相关评论', function onConfirm () {
+				$.post(postMap.del, {id: $(self).prev().data('id')}, function(response, textStatus) {
+					if (response.status == 200) {
+						view.alert('删除成功', function () {
+							// 移除问题
+							$(self).parents('li').fadeOut();
+						});
+					} else {
+						view.alert('稍安勿躁, 好像出了点小问题=_=');
+					}
+				}).error(function () {
+					view.alert('稍安勿躁, 好像出了点小问题=_=');
+				});
+			});
+		};
+
 		praise = function () {
-			var data = {id: $('input[name=voiceId]').val()};
-			$.post(postMap.praise, data, function(response, textStatus) {
+			$.post(postMap.praise, {id: $('input[name=voiceId]').val()}, function(response, textStatus) {
 				if (response.status == 200) {
 					view.alert('点赞成功', function () {
 						// 点赞动画
@@ -166,10 +183,11 @@
 				});
 				
 			}
-		}
+		};
 
 		return {
 			add: add,
+			delete: del,
 			praise: praise,
 			comment: comment,
 			addViewShow: addViewShow,
@@ -258,7 +276,7 @@
 		}
 
 		// 重写Confirm方法
-		confirm = function (text, onConfirm) {
+		confirm = function (text, onConfirm, onCancel) {
 			if ($('#confirm-modal').find('.am-modal-bd').html()) {
 				$('#confirm-modal').find('.am-modal-bd').html(text);
 			} else {
@@ -266,9 +284,8 @@
 			}
 			$('#confirm-modal').modal({
 		        relatedTarget: this,
-		        onConfirm: function (options) {
-		          	location.href = $('html').attr('data-login');
-		        }
+		        onCancel: onCancel,
+		        onConfirm: onConfirm
 		    });
 		};
 
@@ -441,15 +458,23 @@
 		}
 
 		confirmModal = function (text) {
+			var textArray = [];
+			if (!$.isArray(text)) {
+				textArray[0] = text;
+				textArray[1] = '确认';
+				textArray[2] = '取消';
+			} else {
+				textArray = text;
+			}
 			_confirmModalHTML += '<div class="am-modal am-modal-confirm" tabindex="-1" id="confirm-modal">';
 			  	_confirmModalHTML += '<div class="am-modal-dialog">';
 				    _confirmModalHTML += '<div class="am-modal-hd">温馨提示</div>';
 				    	_confirmModalHTML += '<div class="am-modal-bd">';
-				      		_confirmModalHTML += text;
+				      		_confirmModalHTML += textArray[0];
 				    		_confirmModalHTML += '</div>';
 				    	_confirmModalHTML += '<div class="am-modal-footer">';
-				    _confirmModalHTML += '<span class="am-modal-btn" data-am-modal-confirm>戳我登录</span>';
-			    _confirmModalHTML += '<span class="am-modal-btn" data-am-modal-cancel>我就看看</span>';
+				    _confirmModalHTML += '<span class="am-modal-btn" data-am-modal-confirm>' + textArray[1] + '</span>';
+			    _confirmModalHTML += '<span class="am-modal-btn" data-am-modal-cancel>' + textArray[2] + '</span>';
 			_confirmModalHTML += '</div></div></div>';
 			return _confirmModalHTML;
 		}
