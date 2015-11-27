@@ -298,7 +298,7 @@
 			}
 			var $questionCommentLi = $(template.comment(data)).addClass('animated pulse');
 			$('.am-comments-list').prepend($questionCommentLi);
-			setTimeout(function () {
+			setTimeout(funct=ion () {
 				$questionCommentLi.removeClass('animated pulse');
 			}, 1000);
 		}
