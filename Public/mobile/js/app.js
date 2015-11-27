@@ -418,7 +418,7 @@
 
 		questionLi = function (data) {
 			_questionLiHTML += '<li class="am-g am-list-item-desced">';
-	          	_questionLiHTML += '<a href="'+ $('html').attr('data-detail').substr(0, $('html').attr('data-detail').length - 5) + '/id/' + data.id '">' + data.title + '</a>';
+	          	_questionLiHTML += '<a href="'+ $('html').attr('data-detail').substr(0, $('html').attr('data-detail').length - 5) + '/id/' + data.id + '">' + data.title + '</a>';
 	          	_questionLiHTML += '<span class="am-list-date">发表日期: '+ data.time +'</span>';
 	          	_questionLiHTML += '<div class="am-list-item-text">'+ data.question +'</div>';
 	      	_questionLiHTML += '</li>';
