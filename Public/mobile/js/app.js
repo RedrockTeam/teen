@@ -96,6 +96,7 @@
 							view.addQuestionViewHide();
 							// 动态添加最新问题
 							view.addQuestionLi(data);
+							$('#alert-modal').modal('close');
 						});
 	            	} else {
 	            		view.alert("问题数据不完整, 请重新");
@@ -137,6 +138,7 @@
 						view.praiseQuestion();
 						// 点赞数增一
 						view.questionPraiseInc();
+						$('#alert-modal').modal('close');
 					});
 				} else if (response.status == 304) {
 					view.alert('不能重复点赞');
@@ -267,6 +269,11 @@
 				$('#alert-modal').find('.am-modal-bd').html(text);
 			} else {
 		    	$('body').append(template.alert(text));
+		    }
+		    if (!callback) {
+		    	callback = function () {
+					$('#alert-modal').modal('close');						
+		    	}
 		    }
 	    	$('#alert-modal').modal();
 		    $('#alert-modal .am-modal-btn').off('click').on('click', callback);
