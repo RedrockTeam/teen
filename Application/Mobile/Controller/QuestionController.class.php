@@ -186,11 +186,11 @@
         public function delete_vioce(){
             $stunum = session('stunum');
             $where = array(
-                'id' => I('get.id'),  //问题的id
+                'id' => I('post.id'),  //问题的id
             );
             $voice_stunum = M('voice')->where($where)->getField('posterid');    //查看是否是本人提的问题
             if($stunum == $voice_stunum){
-                $id = I('get.id');
+                $id = I('post.id');
                 $where = array(
                     'id' => $id,
                 );
