@@ -111,22 +111,21 @@
 
 		del = function () {
 			var self = this;
-			var data = {id: $(self).prev().data('id')};
 			view.confirm('此操作将删除问题和相关评论', function onConfirm () {
-				// $.post(postMap.del, data, function(response, textStatus) {
-				// 	if (response.status == 200) {
-				// 		view.alert('删除成功', function () {
-				// 			// 移除问题
-				// 			$(self).parents('li').fadeOut();
-				// 			$(self).parents('li').remove();
-				// 		});
-				// 	} else {
-				// 		view.alert('稍安勿躁, 好像出了点小问题=_=');
-				// 	}
-				// }).error(function () {
-				// 	view.alert('稍安勿躁, 好像出了点小问题=_=');
-				// });
-				alert(data.id);
+				$.post(postMap.del, {id: $(self).prev().data('id')}, function(response, textStatus) {
+					if (response.status == 200) {
+						view.alert('删除成功', function () {
+							// 移除问题
+							$(self).parents('li').fadeOut();
+							$(self).parents('li').remove();
+						});
+					} else {
+						view.alert('稍安勿躁, 好像出了点小问题=_=');
+					}
+				}).error(function () {
+					view.alert('稍安勿躁, 好像出了点小问题=_=');
+				});
+				$('#confirm-modal').modal('close');
 			});
 		};
 
