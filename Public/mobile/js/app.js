@@ -125,7 +125,6 @@
 					view.alert('稍安勿躁, 好像出了点小问题=_=');
 				});
 			});
-			self = null;
 		};
 
 		praise = function () {
