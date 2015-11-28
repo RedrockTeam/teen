@@ -185,7 +185,6 @@
         //删除自己提问的问题
         public function delete_vioce(){
             $stunum = session('stunum');
-            dump(session());
             $where = array(
                 'id' => I('get.id'),  //问题的id
             );
