@@ -268,15 +268,8 @@
 			} else {
 		    	$('body').append(template.alert(text));
 		    }
-		    if (!callback) {
-		    	callback = function () {
-		    		return;
-		    	}
-		    }
-	    	$('#alert-modal').modal({
-	    		relatedTarget: this,
-				onConfirm: callback
-			});
+	    	$('#alert-modal').modal();
+		    $('#alert-modal .am-modal-btn').off('click').on('click', callback);
 		}
 
 		// 重写Confirm方法
@@ -459,7 +452,7 @@
 	      					_alertModalHTML += text;
 	    				_alertModalHTML += '</div>';
 	    			_alertModalHTML += '<div class="am-modal-footer">'
-	      		_alertModalHTML += '<span class="am-modal-btn" data-am-modal-confirm>确定</span>';
+	      		_alertModalHTML += '<span class="am-modal-btn">确定</span>';
 	    	_alertModalHTML += '</div></div></div>';
 	    	return _alertModalHTML;
 		}
