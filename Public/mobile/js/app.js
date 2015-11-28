@@ -111,8 +111,9 @@
 
 		del = function () {
 			var self = this;
+			var data = {id: $(self).prev().data('id')};
 			view.confirm('此操作将删除问题和相关评论', function onConfirm () {
-				$.post(postMap.del, {id: $(self).prev().data('id')}, function(response, textStatus) {
+				$.post(postMap.del, data, function(response, textStatus) {
 					if (response.status == 200) {
 						view.alert('删除成功', function () {
 							// 移除问题
