@@ -276,8 +276,8 @@
 					$('#alert-modal').modal('close');		
 		    	}
 		    }
-	    	$('#alert-modal').modal();
 		    $('#alert-modal .am-modal-btn').off('click').on('click', callback);
+	    	$('#alert-modal').modal();
 		}
 
 		// 重写Confirm方法
@@ -293,8 +293,8 @@
 			} else {
 				$('body').append(template.confirm(text));
 			}
-			$('#confirm-modal').modal();
 		    $('#confirm-modal .am-modal-btn:eq(0)').off('click').on('click', onConfirm);
+			$('#confirm-modal').modal();
 		};
 
 		// 提问页面显示
