@@ -69,7 +69,7 @@
 			if ($.AMUI.utils.cookie.get('stunum')) {
 				view.addQuestionViewShow();
 			} else {
-				view.confirm(['你还未登陆, 不能查看个人中心', '戳我登录', '我就看看'], function onConfirm () {
+				view.confirm(['你还未登陆, 不能提问', '戳我登录', '我就看看'], function onConfirm () {
 					location.href = $('html').attr('data-login');
 				});
 			}
