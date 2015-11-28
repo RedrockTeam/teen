@@ -118,6 +118,7 @@
 						view.alert('删除成功', function () {
 							// 移除问题
 							$(self).parents('li').fadeOut();
+							$(self).parents('li').remove();
 						});
 					} else {
 						view.alert('稍安勿躁, 好像出了点小问题=_=');
