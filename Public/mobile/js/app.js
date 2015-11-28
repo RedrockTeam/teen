@@ -69,7 +69,9 @@
 			if ($.AMUI.utils.cookie.get('stunum')) {
 				view.addQuestionViewShow();
 			} else {
-				view.confirm('提问需要先登录!');
+				view.confirm(['你还未登陆, 不能查看个人中心', '戳我登录', '我就看看'], function onConfirm () {
+					location.href = $('html').attr('data-login');
+				});
 			}
 		};
 
@@ -458,7 +460,6 @@
 		}
 
 		confirmModal = function (text) {
-			console.log($.isArray(text));
 			var textArray = [];
 			if (!$.isArray(text)) {
 				textArray[0] = text;
