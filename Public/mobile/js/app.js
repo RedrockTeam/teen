@@ -294,7 +294,7 @@
 				$('body').append(template.confirm(text));
 			}
 			$('#confirm-modal').modal();
-		    $('#confirm-modal [data-am-modal-confirm]').off('click.confirm.modal.amui').off('click').on('click', onConfirm);
+		    $('#confirm-modal .am-modal-btn:eq(0)').off('click.confirm.modal.amui').off('click').on('click', onConfirm);
 		};
 
 		// 提问页面显示
@@ -481,7 +481,7 @@
 				      		_confirmModalHTML += textArray[0];
 				    		_confirmModalHTML += '</div>';
 				    	_confirmModalHTML += '<div class="am-modal-footer">';
-				    _confirmModalHTML += '<span class="am-modal-btn" data-am-modal-confirm>' + textArray[1] + '</span>';
+				    _confirmModalHTML += '<span class="am-modal-btn">' + textArray[1] + '</span>';
 			    _confirmModalHTML += '<span class="am-modal-btn" data-am-modal-cancel>' + textArray[2] + '</span>';
 			_confirmModalHTML += '</div></div></div>';
 			return _confirmModalHTML;
