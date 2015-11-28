@@ -127,9 +127,6 @@
 					view.alert('稍安勿躁, 好像出了点小问题=_=');
 				});
 			});
-			$('#confirm-modal').on('closed.modal.amui', function () {
-			  	$(this).removeData('amui.modal');
-			});
 		};
 
 		praise = function () {
@@ -283,7 +280,7 @@
 		}
 
 		// 重写Confirm方法
-		confirm = function (text, onConfirm, onCancel) {
+		confirm = function (text, onConfirm) {
 			if ($('#confirm-modal').find('.am-modal-bd').html()) {
 				if ($.isArray(text)) {
 					$('#confirm-modal').find('.am-modal-bd').html(text[0]);
@@ -295,11 +292,8 @@
 			} else {
 				$('body').append(template.confirm(text));
 			}
-			$('#confirm-modal').modal({
-		        relatedTarget: this,
-		        onCancel: onCancel,
-		        onConfirm: onConfirm
-		    });
+			$('#confirm-modal').modal();
+		    $('#confirm-modal [data-am-modal-confirm]').off('click.confirm.modal.amui').on('click', onConfirm);
 		};
 
 		// 提问页面显示
