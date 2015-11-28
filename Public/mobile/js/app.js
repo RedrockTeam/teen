@@ -280,7 +280,13 @@
 		// 重写Confirm方法
 		confirm = function (text, onConfirm, onCancel) {
 			if ($('#confirm-modal').find('.am-modal-bd').html()) {
-				$('#confirm-modal').find('.am-modal-bd').html(text);
+				if ($.isArray(text)) {
+					$('#confirm-modal').find('.am-modal-bd').html(text[0]);
+					$('#confirm-modal').find('span[data-am-modal-confirm]').text(text[1]);
+					$('#confirm-modal').find('span[data-am-modal-cancel]').text(text[2]);
+				} else {
+					$('#confirm-modal').find('.am-modal-bd').text(text);
+				}
 			} else {
 				$('body').append(template.confirm(text));
 			}
