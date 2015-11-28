@@ -129,7 +129,7 @@
                         'title' => $config['title'],
                         'stunum' => $config['posterid']
                     );
-                    $config['id'] = M('voice')->where($where)->field('id')->select();
+                    $config['id'] = M('voice')->where($where)->getField('id');
                     $info = array(
                         'status' => 200,
                         'message' => 'ok',
