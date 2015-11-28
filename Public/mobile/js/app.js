@@ -271,8 +271,8 @@
 		    	$('body').append(template.alert(text));
 		    }
 		    if (!callback) {
-		    	callback = function () {
-					$('#alert-modal').modal('close');						
+		    	var callback = function () {
+					$('#alert-modal').modal('close');		
 		    	}
 		    }
 	    	$('#alert-modal').modal();
