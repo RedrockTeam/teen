@@ -119,6 +119,7 @@
 							// 移除问题
 							$(self).parents('li').fadeOut();
 							$(self).parents('li').remove();
+							$('#alert-modal').modal('close');
 						});
 					} else {
 						view.alert('稍安勿躁, 好像出了点小问题=_=');
