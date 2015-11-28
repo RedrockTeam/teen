@@ -458,6 +458,7 @@
 		}
 
 		confirmModal = function (text) {
+			console.log($.isArray(text));
 			var textArray = [];
 			if (!$.isArray(text)) {
 				textArray[0] = text;
