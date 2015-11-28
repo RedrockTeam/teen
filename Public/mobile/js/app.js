@@ -126,7 +126,7 @@
 				// }).error(function () {
 				// 	view.alert('稍安勿躁, 好像出了点小问题=_=');
 				// });
-				alert();
+				alert(data.id);
 			});
 		};
 
@@ -294,7 +294,7 @@
 				$('body').append(template.confirm(text));
 			}
 			$('#confirm-modal').modal();
-		    $('#confirm-modal [data-am-modal-confirm]').off('click.confirm.modal.amui').on('click', onConfirm);
+		    $('#confirm-modal [data-am-modal-confirm]').off('click.confirm.modal.amui').off('click').on('click', onConfirm);
 		};
 
 		// 提问页面显示
