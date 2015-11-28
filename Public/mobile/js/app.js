@@ -293,7 +293,7 @@
 				$('body').append(template.confirm(text));
 			}
 			$('#confirm-modal').modal();
-		    $('#confirm-modal .am-modal-btn:eq(0)').off('click.confirm.modal.amui').off('click').on('click', onConfirm);
+		    $('#confirm-modal .am-modal-btn:eq(0)').off('click').on('click', onConfirm);
 		};
 
 		// 提问页面显示
