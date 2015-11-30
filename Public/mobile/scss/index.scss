@@ -2,6 +2,26 @@
 	body {
 		background-color: rgb(245, 245, 245);
 	}
+
+	#lately-question-list {
+		.am-list-news-bd {
+			ul {
+				li {
+					a {
+						font-size: 1.8rem;
+					}
+					.am-list-date {
+						font-size: 1rem;
+						color: #999;
+					}
+					.am-list-item-text {
+						color: #666;
+						font-size: 1.5rem;
+					}
+				}
+			}
+		}
+	}
 	
 	.add-question {
 		height: 5rem;

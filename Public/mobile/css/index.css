@@ -1,6 +1,17 @@
 body {
   background-color: whitesmoke; }
 
+#lately-question-list .am-list-news-bd ul li a {
+  font-size: 1.8rem; }
+
+#lately-question-list .am-list-news-bd ul li .am-list-date {
+  font-size: 1rem;
+  color: #999; }
+
+#lately-question-list .am-list-news-bd ul li .am-list-item-text {
+  color: #666;
+  font-size: 1.5rem; }
+
 .add-question {
   height: 5rem;
   width: 5rem;
