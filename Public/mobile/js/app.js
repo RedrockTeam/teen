@@ -293,7 +293,9 @@
 			} else {
 				$('body').append(template.confirm(text));
 			}
+			// 接触事件绑定
 		    $('#confirm-modal .am-modal-btn:eq(0)').off('click').on('click', onConfirm);
+		    // 弹出显示
 			$('#confirm-modal').modal();
 		};
 
@@ -305,13 +307,13 @@
 			// FAB按钮的动画是300ms, 为了炫一点, 在动画完成之后再显示, 你可以选择打我T_T
 			setTimeout(function () {
 				$('#index').css('display', 'none');
-				$('#question').removeClass('bounceOut').addClass('fadeIn animated').css('display', 'block');
+				$('#question').removeClass('bounceOut').addClass('bounceInDown animated').css('display', 'block');
 			}, 400);
 		};
 
 		// 提问页面隐藏
 		addQuestionViewHide = function () {
-			$('#question').removeClass('fadeIn').addClass('bounceOut animated');
+			$('#question').removeClass('bounceInDown').addClass('bounceOut animated');
 			$('#index').css('display', 'block');
 			$('#question').css('display', 'none');
 			$('.add-question').removeClass('openChooseListAnimation').addClass('closeChooseListAnimation').css({

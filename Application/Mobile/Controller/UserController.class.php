@@ -104,7 +104,7 @@
                 $data['is_chairman'] = true;
             }
             $data['question'] = $this->load_question($id);  //加载提问数据
-            $data['is_chairman'] = false;
+            $data['is_chairman'] = true;
             return $data;
         }
         private function load_be_question($id = 0){     
