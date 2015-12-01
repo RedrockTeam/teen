@@ -6,7 +6,7 @@
 		<link rel="stylesheet" href="__PUBLIC__/home/css/index.css">
 	</head>
 	<body>
-		
+		<?php print_r($voice); ?>
 		<div id="header">
 			<div class="nav-bar">
 				<ul>
@@ -104,45 +104,55 @@
 					</div>
 					
 					<div class="question-list">
-						<?php 
-							for ($i = 0; $i < 4; $i++) { 
-						?>
+						<volist name="voice" id="v">
 							<div class="question">
 								<div class="question-header">
 									<div class="user-avatar">
-										<img src="__PUBLIC__/home/images/face.png">
+										<img src="{$v.face}" >
 									</div>
-									<div class="user-name">
-										能不能赏口饭吃
-									</div>
+									<div class="user-name">{$v.postername}</div>
 									<div class="post-date">
-										<span>2015年11月20日</span>
-										<span>11:20</span>
+										<span>{$v.time|date="Y年m月d日", ###}</span>
+										<span>{$v.time|date="H:i", ###}</span>
 									</div>
 								</div>
 								<div class="question-body">
 									<div class="question-title">
-										<strong>		如何看待阿里无线前端发布的Weex?
-										</strong>
+										<strong>{$v.title}</strong>
 									</div>
-									<div class="question-content">
-										大家好，不匿名，我认为这是一个从头到尾的KPI项目，所以我觉得@赵锦江(勾三股四) 做的超棒，今年KPI肯定有所体现哈哈哈哈做的超棒，今年KPI肯定有所体现哈哈哈哈做的超棒，今年KPI肯定有所体现哈哈哈哈做的超棒，今年KPI肯定有所体现哈哈哈哈做的超棒，今年KPI肯定有所体现哈哈哈哈
-									</div>
+									<div class="question-content">{$v.question}</div>
 								</div>
 								<div class="question-footer">
 									<div class="question-praise">
 										<i class="iconfont">&#xe600;</i>
-										<span><b>12345</b>人赞同</span>
+										<span>{$v.vote}</span>
+									</div>
+									<div class="question-comments-list">
+										<volist name="v.comments" id="k">
+											<div class="question-comment">
+												<div class="comment-header">
+													<img src="{$k.face}" width="28" height="28">
+												</div>
+												<div class="comment-body">
+													<span class="comment-content">
+														<strong class="comment-user-name">{$k.username}</strong>:&nbsp;
+														{$k.comment}
+													</span>
+													<div class="comment-date">{$k.time|date="H:i", ###}</div>
+												</div>
+											</div>
+										</volist>
 									</div>
 									<div class="question-reply">
-										<input type="text" name="question-reply" placeholder="请输入回复内容">
-										<button>回复</button>
+										<form>
+											<input type="hidden" name="voiceId" value="{$v.id}">
+											<input type="text" name="question-reply" placeholder="请输入回复内容">
+											<button>回复</button>
+										</form>
 									</div>
 								</div>
 							</div>
-						<?php 
-							}
-						 ?>
+						</volist>
 					</div>
 				</div>
 				

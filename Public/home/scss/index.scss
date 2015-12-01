@@ -56,15 +56,6 @@
 		padding: 0;
 	}
 
-	$keyframe praise {
-		0% {
-			-webkit-transform: scale(1);
-		}
-
-		100% {
-			-webkit-transform: scale(1.5);
-		}
-	}
 
 	#header {
 		width: 100%;
@@ -225,6 +216,10 @@
 							.user-avatar {
 								float: left;
 								margin-right: 10px;
+								img {
+									width: 36px;
+									height: 36px;
+								}
 							}
 							.user-name {
 								color: #262626;
@@ -251,14 +246,19 @@
 								padding-top: 12px;
 							}
 						}
+
+						// 点赞
+						// 回复框
+						// 评论列表
 						.question-footer {
+							// 点赞
 							.question-praise {
 								width: 100%;
 								text-align: right;
 								padding-right: 10px;
 								color: #fc736b;
 								i {
-									font-size: 18px;
+									font-size: 14px;
 									cursor: pointer;
 									vertical-align: bottom;
 								}
@@ -267,6 +267,47 @@
 									vertical-align: bottom;
 								}
 							}
+
+							// 问题评论列表
+							.question-comments-list {
+								margin-top: 5px;
+								width: 100%;
+								.question-comment {
+									overflow: hidden;
+									width: 540px;
+									margin-bottom: 10px;
+									.comment-header {
+										float: left;
+										height: 28px;
+										width: 28px;
+										img {
+											border: none;
+										}
+									}
+									.comment-body {
+										float: left;
+										width: 502px;
+										margin-left: 10px;
+										min-height: 28px;
+										font-size: 12px;
+										.comment-content {
+											min-height: 14px;
+											.comment-user-name {
+												color: #f36c7d;
+											}
+										}
+										.comment-date {
+											height: 10px;
+											font-size: 10px;
+											margin-top: 6px;
+											color: #9a9a9a;
+											vertical-align: bottom;
+										}
+									}
+								}
+							}
+
+							// 回复框
 							.question-reply {
 								width: 100%;
 								padding-top: 14px;

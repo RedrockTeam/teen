@@ -29,13 +29,53 @@ class IndexController extends Controller {
 
     private function home_load_data($id){        //默认的下拉次数为0即首页加载
         $voice = M('voice');
+        $comment = M('comment');
+        $chairman = M('chairman');
         if($id){
             $where = array(
                 'id' => array('gt' => $id)
             );
-            return $voice->where($where)->order('time desc')->limit(5)->select();   //下拉加载
+            $voices = $voice->where($where)->order('time desc')->limit(5)->select();   //下拉加载
+            foreach ($voices as $index => $voice) {
+                if (strlen($voices[$index]['posterid']) > 3) {
+                    $voices[$index]['face'] = '/teen/Public/home/images/default.png';    
+                } else {
+                    $voices[$index]['face'] = $chairman->where("id = '{$voice['posterid']}'")->getField('picture');
+                }
+                $comments = $comment->where("voiceid = '{$voice['id']}'")->select();
+                if ($comments) {
+                    foreach ($comments as $_index => $_comment) {
+                        if (strlen($_comment['userid']) > 3) {
+                            $comments[$_index]['face'] = '/teen/Public/home/images/default.png';
+                        } else {
+                            $comments[$_index]['face'] = $chairman->where("id = '{$_comment['userid']}'")->getField('picture');
+                        }
+                    }
+                }
+                $voices[$index]['comments'] = $comments;
+            }
+            return $voices;
         }else{
-            return $voice->order('time desc')->limit(5)->select();      //首页加载
+            $voices = $voice->order('time desc')->limit(5)->select();   //下拉加载
+            foreach ($voices as $index => $voice) {
+                if (strlen($voices[$index]['posterid']) > 3) {
+                    $voices[$index]['face'] = '/teen/Public/home/images/default.png';    
+                } else {
+                    $voices[$index]['face'] = $chairman->where("id = '{$voice['posterid']}'")->getField('picture');
+                }
+                $comments = $comment->where("voiceid = '{$voice['id']}'")->select();
+                if ($comments) {
+                    foreach ($comments as $_index => $_comment) {
+                        if (strlen($_comment['userid']) > 3) {
+                            $comments[$_index]['face'] = '/teen/Public/home/images/default.png';
+                        } else {
+                            $comments[$_index]['face'] = $chairman->where("id = '{$_comment['userid']}'")->getField('picture');
+                        }
+                    }
+                }
+                $voices[$index]['comments'] = $comments;
+            }
+            return $voices;      //首页加载
         }
     }
 }

@@ -1,16 +1,19 @@
 body {
   background-color: whitesmoke; }
 
-#lately-question-list .am-list-news-bd ul li a {
-  font-size: 1.8rem; }
-
-#lately-question-list .am-list-news-bd ul li .am-list-date {
-  font-size: 1rem;
-  color: #999; }
-
-#lately-question-list .am-list-news-bd ul li .am-list-item-text {
-  color: #666;
-  font-size: 1.5rem; }
+#lately-question-list .am-list-news-bd ul li {
+  padding-top: 0.7rem;
+  padding-bottom: 0.7rem;
+  border-color: #f8f8f9; }
+  #lately-question-list .am-list-news-bd ul li a {
+    font-size: 1.8rem !important;
+    color: #0e90d2 !important; }
+  #lately-question-list .am-list-news-bd ul li .am-list-date {
+    font-size: 1rem;
+    color: #999; }
+  #lately-question-list .am-list-news-bd ul li .am-list-item-text {
+    color: #666;
+    font-size: 1.5rem; }
 
 .add-question {
   height: 5rem;

@@ -10,7 +10,7 @@
 				  	<ul class="am-list">
             			<volist name="voice" id="v">
 	            			<li class="am-g am-list-item-desced">
-					          	<a href="__MODULE__/Question/detail/id/{$v.id}" class="">{$v.title}</a>
+					          	<a href="__MODULE__/Question/detail/id/{$v.id}" class="am-list-item-text">{$v.title}</a>
 					          	<span class="am-list-date">发表日期: {$v.time|date="m-d H:i", ###}</span>
 					          	<div class="am-list-item-text">{$v.question}</div>
 					      	</li>
@@ -36,19 +36,19 @@
             <header data-am-widget="header" class="am-header am-header-default scrollspy-nav" data-am-scrollspy-nav="{offsetTop: 45}" data-am-sticky>
 		      	<div class="am-header-left am-header-nav">
 		          	<a href="javascript:void(0)">
-						<i class="am-header-icon am-icon-home"></i>
+						<i class="am-header-icon am-icon-close"></i>
 		          	</a>
 		      	</div>
 
 		      	<h1 class="am-header-title">
 		          	<a href="javascript:void(0)">
-		       			最新提问
+		       			添加提问
 		          	</a>
 		      	</h1>
 
 		      	<div class="am-header-right am-header-nav">
 		          	<a href="javascript:void(0)">
-		                <i class="am-header-icon am-icon-user"></i>
+		                <i class="am-header-icon am-icon-check"></i>
 		          	</a>
 		      	</div>
 		  	</header>

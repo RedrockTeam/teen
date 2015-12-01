@@ -108,12 +108,12 @@
 	        proxy: "localhost:80"
 	    });
 	    // 后端文件变化
-	    gulp.watch('mobile/js/*.js', ['mobile-js-watch']);
+	    //gulp.watch('mobile/js/*.js', ['mobile-js-watch']);
 	    // 前端文件变化
-	    //gulp.watch('public/home/js/**/*.js', ['fontend-js-watch']);
+	    gulp.watch('public/home/js/**/*.js', ['fontend-js-watch']);
 	    // sass 编译
-	    //gulp.watch("home/scss/*.scss", ['sass']);
-	    gulp.watch(path.mobile + "*.scss", ['m-sass']);
+	    gulp.watch("home/scss/*.scss", ['sass']);
+	    //gulp.watch(path.mobile + "*.scss", ['m-sass']);
 	    // 页面改动监听
 	    gulp.watch("../Application/**/*.html").on('change', browserSync.reload);
 	    //gulp.watch('src/public/home/images/**/*.{png, jpg, gif, ico}', ['imagemin']);
