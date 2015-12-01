@@ -6,7 +6,6 @@
 		<link rel="stylesheet" href="__PUBLIC__/home/css/index.css">
 	</head>
 	<body>
-		<?php print_r($voice); ?>
 		<div id="header">
 			<div class="nav-bar">
 				<ul>
@@ -178,19 +177,19 @@
 					<div class="president-list">
 						<p>主席信息</p>
 						<ul>
-							<?php for ($i = 0; $i < 6; $i++) { ?>
+							<volist name="chairman" id="v">
 								<li>
-									<img src="__PUBLIC__/home/images/face.png" height="43" width="43">
+									<img src="{$v.picture}" height="43" width="43">
 									<div class="president-info">
-										<p class="president-name">刘晨凌</p>
+										<p class="president-name">{$v.chairname}</p>
 										<p class="president-dep">WEB研发部</p>
 									</div>
 									<div class="handle">
 										<p class="view-info">查看信息</p>
-										<p class="at-me">想他提问</p>
+										<p class="at-me">向他提问</p>
 									</div>
 								</li>
-							<?php } ?>
+							</volist>
 						</ul>
 						<div class="show-more-president">查看更多</div>
 					</div>
