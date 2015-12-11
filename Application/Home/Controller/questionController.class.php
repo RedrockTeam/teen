@@ -76,8 +76,8 @@ class questionController extends Controller {
 	//提交评论的方法
     public function commit_comment(){			//评论方法
         if(!session('username')){return;}
-        $comment = I('get.comment');
-        $id = I('get.id');
+        $comment = I('post.comment');
+        $id = I('post.id');
     	if(!$username = session('username')){
     		$config = array(
     			'status' => 401,
@@ -95,7 +95,7 @@ class questionController extends Controller {
     		M('comment')->add($data);
             $message = array(
                 'comment' => $data['comment'],
-                'time' => date('Y-m-d H:i:s', $data['time']),
+                'time' => date('H:i', $data['time']),
                 'username' => $data['username'],
                 'touxiang' => session('touxiang'),
             );

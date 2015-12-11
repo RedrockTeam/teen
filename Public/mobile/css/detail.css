@@ -84,8 +84,9 @@ body {
 #question-comment-modal {
   display: block; }
   #question-comment-modal .am-modal-hd {
-    background-color: #fff;
+    text-align: left;
     padding: 10px;
+    color: #666;
     font-weight: bold; }
   #question-comment-modal .am-modal-bd {
     background-color: #f8f8f8;

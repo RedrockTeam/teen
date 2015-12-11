@@ -1,9 +1,21 @@
 <!DOCTYPE html>
-<html lang="en">
+<html 
+	lang="zh-CN"
+	data-add="{:U('Question/commit_voice')}"
+	data-del="{:U('Question/delete_vioce')}"
+	data-index="{:U('Index/index')}"
+	data-login="{:U('User/login')}"
+	data-detail="{:U('Question/detail')}"
+	data-praise="{:U('Question/vote')}"
+	data-comment="{:U('Question/commit_comment')}"
+	data-personal="{:U('User/get_voice')}"
+	
+>
 	<head>
 		<meta charset="UTF-8">
 		<title>青年之声</title>
 		<link rel="stylesheet" href="__PUBLIC__/home/css/index.css">
+		<link rel="stylesheet" href="http://apps.bdimg.com/libs/animate.css/3.1.0/animate.min.css">
 	</head>
 	<body>
 		<div id="header">
@@ -54,7 +66,7 @@
 						<div class="at-question">
 							<button>@提问</button>
 						</div>
-						<div>
+						<div class="public-question">
 							<button>公开提问</button>
 						</div>
 					</div>
@@ -63,29 +75,22 @@
 						<p>网站链接</p>
 						<ul>
 							<li>
-								<a href="javascript:void(0)">红岩网校
-								</a>
+								<a href="javascript:void(0)">红岩网校</a>
 							</li>
 							<li>
-								<a href="javascript:void(0)">校学生会团宣部
-								</a>
+								<a href="javascript:void(0)">校学生会团宣部</a>
 							</li>
 							<li>
-								<a href="javascript:void(0)">体育部
-								</a>
+								<a href="javascript:void(0)">体育部</a>
 							</li>
 							<li>
-								<a href="javascript:void(0)">勤工助学部
-								</a>
+								<a href="javascript:void(0)">勤工助学部</a>
 							</li>
 							<li>
-								<a href="javascript:void(0)">宿管部
-								</a>
+								<a href="javascript:void(0)">宿管部</a>
 							</li>
 							<li>
-								<a href="javascript:void(0)">
-									科联
-								</a>
+								<a href="javascript:void(0)">科联</a>
 							</li>
 						</ul>
 					</div>
@@ -124,7 +129,7 @@
 								<div class="question-footer">
 									<div class="question-praise">
 										<i class="iconfont">&#xe600;</i>
-										<span>{$v.vote}</span>
+										<span>2000</span>
 									</div>
 									<div class="question-comments-list">
 										<volist name="v.comments" id="k">
@@ -144,9 +149,9 @@
 									</div>
 									<div class="question-reply">
 										<form>
-											<input type="hidden" name="voiceId" value="{$v.id}">
-											<input type="text" name="question-reply" placeholder="请输入回复内容">
-											<button>回复</button>
+											<input type="hidden" name="id" value="{$v.id}">
+											<input type="text" name="comment" placeholder="请输入回复内容">
+											<button type="button" class="add-comment">回复</button>
 										</form>
 									</div>
 								</div>
@@ -205,13 +210,57 @@
 			<p>本网站由红岩网校工作站负责开发管理,不经红岩网校委员会书面同意,不得进行转载</p>	
 		</div>
 
-	
-		<div class="login" style="display: none">
-			<form class="login-form">
-				<p><input type="text" name="username"></p>
-				<p><input type="password" name="password"></p>
-				<p><button>登录</button></p>
-			</form>
+		<!-- 遮罩层 -->
+		<div class="dimmer" style="">
+		</div>
+
+		<!-- @提问 -->
+		<div id="add-question-view-at">
+			<div class="add-question-view-at-header">
+				<strong>@提问</strong>
+				<i class="iconfont">&#xe603;</i>
+			</div>
+			<div class="add-question-view-at-body">
+				<form class="add-question-form">
+					<div class="form-control">
+							<select name="" id="">
+							<volist name="chairman" id="v">
+								<option value="{$v.id}">{$v.chairname}</option>
+							</volist>
+						</select>
+					</div>
+					<div class="form-control">
+						<input type="text" placeholder="请输入标题">
+					</div>
+					<div class="form-control">
+						<textarea name="question-content" placeholder="请输入内容"></textarea>
+					</div>
+					<div class="form-control">
+						<button type="button">提问</button>
+					</div>
+				</form>
+			</div>
+		</div>
+
+		<!-- 公开提问 -->
+		<div id="add-question-view-public">
+			<div class="add-question-view-public-header">
+				<strong>公开提问</strong>
+				<i class="iconfont">&#xe603;</i>
+			</div>
+			<div class="add-question-view-public-body">
+				<form class="add-question-form">
+					<div class="form-control">
+						<input type="text" placeholder="请输入标题">
+					</div>
+					<div class="form-control">
+						<textarea name="question-content" placeholder="请输入内容"></textarea>
+					</div>
+					<div class="form-control">
+						<button type="button">提问</button>
+					</div>
+				</form>
+			</div>
 		</div>
 
 	</body>
@@ -223,27 +272,67 @@
 	<script>
 
 			$(function () {
+
+
+				function isLogin () {
+					if (!$.cookie('stunum')) {
+						layer.alert('你还未登录, 不能评论哦', {icon: 6});
+						return;
+					}
+				}
+
+				// 两个提问框定位
+				$('#add-question-view-public').add('#add-question-view-at').css({
+					top: ($(window).height() +  $(document).scrollTop() - 467) / 2,
+					left: ($(window).width() - 664) / 2
+				});
+
+
+
+				// 打开@提问框
+				$('.at-question').click(function () {
+					$('.dimmer').css({
+						display: 'block',
+						top: $(document).scrollTop()
+					});
+					$('#add-question-view-at').css('display', 'block').removeClass('bounceOutUp').addClass('animated bounceInDown');
+					$('body').css('overflow', 'hidden');
+				});
+
+				// 关闭@提问框
+				$('#add-question-view-at i').click(function () {
+					$('.dimmer').css('display', 'none');
+					$('#add-question-view-at').removeClass('bounceInDown').addClass('bounceOutUp');
+					$('body').css('overflow', 'auto');
+				});
+
+				/*================================================================================*/
+
+				// 打开公开提问框
+				$('.public-question').click(function () {
+					$('.dimmer').css({
+						display: 'block',
+						top: $(document).scrollTop()
+					});
+					$('#add-question-view-public').css('display', 'block').removeClass('bounceOutUp').addClass('animated bounceInDown');
+					$('body').css('overflow', 'hidden');
+				});
+
+				// 关闭公开提问框
+				$('#add-question-view-public i').click(function () {
+					$('.dimmer').css('display', 'none');
+					$('#add-question-view-public').removeClass('bounceInDown').addClass('bounceOutUp');
+					$('body').css('overflow', 'auto');
+				})
+
+
+				// 登录文字定位
 				var rightPosition = $('.nav-bar li:eq(7)').offset().left + 17 + $('.nav-bar li:eq(7)').width();
 				$('.login-reg-btn').css({
 					'opacity': 1,
 					'left': rightPosition - $('.login-reg-btn').width()
 				});
 
-				$('.question-list').on('click', '.question-praise i', function () {
-					$(this).css({
-						'transform': 'scale(1.2)'
-					});
-					$(this).html('&#xe602;');
-				})
-
-				$('.login-reg-btn span').click(function () {
-					layer.open({
-					    type: 1,
-					    skin: 'layui-layer-rim', //加上边框
-					    area: ['420px', '240px'], //宽高
-					    content: $('.login')
-					});
-				});
 
 				$('.login button').click(function () {
 					event.preventDefault();
@@ -264,8 +353,69 @@
 					}).fail(function() {
 						alert('cuowu');
 					});
-					
 				});
+
+
+				// 添加评论
+				$('.question-list').on('click', '.add-comment', function () {
+
+					isLogin();
+
+					var self = this;
+					if (!$.trim($(this).parent().find('input[name=comment]').val())) {
+						$(this).parent().find('input[name=comment]').css('border', '1px solid #dd514c');
+						return;
+					}
+					$.ajax({
+						url: $('html').data('comment'),
+						type: 'POST',
+						data: $(self).parent().serialize(),
+						beforeSend: function () {
+							$(self).css('background-color', '#c0c0c0');
+						}
+					}).done(function (response) {
+						var html = '';
+						if (response.status == 200) {
+							html += '<div class="question-comment">';
+								html += '<div class="comment-header">';
+									html += '<img src="'+ response.data.touxiang +'" width="28" height="28">';
+								html += '</div>';
+								html += '<div class="comment-body">';
+									html += '<span class="comment-content">';
+										html += '<strong class="comment-user-name">'+ response.data.username +'</strong>:&nbsp;';
+										html += response.data.comment;
+									html += '</span>';
+									html += '<div class="comment-date">'+ response.data.time +'</div>';
+								html += '</div>';
+							html += '</div>';
+							$(self).parents('.question-reply').prev().append(html);
+						} else {
+							
+						}
+					}).fail(function() {
+						alert('message');
+					}).always(function () {
+						$(this).parent().find('input[name=comment]').val('');
+						$(self).css('background-color', '#3686c5');
+					});
+				});
+
+				
+				function addQuestion () {
+					$.ajax({
+						url: $('html').data('question'),
+						type: 'POST',
+						data: {param1: 'value1'},
+					}).done(function() {
+						console.log("success");
+					}).fail(function() {
+						console.log("error");
+					}).always(function() {
+						console.log("complete");
+					});
+					
+				}
+	
 
 			})
 

@@ -4,6 +4,9 @@ use Think\Controller;
 class IndexController extends Controller {
     
     public function index(){
+        session('username', '王洋辉');
+        session('stunum', '2013214046');
+        cookie('stunum', '2013214046');
         $this->flash();
         $this->display();
     }
@@ -38,7 +41,7 @@ class IndexController extends Controller {
             $voices = $voice->where($where)->order('time desc')->limit(5)->select();   //下拉加载
             foreach ($voices as $index => $voice) {
                 if (strlen($voices[$index]['posterid']) > 3) {
-                    $voices[$index]['face'] = '/teen/Public/home/images/default.png';    
+                    $voices[$index]['face'] = '/teen/Public/home/images/default.png';
                 } else {
                     $voices[$index]['face'] = $chairman->where("id = '{$voice['posterid']}'")->getField('picture');
                 }
