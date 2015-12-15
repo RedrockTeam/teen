@@ -1,0 +1,11 @@
+<include file="Index/header" />
+<div style="margin-top: 100px;">
+	<?php
+	foreach ($message as $key => $value) {
+	?>
+	<p style="text-align: center; font-size:20px; color: #fff;"><?php echo '名字' . ": " . $value['chairname'] . "  " . "性别" . ": " . $value['sex'] .' '. '职位' . ': ' . $value['information']?></p>
+	<?php 
+	}
+	?>
+</div>
+<include file="Index/footer" />
