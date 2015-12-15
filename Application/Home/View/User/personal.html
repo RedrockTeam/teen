@@ -25,32 +25,31 @@
 					<li class="school-logo">
 						<img src="__PUBLIC__/home/images/cqupt.png">
 					</li>
-					<li class="nav">
-						<a href="###">首页</a>
+					<li>
+						<a href="__MODULE__/Index">首页</a>
 					</li>
-					<li class="nav">
-						<a href="###">学生辅导</a>
+					<li>
+						<a href="javascript:void(0)">学生辅导</a>
 					</li>
-					<li class="nav">
-						<a href="###">职业规划</a>
+					<li>
+						<a href="javascript:void(0)">职业规划</a>
 					</li>
-					<li class="nav">
-						<a href="###">心里互助</a>
+					<li>
+						<a href="javascript:void(0)">心里互助</a>
 					</li>
-					<li class="nav">
-						<a href="###">书籍信箱</a>
+					<li>
+						<a href="javascript:void(0)">书籍信箱</a>
 					</li>
-					<li class="nav">
-						<a href="###">接待中心</a>
+					<li>
+						<a href="javascript:void(0)">接待中心</a>
 					</li>
-					<li class="nav">
-						<a href="###">售后服务</a>
+					<li>
+						<a href="javascript:void(0)">售后服务</a>
 					</li>
 				</ul>
 			</div>
 			<div class="login-reg-btn">
 				<if condition="$Think.session.username neq ''">
-					<span><a href="__MODULE__/User/get_voice">个人中心</a></span>
 					<span><a href="__MODULE__/User/logout">退出</a></span>
 				<else/>
 					<span class="open-login-view">登录</span>
@@ -66,47 +65,11 @@
 				
 			<div class="main-content">
 
-				<div class="left-sidebar">
-					<div class="add-question-container">
-						<p>提问框</p>
-						<div class="at-question">
-							<button>@提问</button>
-						</div>
-						<div class="public-question">
-							<button>公开提问</button>
-						</div>
-					</div>
-					
-					<div class="website-link">
-						<p>网站链接</p>
-						<ul>
-							<li>
-								<a href="###">红岩网校</a>
-							</li>
-							<li>
-								<a href="###">校学生会团宣部</a>
-							</li>
-							<li>
-								<a href="###">体育部</a>
-							</li>
-							<li>
-								<a href="###">勤工助学部</a>
-							</li>
-							<li>
-								<a href="###">宿管部</a>
-							</li>
-							<li>
-								<a href="###">科联</a>
-							</li>
-						</ul>
-					</div>
-
-				</div>
 				
-				<div class="middle">
+				<div class="middle" style="width: 758px; float: none; margin: 0 auto;">
 					<div class="list-title">
 						<div class="all-question on-focus">
-							所有提问
+							我的提问
 						</div>
 						<if condition="$Think.session.userType neq ''">
 							<div class="ask-me">向我提问</div>
@@ -114,7 +77,7 @@
 					</div>
 					
 					<div class="question-list">
-						<volist name="voice" id="v">
+						<volist name="data.question" id="v">
 							<div class="question" data-index="{$v.id}">
 								<div class="question-header">
 									<div class="user-avatar">
@@ -165,7 +128,68 @@
 									<div class="question-reply">
 										<form>
 											<input type="hidden" name="id" value="{$v.id}">
-											<input type="text" name="comment" placeholder="请输入回复内容">
+											<input type="text" name="comment" placeholder="请输入回复内容" style="width: 644px;">
+											<button type="button" class="add-comment">回复</button>
+										</form>
+									</div>
+								</div>
+							</div>
+						</volist>
+					</div>
+
+					<div class="be-question-list" style="display: none">
+						<volist name="data.be_question" id="v">
+							<div class="question" data-index="{$v.id}">
+								<div class="question-header">
+									<div class="user-avatar">
+										<img src="{$v.touxiang}" >
+									</div>
+									<div class="user-name">{$v.postername}</div>
+									<div class="post-date">
+										<span>{$v.time|date="Y年m月d日", ###}</span>
+										<span>{$v.time|date="H:i", ###}</span>
+									</div>
+								</div>
+								<div class="question-body">
+									<div class="question-title">
+										<strong>{$v.title}</strong>
+										<if condition="$v.gettername eq 'public'">
+											<span>公共提问</span>
+										<else/>
+											<span>@{$v.gettername}</span>
+										</if>
+									</div>
+									<div class="question-content">{$v.question}</div>
+								</div>
+								<div class="question-footer">
+									<div class="question-praise">
+										<if condition="$v.is_voted eq 'true'">
+											<i class="iconfont" data-id="{$v.id}">&#xe604;</i>
+										<else/>
+											<i class="iconfont" data-id="{$v.id}">&#xe605;</i>
+										</if>
+										<span>{$v.vote}</span>
+									</div>
+									<div class="question-comments-list">
+										<volist name="v.comments" id="k">
+											<div class="question-comment">
+												<div class="comment-header">
+													<img src="{$k.touxiang}" width="28" height="28">
+												</div>
+												<div class="comment-body">
+													<span class="comment-content">
+														<strong class="comment-user-name">{$k.username}</strong>:&nbsp;
+														{$k.comment}
+													</span>
+													<div class="comment-date">{$k.time|date="H:i", ###}</div>
+												</div>
+											</div>
+										</volist>
+									</div>
+									<div class="question-reply">
+										<form>
+											<input type="hidden" name="id" value="{$v.id}">
+											<input type="text" name="comment" placeholder="请输入回复内容" style="width: 644px;">
 											<button type="button" class="add-comment">回复</button>
 										</form>
 									</div>
@@ -178,46 +202,6 @@
 
 				</div>
 				
-				<div class="right-sidebar">
-					<div class="weico-link-list">
-						<p>微博链接</p>
-						<ul class="weico-avatar-list">
-							<?php 
-								for ($i = 0; $i < 9; $i++) { 
-									if ($i % 3 == 1) {
-							?>
-								<li class="weico-avatar-middle">
-							<?php 	} else { ?>
-								<li>
-							<?php 	}	?>
-									<img src="__PUBLIC__/home/images/face.png">
-									<span>大哥大</span>
-								</li>
-							<?php } ?>
-						</ul>
-						<div class="show-more-weico">查看更多</div>
-					</div>
-					<div class="president-list">
-						<p>主席信息</p>
-						<ul>
-							<volist name="chairman" id="v">
-								<li>
-									<img src="{$v.picture}" height="43" width="43">
-									<div class="president-info">
-										<p class="president-name">{$v.chairname}</p>
-										<p class="president-dep">WEB研发部</p>
-									</div>
-									<div class="handle">
-										<p class="view-info">查看信息</p>
-										<p class="at-me">向他提问</p>
-									</div>
-								</li>
-							</volist>
-						</ul>
-						<div class="show-more-president">查看更多</div>
-					</div>
-				</div>
-
 			</div>	
 			
 		</div>
@@ -361,167 +345,12 @@
 					}
 				}
 
-
-				$('#login-view-container').css({
-					
-				})
-
 				// 登录文字定位
 				var rightPosition = $('.nav-bar li:eq(7)').offset().left + 17 + $('.nav-bar li:eq(7)').width();
 				$('.login-reg-btn').css({
 					'opacity': 1,
 					'left': rightPosition - $('.login-reg-btn').width()
 				});
-
-
-				// 打开@提问框
-				$('.at-question').click(function () {
-					if (isLogin()) {
-						$('.dimmer').css({
-							display: 'block',
-							top: $(document).scrollTop()
-						});
-						$('#add-question-view-at').css({
-							display: 'block',
-							top: ($(window).height() - 467) / 2 + $(window).scrollTop(),
-							left: ($(window).width() - 664) / 2
-						}).removeClass('bounceOutUp').addClass('animated bounceInDown');
-						$('body').css('overflow', 'hidden');
-					} else {
-						layer.alert('你还未登录, 不能进行此操作', {icon: 6});
-					}
-				});
-
-				// 关闭@提问框
-				$('#add-question-view-at i').click(function () {
-					$('.dimmer').css('display', 'none');
-					$('#add-question-view-at').removeClass('bounceInDown').addClass('bounceOutUp');
-					$('body').css('overflow', 'auto');
-				});
-
-				/*================================================================================*/
-
-				// 打开公开提问框
-				$('.public-question').click(function () {
-					if (isLogin()) {
-						$('.dimmer').css({
-							display: 'block',
-							top: $(document).scrollTop()
-						});
-						$('#add-question-view-public').css({
-							display: 'block',
-							top: ($(window).height() - 467) / 2 + $(window).scrollTop(),
-							left: ($(window).width() - 664) / 2
-						}).removeClass('bounceOutUp').addClass('animated bounceInDown');
-						$('body').css('overflow', 'hidden');
-					} else {
-						layer.alert('你还未登录, 不能进行此操作', {icon: 6});
-					}
-				});
-
-				// 关闭公开提问框
-				$('#add-question-view-public i').click(function () {
-					$('.dimmer').css('display', 'none');
-					$('#add-question-view-public').removeClass('bounceInDown').addClass('bounceOutUp');
-					$('body').css('overflow', 'auto');
-				});
-
-				// 格式化时间
-				function formatTime (timestamp, type) {
-					var time = new Date(timestamp * 1000);
-					var year = time.getYear();
-					var month = time.getMonth() + 1;
-					var day = time.getDate();
-					var hour = time.getHours();
-					var min = time.getMinutes();
-					if (type === 'year') {
-						return 	'20' + (String(year).substr(1)) + '年' + month + '月' + day + '日';
-					} else {
-						return hour + ':' + min;
-					}
-				}
-
-
-				function questionTemplate (data) {
-					var _question = '', _temp = '';
-					_question += '<div class="question" data-index="'+ data.id +'">';
-						// 头部
-						_question += '<div class="question-header">';
-							_question += '<div class="user-avatar">';
-								_question += '<img src="'+ data.touxiang +'" >';
-							_question += '</div>';
-							_question += '<div class="user-name">'+ data.postername +'</div>';
-							_question += '<div class="post-date">';
-								_question += '<span>'+ formatTime(data.time, 'year') +'</span>&nbsp;';
-								_question += '<span>'+ formatTime(data.time) +'</span>';
-							_question += '</div>';
-						_question += '</div>';
-						// 内容
-						_question += '<div class="question-body">';
-							_question += '<div class="question-title">';
-								_question += '<strong>'+ data.title +'</strong>';
-							_question += '</div>';
-							_question += '<div class="question-content">'+ data.question +'</div>';
-						_question += '</div>';
-						// 尾部
-						_question += '<div class="question-footer">';
-							_question += '<div class="question-praise">';
-								_question += '<i class="iconfont" data-id="'+ data.id +'">&#xe605;</i>&nbsp;';
-								_question += '<span>'+ data.vote || 0 +'</span>';
-							_question += '</div>';
-							_question += '<div class="question-comments-list"></div>';
-							_question += '<div class="question-reply">';
-								_question += '<form>';
-									_question += '<input type="hidden" name="id" value="{$v.id}">';
-									_question += '<input type="text" name="comment" placeholder="请输入回复内容">';
-									_question += '<button type="button" class="add-comment">回复</button>';
-								_question += '</form>';
-							_question += '</div>';
-						_question += '</div>';
-					_question += '</div>';
-					_temp = _question;
-					_question = '';
-					return _temp
-				}
-
-				// 添加问题
-				function addQuestion (formName) {
-
-					if (isLogin()) {
-						$.ajax({
-							url: $('html').data('add'),
-							type: 'POST',
-							data: $(formName).serialize()
-						}).done(function (response) {
-							layer.alert('提问成功', {icon: 5}, function (index) {
-								layer.close(index);
-								$('.dimmer').css('display', 'none');
-								$(formName).get(0).reset();
-								$(formName).parent().parent().removeClass('bounceInDown').addClass('bounceOutUp');
-								$('body').css('overflow', 'auto');
-							});
-							response.data.type = $(formName).find('input[name=type]')
-							$('.question-list').prepend(questionTemplate(response.data));
-						}).fail(function() {
-							console.log("error");
-						}).always(function() {
-							console.log("complete");
-						});
-					} else {
-						layer.alert('你还未登录, 不能进行此操作', {icon: 6});
-					}
-				}
-
-
-				$('.add-public-question-form button').on('click', function () {
-					addQuestion('.add-public-question-form');
-				})
-
-				$('.add-private-question-form button').on('click', function () {
-					addQuestion('.add-private-question-form');
-				})
-
-				
 
 
 				// 添加评论
@@ -597,86 +426,6 @@
 					}
 				});
 				
-
-
-				// 打开登录框
-				$('.open-login-view').on('click', function () {
-					$('.dimmer').css({
-						display: 'block',
-						top: $(document).scrollTop()
-					});
-					$('#login-view-container').css({
-						display: 'block',
-						top: ($(window).height() - 250) / 2,
-						left: ($(window).width() - 340) / 2
-					}).removeClass('bounceOutUp').addClass('animated bounceInDown');
-					$('body').css('overflow', 'hidden');
-				});
-
-				// 关闭登陆框
-				$('#login-view-container i').click(function () {
-					$('.dimmer').css('display', 'none');
-					$('#login-view-container').removeClass('bounceInDown').addClass('bounceOutUp');
-					$('body').css('overflow', 'auto');
-				});
-
-				$('.user-form strong:eq(0)').on('click', function () {
-					$('.user-form').css('display', 'none');
-					$('.chairman-form').css('display', 'block');
-				});
-
-				$('.chairman-form strong:eq(2)').on('click', function () {
-					$('.chairman-form').css('display', 'none');
-					$('.user-form').css('display', 'block');
-				});
-
-				// 学生和教师登录
-				$('.user-form button').click(function () {
-					$.ajax({
-						url: $('html').data('login'),
-						type: 'POST',
-						data: $('.user-form').serialize()
-					}).done(function (response) {
-						if (response.status == 200) {
-							layer.alert('登录成功!', {icon: 3}, function (index) {
-								layer.close(index);
-								$('.dimmer').css('display', 'none');
-								$('#login-view-container').removeClass('bounceInDown').addClass('bounceOutUp');
-								$('body').css('overflow', 'auto');
-							});
-							location.reload();
-						} else {
-							layer.msg('用户名或密码有误', {icon: 5});
-							$('.user-form').get(0).reset();
-						}
-					}).fail(function() {
-						alert('cuowu');
-					});
-				});
-
-				// 主席登录
-				$('.chairman-form button').click(function () {
-					$.ajax({
-						url: $('html').attr('data-chariLogin'),
-						type: 'POST',
-						data: $('.chairman-form').serialize()
-					}).done(function (response) {
-						if (response.status == 200) {
-							layer.alert('登录成功!', {icon: 3}, function (index) {
-								layer.close(index);
-								$('.dimmer').css('display', 'none');
-								$('#login-view-container').removeClass('bounceInDown').addClass('bounceOutUp');
-								$('body').css('overflow', 'auto');
-								location.reload();
-							});
-						} else {
-							layer.msg('用户名或密码有误', {icon: 5});
-							$('.chairman-form').get(0).reset();
-						}
-					}).fail(function() {
-						alert('cuowu');
-					});
-				});
 
 				// 加载更多
 				$('.loading-more').on('click', function () {

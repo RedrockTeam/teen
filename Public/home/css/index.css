@@ -16,14 +16,14 @@
 .icon-huidaodingbu:before {
   content: "\e601"; }
 
-.icon-dianzan:before {
-  content: "\e600"; }
-
-.icon-dianzan1:before {
-  content: "\e602"; }
-
 .icon-guanbi:before {
   content: "\e603"; }
+
+.icon-dianzanhou01:before {
+  content: "\e604"; }
+
+.icon-dianzanqian01:before {
+  content: "\e605"; }
 
 body {
   margin: 0;
@@ -79,11 +79,11 @@ p {
           line-height: 66px;
           font-size: 18px;
           color: #0b6ebb; }
-      #header .nav-bar ul li:hover {
+      #header .nav-bar ul .nav:hover {
         background: #079ae6;
         background-image: -webkit-linear-gradient(top, #0ba0ed, #0699e5);
         border-bottom: 1px solid #028cd3; }
-        #header .nav-bar ul li:hover a {
+        #header .nav-bar ul .nav:hover a {
           color: #fffefe; }
       #header .nav-bar ul .school-logo {
         margin-right: 67px;
@@ -153,7 +153,8 @@ p {
       background-color: #f6f7f7;
       float: left;
       margin: 0 20px;
-      width: 558px; }
+      width: 558px;
+      min-height: 500px; }
       #main .main-content .middle .list-title {
         height: 43px;
         background-color: #fff; }
@@ -171,83 +172,96 @@ p {
         #main .main-content .middle .list-title .on-focus {
           color: #5e8bcc;
           border-bottom: 1px solid #5e8cca; }
-      #main .main-content .middle .question-list .question {
+      #main .main-content .middle .be-question-list .question, #main .main-content .middle .question-list .question {
         margin-top: 10px;
         padding: 14px 11px 22px;
         background-color: #fff; }
-        #main .main-content .middle .question-list .question .question-header {
+        #main .main-content .middle .be-question-list .question .question-header, #main .main-content .middle .question-list .question .question-header {
           height: 47px;
           border-bottom: 1px solid #f2f2f2; }
-          #main .main-content .middle .question-list .question .question-header .user-avatar {
+          #main .main-content .middle .be-question-list .question .question-header .user-avatar, #main .main-content .middle .question-list .question .question-header .user-avatar {
             float: left;
             margin-right: 10px; }
-            #main .main-content .middle .question-list .question .question-header .user-avatar img {
+            #main .main-content .middle .be-question-list .question .question-header .user-avatar img, #main .main-content .middle .question-list .question .question-header .user-avatar img {
               width: 36px;
               height: 36px; }
-          #main .main-content .middle .question-list .question .question-header .user-name {
+          #main .main-content .middle .be-question-list .question .question-header .user-name, #main .main-content .middle .question-list .question .question-header .user-name {
             color: #262626;
             font-size: 14px;
             margin-bottom: 10px; }
-          #main .main-content .middle .question-list .question .question-header .post-date {
+          #main .main-content .middle .be-question-list .question .question-header .post-date, #main .main-content .middle .question-list .question .question-header .post-date {
             color: #999;
             font-size: 12px; }
-        #main .main-content .middle .question-list .question .question-body {
+        #main .main-content .middle .be-question-list .question .question-body, #main .main-content .middle .question-list .question .question-body {
           padding-top: 17px;
           padding-bottom: 14px; }
-          #main .main-content .middle .question-list .question .question-body .question-title {
+          #main .main-content .middle .be-question-list .question .question-body .question-title, #main .main-content .middle .question-list .question .question-body .question-title {
             font-size: 14px;
             color: #333;
             cursor: pointer; }
-          #main .main-content .middle .question-list .question .question-body .question-content {
+            #main .main-content .middle .be-question-list .question .question-body .question-title span, #main .main-content .middle .question-list .question .question-body .question-title span {
+              float: right;
+              display: inline-block;
+              height: 10px;
+              min-width: 10px;
+              padding: 2px 8px;
+              font-size: 10px;
+              font-weight: 700;
+              color: #fff;
+              line-height: 1;
+              vertical-align: baseline;
+              white-space: nowrap;
+              background-color: #999; }
+          #main .main-content .middle .be-question-list .question .question-body .question-content, #main .main-content .middle .question-list .question .question-body .question-content {
             font-size: 12px;
             line-height: 18px;
             color: #333;
             padding-top: 12px; }
-        #main .main-content .middle .question-list .question .question-footer .question-praise {
+        #main .main-content .middle .be-question-list .question .question-footer .question-praise, #main .main-content .middle .question-list .question .question-footer .question-praise {
           width: 100%;
           text-align: right;
           padding-right: 10px;
           color: #fc736b; }
-          #main .main-content .middle .question-list .question .question-footer .question-praise i {
+          #main .main-content .middle .be-question-list .question .question-footer .question-praise i, #main .main-content .middle .question-list .question .question-footer .question-praise i {
             font-size: 14px;
             cursor: pointer;
             vertical-align: bottom; }
-          #main .main-content .middle .question-list .question .question-footer .question-praise span {
+          #main .main-content .middle .be-question-list .question .question-footer .question-praise span, #main .main-content .middle .question-list .question .question-footer .question-praise span {
             font-size: 14px;
             vertical-align: bottom; }
-        #main .main-content .middle .question-list .question .question-footer .question-comments-list {
+        #main .main-content .middle .be-question-list .question .question-footer .question-comments-list, #main .main-content .middle .question-list .question .question-footer .question-comments-list {
           margin-top: 5px;
           width: 100%; }
-          #main .main-content .middle .question-list .question .question-footer .question-comments-list .question-comment {
+          #main .main-content .middle .be-question-list .question .question-footer .question-comments-list .question-comment, #main .main-content .middle .question-list .question .question-footer .question-comments-list .question-comment {
             overflow: hidden;
             width: 540px;
             margin-bottom: 15px; }
-            #main .main-content .middle .question-list .question .question-footer .question-comments-list .question-comment .comment-header {
+            #main .main-content .middle .be-question-list .question .question-footer .question-comments-list .question-comment .comment-header, #main .main-content .middle .question-list .question .question-footer .question-comments-list .question-comment .comment-header {
               float: left;
               height: 28px;
               width: 28px; }
-              #main .main-content .middle .question-list .question .question-footer .question-comments-list .question-comment .comment-header img {
+              #main .main-content .middle .be-question-list .question .question-footer .question-comments-list .question-comment .comment-header img, #main .main-content .middle .question-list .question .question-footer .question-comments-list .question-comment .comment-header img {
                 border: none; }
-            #main .main-content .middle .question-list .question .question-footer .question-comments-list .question-comment .comment-body {
+            #main .main-content .middle .be-question-list .question .question-footer .question-comments-list .question-comment .comment-body, #main .main-content .middle .question-list .question .question-footer .question-comments-list .question-comment .comment-body {
               float: left;
               width: 502px;
               margin-left: 10px;
               min-height: 28px;
               font-size: 12px; }
-              #main .main-content .middle .question-list .question .question-footer .question-comments-list .question-comment .comment-body .comment-content {
+              #main .main-content .middle .be-question-list .question .question-footer .question-comments-list .question-comment .comment-body .comment-content, #main .main-content .middle .question-list .question .question-footer .question-comments-list .question-comment .comment-body .comment-content {
                 min-height: 14px; }
-                #main .main-content .middle .question-list .question .question-footer .question-comments-list .question-comment .comment-body .comment-content .comment-user-name {
+                #main .main-content .middle .be-question-list .question .question-footer .question-comments-list .question-comment .comment-body .comment-content .comment-user-name, #main .main-content .middle .question-list .question .question-footer .question-comments-list .question-comment .comment-body .comment-content .comment-user-name {
                   color: #f36c7d; }
-              #main .main-content .middle .question-list .question .question-footer .question-comments-list .question-comment .comment-body .comment-date {
+              #main .main-content .middle .be-question-list .question .question-footer .question-comments-list .question-comment .comment-body .comment-date, #main .main-content .middle .question-list .question .question-footer .question-comments-list .question-comment .comment-body .comment-date {
                 height: 10px;
                 font-size: 10px;
                 margin-top: 6px;
                 color: #9a9a9a;
                 vertical-align: bottom; }
-        #main .main-content .middle .question-list .question .question-footer .question-reply {
+        #main .main-content .middle .be-question-list .question .question-footer .question-reply, #main .main-content .middle .question-list .question .question-footer .question-reply {
           width: 100%;
           padding-top: 14px; }
-          #main .main-content .middle .question-list .question .question-footer .question-reply input {
+          #main .main-content .middle .be-question-list .question .question-footer .question-reply input, #main .main-content .middle .question-list .question .question-footer .question-reply input {
             width: 444px;
             height: 30px;
             border: 1px solid #ebebeb;
@@ -255,11 +269,11 @@ p {
             padding: 0 8px;
             letter-spacing: .7px;
             outline: none; }
-            #main .main-content .middle .question-list .question .question-footer .question-reply input:focus {
+            #main .main-content .middle .be-question-list .question .question-footer .question-reply input:focus, #main .main-content .middle .question-list .question .question-footer .question-reply input:focus {
               border-color: #3686c5; }
-          #main .main-content .middle .question-list .question .question-footer .question-reply input::-webkit-input-placeholder {
+          #main .main-content .middle .be-question-list .question .question-footer .question-reply input::-webkit-input-placeholder, #main .main-content .middle .question-list .question .question-footer .question-reply input::-webkit-input-placeholder {
             color: #9a9a9a; }
-          #main .main-content .middle .question-list .question .question-footer .question-reply button {
+          #main .main-content .middle .be-question-list .question .question-footer .question-reply button, #main .main-content .middle .question-list .question .question-footer .question-reply button {
             height: 32px;
             width: 70px;
             color: #fff;
@@ -268,6 +282,14 @@ p {
             line-height: 30px;
             background-color: #3686c5;
             cursor: pointer; }
+      #main .main-content .middle .loading-more {
+        margin-top: 10px;
+        height: 40px;
+        width: 100%;
+        background-color: #fff;
+        text-align: center;
+        line-height: 40px;
+        cursor: pointer; }
     #main .main-content .right-sidebar {
       float: left;
       width: 234px; }
@@ -439,3 +461,63 @@ p {
       cursor: pointer; }
       #add-question-view-public .form-control button:focus, #add-question-view-at .form-control button:focus {
         outline: none; }
+
+#login-view-container {
+  width: 340px;
+  min-height: 250px;
+  z-index: 4;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: none; }
+  #login-view-container .login-view-header {
+    height: 33px; }
+    #login-view-container .login-view-header strong {
+      color: #fddc28;
+      font-size: 24px;
+      text-shadow: 0px 0px .3px #ffffbe; }
+    #login-view-container .login-view-header i {
+      float: right;
+      font-size: 24px;
+      color: #f4f5f5;
+      font-weight: bold;
+      cursor: pointer; }
+  #login-view-container .login-view-body {
+    height: 165px;
+    width: 280px;
+    padding: 50px 30px 53px;
+    background-color: #f6f7f7; }
+  #login-view-container .form-control {
+    width: 280px;
+    margin-bottom: 20px;
+    overflow: hidden; }
+    #login-view-container .form-control label {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 14px; }
+      #login-view-container .form-control label strong {
+        float: right;
+        cursor: pointer; }
+    #login-view-container .form-control input {
+      height: 18px;
+      width: 258px;
+      padding: 7px 10px;
+      font-size: 14px;
+      letter-spacing: 1.2px;
+      border-radius: 2px;
+      color: #999;
+      border: 1px solid #d8d9d9; }
+      #login-view-container .form-control input:focus {
+        outline: none; }
+    #login-view-container .form-control button {
+      width: 280px;
+      height: 36px;
+      background-color: #3686c4;
+      background-image: -moz-linear-gradient(top, #1f7ec5, #1a8ddf);
+      background-image: -ms-linear-gradient(top, #1f7ec5, #1a8ddf);
+      background-image: -webkit-linear-gradient(top, #1f7ec5, #1a8ddf);
+      color: #fff;
+      font-size: 14px;
+      letter-spacing: .3em;
+      border-radius: 2px;
+      cursor: pointer; }

@@ -17,9 +17,10 @@
 	  -moz-osx-font-smoothing: grayscale;
 	}
 	.icon-huidaodingbu:before { content: "\e601"; }
-	.icon-dianzan:before { content: "\e600"; }
-	.icon-dianzan1:before { content: "\e602"; }
 	.icon-guanbi:before { content: "\e603"; }
+	.icon-dianzanhou01:before { content: "\e604"; }
+	.icon-dianzanqian01:before { content: "\e605"; }
+
 
 	body {
 		margin: 0;
@@ -84,7 +85,7 @@
 		    			color: #0b6ebb;
 		    		}
 		    	}
-		    	li:hover {
+		    	.nav:hover {
 		    		background: #079ae6;
 		    		background-image: -webkit-linear-gradient(top, #0ba0ed, #0699e5);
 		    		border-bottom: 1px solid #028cd3;
@@ -188,6 +189,7 @@
 				float: left;
 				margin: 0 20px;
 				width: 558px;
+				min-height: 500px;
 				.list-title {
 					height: 43px;
 					background-color: #fff;
@@ -211,7 +213,7 @@
 				}
 
 				// 问题列表
-				.question-list {
+				.be-question-list, .question-list {
 					.question {
 						margin-top: 10px;
 						padding: 14px 11px 22px;
@@ -244,6 +246,20 @@
 								font-size: 14px;
 								color: #333;
 								cursor: pointer;
+								span {
+									float: right;
+									display: inline-block;
+									height: 10px;
+								    min-width: 10px;
+								    padding: 2px 8px;
+								    font-size: 10px;
+								    font-weight: 700;
+								    color: #fff;
+								    line-height: 1;
+								    vertical-align: baseline;
+								    white-space: nowrap;
+								    background-color: #999;
+								}
 							}
 							.question-content {
 								font-size: 12px;
@@ -345,6 +361,16 @@
 							}
 						}
 					}
+				}
+
+				.loading-more {
+					margin-top: 10px;
+					height: 40px;
+					width: 100%;
+					background-color: #fff;
+					text-align: center;
+					line-height: 40px;
+					cursor: pointer;
 				}
 			}
 
@@ -567,6 +593,77 @@
 				&:focus {
 					outline: none;
 				}
+			}
+		}
+    }
+
+    #login-view-container {
+    	width: 340px;
+		min-height: 250px;
+		z-index: 4;
+		position: absolute;
+		top: 0;
+		left: 0;
+		display: none;
+		.login-view-header {
+			height: 33px;
+			strong {
+				color: #fddc28;
+				font-size: 24px;
+				text-shadow: 0px 0px .3px #ffffbe;
+			}
+			i {
+				float: right;
+				font-size: 24px;
+				color: #f4f5f5;
+				font-weight: bold;
+				cursor: pointer;
+			}
+		}
+		.login-view-body {
+			height: 165px;
+			width: 280px;
+			padding: 50px 30px 53px;
+			background-color: #f6f7f7;
+		}
+		.form-control {
+			width: 280px;
+			margin-bottom: 20px;
+			overflow: hidden;
+			label {
+				display: block;
+				margin-bottom: 6px;
+				font-size: 14px;
+				strong {
+					float: right;
+					cursor: pointer;
+				}
+			}
+			input {
+				height: 18px;
+				width: 258px;
+				padding: 7px 10px;
+				font-size: 14px;
+				letter-spacing: 1.2px;
+				border-radius: 2px;
+				color: #999;
+				border: 1px solid #d8d9d9;
+				&:focus {
+					outline: none;
+				}
+			}
+			button {
+				width: 280px;
+				height: 36px;
+				background-color: #3686c4;
+				background-image: -moz-linear-gradient(top, #1f7ec5, #1a8ddf);
+			    background-image: -ms-linear-gradient(top, #1f7ec5, #1a8ddf);
+			    background-image: -webkit-linear-gradient(top, #1f7ec5, #1a8ddf);
+			    color: #fff;
+				font-size: 14px;
+				letter-spacing: .3em;
+				border-radius: 2px;
+				cursor: pointer;
 			}
 		}
     }

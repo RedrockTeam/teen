@@ -68,7 +68,6 @@ class questionController extends Controller {
 				$data['is_voted'] = false;
 			}
 			//查看是否已经对该问题点过赞
-			dump($data);
 			return $data;
 		}
 	}
@@ -155,9 +154,10 @@ class questionController extends Controller {
     //点赞的接口
     public function vote(){      //点赞接口
         if(!session('username')){return;}
-        $id = I('get.id');
+        $id = I('post.id');
         $where = array(
             'voiceid' => $id,
+            'user' => session('stunum')
         );
         if(!M('user_vote')->where($where)->select()){
             //增加关联表的一条数据

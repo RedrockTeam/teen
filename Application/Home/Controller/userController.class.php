@@ -13,11 +13,7 @@ class userController extends Controller {
     		session('stunum', $user_message['userInfo']['stu_num']);	//学号或者教职工号
             session('sex', $user_message['userInfo']['gender']);	//性别
             cookie('stunum',$user_message['userInfo']['stu_num']);
-            if($user_message['userInfo']['gender'] == "男"){
-                session('touxiang', 'Public/chairone/boy.jpg');		//根据不同性别设置头像
-            }else{
-                session('touxiang', 'Public/chairone/girl.jpg');
-            }
+            session('touxiang', '/teen/Public/home/images/default.png');		//根据不同性别设置头像
             $conf = array(
                 'username' => $user_message['userInfo']['real_name'],
                 'stunum' => $user_message['userInfo']['stu_num'],
@@ -35,15 +31,15 @@ class userController extends Controller {
 
     //学生会主席的登陆方法
     public function chair_login(){      
-        if(I('get.type') != 'chairman'){
+        if(I('post.type') != 'chairman'){
             $data = array(
                 'status' => '403',
                 'message' => '参数不正确' 
             );
         }else{
         	$where = array(
-        		'chairname' => I('get.chairname'),
-        		'password' => I('get.password'),
+        		'chairname' => I('post.chairname'),
+        		'password' => I('post.password'),
         	);
         	$message = M('chairman')->where($where)->select();
         	if($message){
@@ -84,17 +80,16 @@ class userController extends Controller {
     //获取主席自己的提问和@提问
     public function get_voice(){        
         $id = I('get.id');
+        print_r($id);
         if(!$id){
-            $id = 0;
             $data = $this->loadData($id);//根据是否有id判断是首次加载还是下拉加载
             $this->assign('data', $data);
-            dump(session());
-            dump($data);
-            //$this->display();
+            $this->display('personal');
         }else{
             $this->ajaxReturn($this->loadData($id));
         }
     }
+
     private function loadData($id){    //下拉加载问题
         if(session('userType') == 'chairman'){
             $data['be_question'] = $this->load_be_question($id);  //加载被提问数据
@@ -105,20 +100,92 @@ class userController extends Controller {
         $data['question'] = $this->load_question($id);  //加载提问数据
         return $data;
     }
-    private function load_be_question($id = 0){     
-        $where = array(
-            'posterid' => session('stunum'),    //这里是主席的id
-            'id' => array('gt', $id),
-        );
-        $res = M('voice')->where($where)->limit(5)->select();
-        return $res;
+    private function load_be_question($id){
+        $user = session('stunum');
+        $UserVote = M('user_vote');
+        $chairman = M('chairman');
+        $comment = M('comment');
+        $Voice = M('voice');
+
+        $map['gettername'] = session('stunum');
+        if ($id) {
+            $map['id'] = array('lt', $id);
+        }
+        $voices = $Voice->where($map)->limit(5)->select();
+
+        foreach ($voices as $index => $voice) {
+            if (strlen($voices[$index]['posterid']) > 6) {
+                $voices[$index]['touxiang'] = '/teen/Public/home/images/default.png';    
+            } else {
+                $voices[$index]['touxiang'] = $chairman->where("id = '{$voice['posterid']}'")->getField('picture');
+            }
+          
+            // 是否点过赞
+            if($UserVote->where("voiceid = '{$voice['id']}' AND user = '$user'")->find()){
+                $voices[$index]['is_voted'] = 'true';
+            }else{
+                $voices[$index]['is_voted'] = 'false';
+            }
+            $comments = $comment->where("voiceid = '{$voice['id']}'")->select();
+            if ($comments) {
+                foreach ($comments as $_index => $_comment) {
+                    if (strlen($_comment['userid']) > 6) {
+                        $comments[$_index]['touxiang'] = '/teen/Public/home/images/default.png';
+                    } else {
+                        $comments[$_index]['touxiang'] = $chairman->where("id = '{$_comment['userid']}'")->getField('picture');
+                    }
+                }
+            }
+            $voices[$index]['comments'] = $comments;
+        }
+        return $voices;
     }
-    private function load_question($id = 0){
-        $where = array(
-            'posterid' => session('stunum'),    
-            'id' => array('gt', $id),
-        );
-        $res = M('voice')->where($where)->limit(5)->select();
-        return $res;
+    private function load_question(){
+        $user = session('stunum');
+        $UserVote = M('user_vote');
+        $chairman = M('chairman');
+        $comment = M('comment');
+        $Voice = M('voice');
+
+        $map['posterid'] = session('stunum');
+        if ($id) {
+            $map['id'] = array('lt', $id);
+        }
+        
+        $voices = $Voice->where($map)->limit(5)->select();
+        
+        foreach ($voices as $index => $voice) {
+            if (strlen($voices[$index]['posterid']) > 6) {
+                $voices[$index]['touxiang'] = '/teen/Public/home/images/default.png';    
+            } else {
+                $voices[$index]['touxiang'] = $chairman->where("id = '{$voice['posterid']}'")->getField('picture');
+            }
+          
+            // 是否点过赞
+            if($UserVote->where("voiceid = '{$voice['id']}' AND user = '$user'")->find()){
+                $voices[$index]['is_voted'] = 'true';
+            }else{
+                $voices[$index]['is_voted'] = 'false';
+            }
+            $comments = $comment->where("voiceid = '{$voice['id']}'")->select();
+            if ($comments) {
+                foreach ($comments as $_index => $_comment) {
+                    if (strlen($_comment['userid']) > 6) {
+                        $comments[$_index]['touxiang'] = '/teen/Public/home/images/default.png';
+                    } else {
+                        $comments[$_index]['touxiang'] = $chairman->where("id = '{$_comment['userid']}'")->getField('picture');
+                    }
+                }
+            }
+            $voices[$index]['comments'] = $comments;
+        }
+        return $voices;
     }
+
+    public function logout() {
+        session(null);
+        cookie('stunum', null);
+        redirect('../Index/index');
+    }
+
 }
