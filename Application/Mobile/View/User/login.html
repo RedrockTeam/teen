@@ -1,71 +1,77 @@
 
 <!DOCTYPE html>
-<html lang="zh-CN" data-index="{:U('Index/index')}" data-login="{:U('login')}">
+<html lang="zh-CN" data-index="{:U('Index/index')}" data-login="{:U('login')}" data-chariLogin="{:U('User/chair_login')}">
+
+    
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-        <title>个人资料</title>
+        <title>青年之声登录</title>
         <link rel="stylesheet" href="__PUBLIC__/mobile/css/amazeui.min.css">
-        <style>
-            
-            body {
-                background: url('__PUBLIC__/mobile/images/texture.png');
-            }
-
-
-            .am-vertical-align-middle {
-                vertical-align: middle;
-                margin-top: 2px;
-            }
-            .am-panel-footer {
-                font-size: 13px;
-                color: #999;
-            }
-            .am-panel-footer span {
-                color: #999;
-                font-weight: lighter;
-                letter-spacing: -1.5px;
-            }
-            .am-panel-footer div {
-                margin: 0 3px;
-            }
-            .am-tabs-nav li {
-                width: 50%;
-                text-align: center;
-            }
-        </style>
+        <link rel="stylesheet" href="__PUBLIC__/mobile/css/login.css">
+        <link rel="stylesheet" href="http://apps.bdimg.com/libs/animate.css/3.1.0/animate.min.css">
     </head>
     <body>
 
-        <div class="am-g">
-            <div class="am-u-md-8 am-u-md-offset-2 am-text-center">            
-                <img src="http://f.hiphotos.baidu.com/baike/w%3D268/sign=2443a75bb11bb0518f24b42e0e7ada77/8b13632762d0f7031cbb3ea50afa513d2697c5ba.jpg" alt="">
+        <div id="user-login-view">
+            <div class="am-g" id="user-login-view-header">
+                <header data-am-widget="header" class="am-header am-header-default">
+                    <h1 class="am-header-title">
+                        <a href="#title-link">用户登录</a>
+                    </h1>
+                    <div class="am-header-right am-header-nav">
+                        <a href="###">
+                            <span class="am-header-nav-title">主席登录</span>
+                        </a>
+                    </div>
+                </header>
             </div>
 
-        </div>
-
-        <div class="am-g">
-
-            <div class="am-u-md-8 am-u-md-offset-2">
+            <div class="am-g" id="user-login-view-content">
                 <form class="am-form am-form-horizontal" id="user-login-form">
-                    <div class="am-form-group">
-                        <div class="am-u-sm-12">
-                          <input type="text" name="username" placeholder="请输入发布者的学号" autocomplete="off">
-                        </div>
+                    <div class="am-form-group am-form-icon">
+                        <i class="am-icon-user"></i>
+                        <input type="text" class="am-form-field" name="username" placeholder="学号或教师一卡通号" autocomplete="off">
                     </div>
-
-                    <div class="am-form-group">
-                        <div class="am-u-sm-12">
-                          <input type="password" name="password" placeholder="请输入发布者的密码" autocomplete="off">
-                        </div>
+                    <div class="am-form-group am-form-icon">
+                        <i class="am-icon-calendar"></i>    
+                        <input type="password" class="am-form-field" name="password" placeholder="身份证后六位或教师账号密码" autocomplete="off">
                     </div>
                     <div class="am-form-group">
-                        <div class="am-u-sm-12">
-                            <button type="button" id="user-login-btn" class="am-btn am-btn-primary am-btn-block" data-am-loading="{spinner: 'circle-o-notch', loadingText: '登录中...', resetText: '登录'}">登录</button>
-                        </div>
+                        <button type="button" id="user-login-btn" class="am-btn am-btn-block" data-am-loading="{spinner: 'circle-o-notch', loadingText: '登录中...', resetText: '登录'}">登录</button>
                     </div>
                 </form>
+            </div>
+        </div>
 
+        <div id="chairman-login-view" style="display: none;">
+            <div class="am-g" id="chairman-login-view-header">
+                <header data-am-widget="header" class="am-header am-header-default">
+                    <h1 class="am-header-title">
+                        <a href="#title-link">主席登录</a>
+                    </h1>
+                    <div class="am-header-right am-header-nav">
+                        <a href="###">
+                            <span class="am-header-nav-title">用户登录</span>
+                        </a>
+                    </div>
+                </header>
+            </div>
+
+            <div class="am-g" id="chairman-login-view-content">
+                <form class="am-form am-form-horizontal" id="chairman-login-form">
+                    <div class="am-form-group am-form-icon">
+                        <i class="am-icon-user"></i>
+                        <input type="text" class="am-form-field" name="chairname" placeholder="请输入用户名" autocomplete="off">
+                    </div>
+                    <div class="am-form-group am-form-icon">
+                        <i class="am-icon-calendar"></i>    
+                        <input type="password" class="am-form-field" name="password" placeholder="请输入密码" autocomplete="off">
+                    </div>
+                    <div class="am-form-group">
+                        <button type="button" id="chairman-login-btn" class="am-btn am-btn-block" data-am-loading="{spinner: 'circle-o-notch', loadingText: '登录中...', resetText: '登录'}">登录</button>
+                    </div>
+                </form>
             </div>
         </div>
 
@@ -77,7 +83,13 @@
     <script>
         $(function () {
             $.AMUI.progress.start();
-            $('#user-login-btn').on('click', user.login);
+            $('#user-login-btn').on('click', function () {
+                user.login('#user-login-form', $('html').attr('data-login'));
+            });
+            $('#chairman-login-btn').on('click', function () {
+                user.login('#chairman-login-form', $('html').attr('data-chariLogin'));
+            });
+            $('.am-header-nav-title').on('click', view.loginViewTrigger);
             $.AMUI.progress.done();
         });
     </script>

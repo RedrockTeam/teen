@@ -37,9 +37,9 @@
     						'id' => $value['userid']
     					);
                         $_data = M('chairman')->field('picture')->where($where)->select();
-    					$commentData[$key]['image'] = $_data[0]['picture'];
+    					$commentData[$key]['touxiang'] = $_data[0]['picture'];
     				}else{
-    					$commentData[$key]['image'] = 'public/chairone/man.jpg';
+    					$commentData[$key]['touxiang'] = '/teen/Public/home/images/default.png';
     				}
     			}
 
@@ -53,9 +53,9 @@
     					'id' => $voiceData[0]['posterid']
     				);
                     $_data = M('chairman')->field('picture')->where($where)->select();
-    				$data['voice']['image'] = $_data[0]['picture'];
+    				$data['voice']['touxiang'] = $_data[0]['picture'];
     			}else{
-    				$data['voice']['image'] = 'public/chairone/man.jpg';
+    				$data['voice']['touxiang'] = '/teen/Public/home/images/default.png';
     			}
     			//将照片地址添加到结果数组里
     			$where = array(

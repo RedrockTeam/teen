@@ -14,16 +14,13 @@
 	})()
 
 	var user = (function () {
-
-		var login;
-
-		login = function () {
-            if (verify.userLoginVerify('#user-login-form')) {
-				var $button = $(this);
+		var login = function (formName, url) {
+            if (verify.userLoginVerify(formName)) {
+				var $button = $(formName).find('button');
 	            $.ajax({
-	            	url: $('html').attr('data-login'),
+	            	url: url,
 	            	type: 'POST',
-	            	data: $('#user-login-form').serialize(),
+	            	data: $(formName).serialize(),
 	            	beforeSend: function () {
 	            		$button.button('loading');
 	            	}
@@ -60,10 +57,7 @@
 		};
 
 
-		var add,
-			del,
-			praise,
-			comment;
+		var add, del, praise, comment;
 
 		addViewShow = function () {
 			if ($.AMUI.utils.cookie.get('stunum')) {
@@ -76,37 +70,43 @@
 		};
 
 		add = function () {
-			var $button = $(this);
-			var result = verify.questionAddVerify('#question-form');
-			if (result) {
-				$.ajax({
-	            	url: postMap.add,
-	            	type: 'POST',
-	            	dataType: 'json',
-	            	data: result,
-	            	beforeSend: function () {
-	            		$button.button('loading');
-	            	}
-	            }).done(function (response, status) {
-	            	if (response.status === 200) {
-	            		var data = response.data;
-	            		data.time = tool.formatTime(data.time);
-	            		view.alert('提问成功~', function () {
-							// 隐藏提问页面
-							view.addQuestionViewHide();
-							// 动态添加最新问题
-							view.addQuestionLi(data);
-							$('#alert-modal').modal('close');
-						});
-	            	} else {
-	            		view.alert("问题数据不完整, 请重新");
-	            	}
-	            }).fail(function (jqXHR, textStatus) {
-	            	view.alert('稍安勿躁, 好像出了点小问题=_=');
-	            }).always(function() {
-	            	$button.button('reset');
-	            	$('form')[0].reset();
-	            });
+			if (!$.AMUI.utils.cookie.get('stunum')) {
+				view.confirm(['你还未登陆, 不能提问', '戳我登录', '我就看看'], function onConfirm () {
+					location.href = $('html').attr('data-login');
+				});
+			} else {
+				var $button = $(this);
+				var result = verify.questionAddVerify('#question-form');
+				if (result) {
+					$.ajax({
+		            	url: postMap.add,
+		            	type: 'POST',
+		            	dataType: 'json',
+		            	data: result,
+		            	beforeSend: function () {
+		            		$button.button('loading');
+		            	}
+		            }).done(function (response, status) {
+		            	if (response.status === 200) {
+		            		var data = response.data;
+		            		data.time = tool.formatTime(data.time);
+		            		view.alert('提问成功~', function () {
+								// 隐藏提问页面
+								view.addQuestionViewHide();
+								// 动态添加最新问题
+								view.addQuestionLi(data);
+								$('#alert-modal').modal('close');
+							});
+		            	} else {
+		            		view.alert("问题数据不完整, 请重新");
+		            	}
+		            }).fail(function (jqXHR, textStatus) {
+		            	view.alert('稍安勿躁, 好像出了点小问题=_=');
+		            }).always(function() {
+		            	$button.button('reset');
+		            	$('form')[0].reset();
+		            });
+				}
 			}
 		};
 
@@ -132,29 +132,41 @@
 		};
 
 		praise = function () {
-			$.post(postMap.praise, {id: $('input[name=voiceId]').val()}, function(response, textStatus) {
-				if (response.status == 200) {
-					view.alert('点赞成功', function () {
-						// 点赞动画
-						view.praiseQuestion();
-						// 点赞数增一
-						view.questionPraiseInc();
-						$('#alert-modal').modal('close');
-					});
-				} else if (response.status == 304) {
-					view.alert('不能重复点赞');
-				} else {
+			if (!$.AMUI.utils.cookie.get('stunum')) {
+				view.confirm(['你还未登陆, 不能点赞', '戳我登录', '戳我关闭'], function onConfirm () {
+					location.href = $('html').attr('data-login');
+				});
+			} else {
+				$.post(postMap.praise, {id: $('input[name=voiceId]').val()}, function(response, textStatus) {
+					if (response.status == 200) {
+						view.alert('点赞成功', function () {
+							// 点赞动画
+							view.praiseQuestion();
+							// 点赞数增一
+							view.questionPraiseInc();
+							$('#alert-modal').modal('close');
+						});
+					} else if (response.status == 304) {
+						view.alert('不能重复点赞');
+					} else {
+						view.alert('稍安勿躁, 好像出了点小问题=_=');
+					}
+				}).error(function () {
 					view.alert('稍安勿躁, 好像出了点小问题=_=');
-				}
-			}).error(function () {
-				view.alert('稍安勿躁, 好像出了点小问题=_=');
-			});
+				});
+			}
 		};
 
 		commentViewShow = function () {
-			$('#question-comment-modal').modal({
-				width: $(window).width() * 0.8
-			});
+			if (!$.AMUI.utils.cookie.get('stunum')) {
+				view.confirm(['你还未登陆, 不能评论', '戳我登录', '戳我关闭'], function onConfirm () {
+					location.href = $('html').attr('data-login');
+				});
+			} else {
+				$('#question-comment-modal').modal({
+					width: $(window).width() * 0.8
+				});
+			}
 		};
 
 		comment = function () {
@@ -204,18 +216,13 @@
 
 	// 验证模块
 	var verify = (function () {
-		var userLoginVerify,
-			questionAddVerify,
-			questionCommentVerify;
+		var userLoginVerify, questionAddVerify, questionCommentVerify;
 
 		// 用户登录验证
 		userLoginVerify = function (form) {
-			var userName = $.trim($(form).find('input[name=username]').val());
+			var userName = $.trim($(form).find('input[name=username]').val() || $(form).find('input[name=chairman]'));
 			var userPass = $.trim($(form).find('input[name=password]').val());
 			if (!userName || !userPass) {
-				return false;
-			}
-			if (isNaN(userName) || userPass.length < 6 || userName.length < 10) {
 				return false;
 			}
 			return true;
@@ -364,11 +371,25 @@
 			}, 1005);
 		};
 
+		// 登录
+		loginViewTrigger = function (event) {
+			event.preventDefault();
+			if ($('#chairman-login-view').hasClass('animated')) {
+				$('#chairman-login-view').removeClass('animated bounceInRight').css('display', 'none');
+				$('#user-login-view').addClass('animated bounceInLeft').css('display', 'block');
+			} else {
+				$('#user-login-view').removeClass('animated bounceInLeft').css('display', 'none');
+				$('#chairman-login-view').addClass('animated bounceInRight').css('display', 'block');
+			}
+
+		}
+
 		return {
 			alert: alert,
 			confirm: confirm,
 			addQuestionLi: addQuestionLi,
 			praiseQuestion: praiseQuestion,
+			loginViewTrigger: loginViewTrigger,
 			questionPraiseInc: questionPraiseInc,
 			questionCommentInc: questionCommentInc,
 			addQuestionViewShow: addQuestionViewShow,
@@ -380,8 +401,12 @@
 
 
 	var tool = (function () {
-		var parseArgs,
-			formatTime;
+
+		// 变量
+		var time, month, day, hour, min;
+
+		// 函数
+		var parseArgs, formatTime;
 			
 		parseArgs = function (formData) {
 			var args = {};
@@ -400,11 +425,11 @@
 		}
 
 		formatTime = function (timestamp) {
-			var time = new Date(timestamp * 1000);
-			var month = time.getMonth() + 1;
-			var day = time.getDate();
-			var hour = time.getHours();
-			var min = time.getMinutes();
+			time = new Date(timestamp * 1000);
+			month = time.getMonth() + 1;
+			day = time.getDate();
+			hour = time.getHours();
+			min = time.getMinutes();
 			return ' ' + month + '-' + day + ' ' + hour + ':' + min;
 		};
 
@@ -470,22 +495,22 @@
 		confirmModal = function (text) {
 			var textArray = [];
 			if (!$.isArray(text)) {
-				textArray[0] = text;
-				textArray[1] = '确认';
-				textArray[2] = '取消';
+				textArray = [text, '确认', '取消'];
 			} else {
 				textArray = text;
 			}
 			_confirmModalHTML += '<div class="am-modal am-modal-confirm" tabindex="-1" id="confirm-modal">';
 			  	_confirmModalHTML += '<div class="am-modal-dialog">';
 				    _confirmModalHTML += '<div class="am-modal-hd">温馨提示</div>';
-				    	_confirmModalHTML += '<div class="am-modal-bd">';
-				      		_confirmModalHTML += textArray[0];
-				    		_confirmModalHTML += '</div>';
-				    	_confirmModalHTML += '<div class="am-modal-footer">';
-				    _confirmModalHTML += '<span class="am-modal-btn">' + textArray[1] + '</span>';
-			    _confirmModalHTML += '<span class="am-modal-btn" data-am-modal-cancel>' + textArray[2] + '</span>';
-			_confirmModalHTML += '</div></div></div>';
+			    	_confirmModalHTML += '<div class="am-modal-bd">';
+			      		_confirmModalHTML += textArray[0];
+			    	_confirmModalHTML += '</div>';
+				    _confirmModalHTML += '<div class="am-modal-footer">';
+					    _confirmModalHTML += '<span class="am-modal-btn">' + textArray[1] + '</span>';
+				    	_confirmModalHTML += '<span class="am-modal-btn" data-am-modal-cancel>' + textArray[2] + '</span>';
+					_confirmModalHTML += '</div>';
+				_confirmModalHTML += '</div>';
+			_confirmModalHTML += '</div>';
 			return _confirmModalHTML;
 		}
 

@@ -62,7 +62,7 @@
 						<select name="type">
 							<option value="public">公开提问</option>
 							<volist name="chairman" id="v">
-								<option value="1">校学生会</option>
+								<option value="{$v.id}">{$v.chairname}</option>
 							</volist>
 						</select>
 					</div>
@@ -103,6 +103,8 @@
 					$(this).parent().removeClass('am-form-error');
 				}
 			});
+
+			$('.am-icon-chevron-left').on('click', view.addQuestionViewHide);
 
 			
 

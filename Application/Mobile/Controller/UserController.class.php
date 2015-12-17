@@ -16,11 +16,7 @@
             		session('stunum', $user_message['userInfo']['stu_num']);	//学号或者教职工号
                     session('sex', $user_message['userInfo']['gender']);	//性别
                     cookie('stunum',$user_message['userInfo']['stu_num']);
-                    if($user_message['userInfo']['gender'] == "男"){
-                        session('touxiang', 'Public/chairone/boy.jpg');		//根据不同性别设置头像
-                    }else{
-                        session('touxiang', 'Public/chairone/girl.jpg');
-                    }
+                    session('touxiang', '/teen/Public/home/images/default.png');
                     $conf = array(
                         'username' => $user_message['userInfo']['real_name'],
                         'stunum' => $user_message['userInfo']['stu_num'],
@@ -39,35 +35,29 @@
 
         //学生会主席的登陆方法
         public function chair_login(){      
-            if(I('get.type') != 'chairman'){
-                $data = array(
-                    'status' => '403',
-                    'message' => '参数不正确' 
-                );
-            }else{
-            	$where = array(
-            		'chairname' => I('get.chairname'),
-            		'password' => I('get.password'),
+       
+        	$where = array(
+        		'chairname' => I('post.chairname'),
+        		'password' => I('post.password'),
+        	);
+        	$message = M('chairman')->where($where)->select();
+        	if($message){
+        		$data = array(
+                	'status' => '200',
+                	'message' => '登陆成功' 
             	);
-            	$message = M('chairman')->where($where)->select();
-            	if($message){
-            		$data = array(
-                    	'status' => '200',
-                    	'message' => '登陆成功' 
-                	);
-                    session('userType', 'chairman');			//区分字段
-                	session('username', $message[0]['chairname']);	//主席名字
-        			session('stunum', $message[0]['id']);	//主席的id生成的5位随机数
-                	session('sex', $message[0]['sex']);		//性别
-                	session('touxiang', $message[0]['picture']);	//头像的地址
-                    cookie('stunum',$message[0]['id']);
-                }else{
-            		$data = array(
-                    	'status' => '400',
-                    	'message' => '用户名或密码错误', 
-                	);
-            	}
-            }
+                session('userType', 'chairman');			//区分字段
+            	session('username', $message[0]['chairname']);	//主席名字
+    			session('stunum', $message[0]['id']);	//主席的id生成的5位随机数
+            	session('sex', $message[0]['sex']);		//性别
+            	session('touxiang', $message[0]['picture']);	//头像的地址
+                cookie('stunum',$message[0]['id']);
+            }else{
+        		$data = array(
+                	'status' => '400',
+                	'message' => '用户名或密码错误', 
+            	);
+        	}
             $this->ajaxReturn($data);
         }
 
@@ -88,10 +78,17 @@
         //获取主席自己的提问和@提问
         public function get_voice(){        
             $id = I('get.id');
+            if (!session('stunum')) {
+                redirect('../Index');
+            }
             if(!$id){
                 $id = 0;
                 $data = $this->loadData($id);//根据是否有id判断是首次加载还是下拉加载
-                // print_r($data);
+                if (session('userType')) {
+                    $stunum = session('stunum');
+                    $map['id'] = $stunum;
+                    $data['info'] = M('chairman')->where($map)->find();
+                }
                 $this->assign('data', $data);
                 $this->display('personal');
             }else{
@@ -104,7 +101,6 @@
                 $data['is_chairman'] = true;
             }
             $data['question'] = $this->load_question($id);  //加载提问数据
-            $data['is_chairman'] = true;
             return $data;
         }
         private function load_be_question($id = 0){     
