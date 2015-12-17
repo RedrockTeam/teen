@@ -242,6 +242,18 @@
 					continue;
 				}
 			}
+			if ($.trim($(form).find('#title').val()).length > 30 || !$.trim($(form).find('#title').val())) {
+				flag = false;
+				$(form).find('#title').addClass('am-form-field');
+				$(form).find('#title').parent().addClass('am-form-error');
+			}
+
+			if ($.trim($(form).find('#content').val()).length < 20 || !$.trim($(form).find('#content').val())) {
+				flag = false;	
+				$(form).find('#content').addClass('am-form-field');
+				$(form).find('#content').parent().addClass('am-form-error');
+			}
+
 			return flag == true ? formData : flag;
 		};
 

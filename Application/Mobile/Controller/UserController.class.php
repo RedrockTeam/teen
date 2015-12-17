@@ -108,7 +108,7 @@
                 'gettername' => session('username'),    //这里是主席的id
                 'id' => array('gt', $id),
             );
-            $res = M('voice')->where($where)->limit(5)->select();
+            $res = M('voice')->where($where)->order('time desc')->select();
             return $res;
         }
         private function load_question($id = 0){
@@ -116,7 +116,7 @@
                 'posterid' => session('stunum'),    
                 'id' => array('gt', $id)
             );
-            $res = M('voice')->where($where)->limit(5)->select();
+            $res = M('voice')->where($where)->order('time desc')->select();
             return $res;
         }
     }
