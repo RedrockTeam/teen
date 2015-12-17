@@ -1,0 +1,36 @@
+body {
+  background-color: #f3f7fa; }
+
+#user-login-view-header .am-header-default, #chairman-login-view-header .am-header-default {
+  background-color: #1588cb; }
+  #user-login-view-header .am-header-default h1, #chairman-login-view-header .am-header-default h1 {
+    font-size: 18px; }
+
+#user-login-view-content, #chairman-login-view-content {
+  padding: 15px 16px; }
+  #user-login-view-content form .am-form-group, #chairman-login-view-content form .am-form-group {
+    margin-bottom: 0; }
+    #user-login-view-content form .am-form-group i, #chairman-login-view-content form .am-form-group i {
+      color: #999; }
+    #user-login-view-content form .am-form-group input, #chairman-login-view-content form .am-form-group input {
+      height: 50px;
+      color: #333;
+      border-color: #c4c5c7;
+      letter-spacing: 1px; }
+    #user-login-view-content form .am-form-group input[name="username"], #chairman-login-view-content form .am-form-group input[name="username"] {
+      border-bottom-color: #e7e7e7; }
+    #user-login-view-content form .am-form-group input[name="chairname"], #chairman-login-view-content form .am-form-group input[name="chairname"] {
+      border-bottom-color: #e7e7e7; }
+    #user-login-view-content form .am-form-group input[name="password"], #chairman-login-view-content form .am-form-group input[name="password"] {
+      border-top: none; }
+    #user-login-view-content form .am-form-group input::-webkit-input-placeholder, #chairman-login-view-content form .am-form-group input::-webkit-input-placeholder {
+      color: #dedede; }
+  #user-login-view-content form .am-form-group:nth-child(3), #chairman-login-view-content form .am-form-group:nth-child(3) {
+    margin-top: 20px; }
+    #user-login-view-content form .am-form-group:nth-child(3) button, #chairman-login-view-content form .am-form-group:nth-child(3) button {
+      height: 50px;
+      background-color: #19a9ff;
+      border-radius: 4px;
+      color: #fefefe;
+      font-size: 19px;
+      font-weight: bold; }

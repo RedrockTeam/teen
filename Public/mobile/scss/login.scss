@@ -1,0 +1,55 @@
+	
+	body {
+		background-color: #f3f7fa;
+	}
+	
+	#user-login-view-header, #chairman-login-view-header {
+		.am-header-default {
+			background-color: #1588cb;
+			h1 {
+				font-size: 18px;
+			}
+		}
+	}
+
+	#user-login-view-content, #chairman-login-view-content {
+		padding: 15px 16px;
+		form {
+			.am-form-group {
+				margin-bottom: 0;
+				i {
+					color: #999;
+				}
+				input {
+					height: 50px;
+					color: #333;
+					border-color: #c4c5c7;
+					letter-spacing: 1px;
+				}
+				input[name="username"] {
+					border-bottom-color: #e7e7e7;
+				}
+				input[name="chairname"] {
+					border-bottom-color: #e7e7e7;
+				}
+				input[name="password"] {
+					border-top: none;
+				}
+				input::-webkit-input-placeholder {
+				    color: #dedede;
+				}
+
+			}
+			.am-form-group:nth-child(3) {
+				margin-top: 20px;
+				button {
+					height: 50px;
+					background-color: #19a9ff;
+					border-radius: 4px;
+					color: #fefefe;
+					font-size: 19px;
+					font-weight: bold;
+				}
+			}
+		}
+	}
