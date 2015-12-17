@@ -147,12 +147,18 @@
 							$('#alert-modal').modal('close');
 						});
 					} else if (response.status == 304) {
-						view.alert('不能重复点赞');
+						view.alert('不能重复点赞', function () {
+							$('#alert-modal').modal('close');
+						});
 					} else {
-						view.alert('稍安勿躁, 好像出了点小问题=_=');
+						view.alert('稍安勿躁, 好像出了点小问题=_=', function () {
+							$('#alert-modal').modal('close');
+						});
 					}
 				}).error(function () {
-					view.alert('稍安勿躁, 好像出了点小问题=_=');
+					view.alert('稍安勿躁, 好像出了点小问题=_=', function () {
+						$('#alert-modal').modal('close');
+					});
 				});
 			}
 		};
@@ -184,6 +190,8 @@
 						view.alert('评论成功', function () {
 							// 关闭评论Modal
 							$('#question-comment-modal').modal('close');
+							// 关闭alert
+							$('#alert-modal').modal('close');
 							// 添加最新评论
 							view.addQuestionCommentLi(response.data);
 							// 评论数字加一
@@ -289,11 +297,6 @@
 				$('#alert-modal').find('.am-modal-bd').html(text);
 			} else {
 		    	$('body').append(template.alert(text));
-		    }
-		    if (!callback) {
-		    	var callback = function () {
-					$('#alert-modal').modal('close');		
-		    	}
 		    }
 		    $('#alert-modal .am-modal-btn').off('click').on('click', callback);
 	    	$('#alert-modal').modal();
@@ -481,7 +484,7 @@
 		}
 
 		questionLi = function (data) {
-			_questionLiHTML += '<li class="am-g am-list-item-desced">';
+			_questionLiHTML += '<li class="am-g am-list-item-desced" data-index="'+ data.id +'">';
 	          	_questionLiHTML += '<a href="'+ $('html').attr('data-detail').substr(0, $('html').attr('data-detail').length - 5) + '/id/' + data.id + '">' + data.title + '</a>';
 	          	_questionLiHTML += '<span class="am-list-date">发表日期: '+ data.time +'</span>';
 	          	_questionLiHTML += '<div class="am-list-item-text">'+ data.question +'</div>';

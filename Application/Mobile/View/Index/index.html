@@ -9,7 +9,7 @@
 			  	<div class="am-list-news-bd">
 				  	<ul class="am-list">
             			<volist name="voice" id="v">
-	            			<li class="am-g am-list-item-desced">
+	            			<li class="am-g am-list-item-desced" data-index="{$v.id}">
 					          	<a href="__MODULE__/Question/detail/id/{$v.id}" class="am-list-item-text">{$v.title}</a>
 					          	<span class="am-list-date">发表日期: {$v.time|date="m-d H:i", ###}</span>
 					          	<div class="am-list-item-text">{$v.question}</div>
@@ -21,7 +21,7 @@
 		</div>
 
 		<div class="am-g am-text-center loading-more" style="display: none"> 
-			<i class="am-icon-refresh am-icon-spin" style="font-size: 2rem; margin-bottom: 1.5rem"></i>
+			<i class="am-icon-spinner am-icon-pulse" style="font-size: 2rem; margin-bottom: 1.5rem"></i>
 			<span>加载更多</span>
 		</div>
 		<div class="add-question">
@@ -102,25 +102,53 @@
 
 			
 
-			// var flag = true;
-			// $(window).scroll(function(){ 
-			//     totalheight = parseFloat($(window).height()) + parseFloat($(window).scrollTop()); 
-			//     if($(document).height() <= totalheight){ 
-			//         $('.loading-more').css('display', 'block');
-			//         if (flag) {
-			//         	flag = false;
-			// 	        setTimeout(function () {
-			// 	        	$('.am-g:eq(1)').append(template.question());
-			// 	        	$(window).scroll(function () {
-			// 	        		return false;
-			// 	        	});
-			//         		flag = true;
-			// 	        }, 1500);
-			//         }
-			//     } else {
-			//     	$('.loading-more').css('display', 'none');
-			//     }
-			// });
+			var flag = true;
+
+			$(window).scroll(function (){ 
+			    totalheight = parseFloat($(window).height()) + parseFloat($(window).scrollTop()); 
+			    if ($(document).height() <= totalheight){ 
+			        if (flag) {
+						var indexArray = [];
+						$.each($('#lately-question-list li'), function (index, el) {
+							indexArray.push($(el).data('index'));
+						});
+			        	flag = false;
+			        	$.ajax({
+			        		url: $('html').attr('data-loadmore'),
+			        		type: 'POST',
+			        		data: {id: Math.min.apply(Math, indexArray)},
+							beforeSend: function () {
+								$('.loading-more').css('display', 'block');
+							}			        	
+						}).done(function (response) {
+			        		if (response.length == 0) {
+								view.alert('没有更多了', function () {
+			    					$('.loading-more').css('display', 'none');
+									$('#alert-modal').modal('close');
+								});
+							} else {
+								$.each(response, function(index, data) {
+									var $li = $(template.question(data));
+									$li.addClass('animated fadeIn');
+									$('.am-list').append($li);
+									setTimeout(function () {
+										$li.removeClass('animated fadeIn');
+									}, 1000);
+								});
+							}
+			        	}).fail(function() {
+			        		console.log("error");
+			        	}).always(function() {
+			        		flag = true;
+			        	});
+			        }
+			    } else {
+			    	$('.loading-more').css('display', 'none');
+			    	$(window).scroll(function () {
+		        		return false;
+		        	});
+			    }
+			});
 
 			$.AMUI.progress.done();
 

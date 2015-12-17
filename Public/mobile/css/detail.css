@@ -73,7 +73,8 @@ body {
             width: 37px;
             height: 37px; }
           #user-comments-list .am-panel .am-panel-bd .am-comments-list .am-comment .am-comment-main {
-            border: none; }
+            border: none;
+            margin-left: 46px; }
             #user-comments-list .am-panel .am-panel-bd .am-comments-list .am-comment .am-comment-main .am-comment-hd .am-comment-meta {
               padding-left: 5px; }
             #user-comments-list .am-panel .am-panel-bd .am-comments-list .am-comment .am-comment-main .am-comment-bd {

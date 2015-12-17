@@ -443,6 +443,7 @@
 
 				function questionTemplate (data) {
 					var _question = '', _temp = '';
+					var vote = data.vote == undefined ? 0 : data.vote;
 					_question += '<div class="question" data-index="'+ data.id +'">';
 						// 头部
 						_question += '<div class="question-header">';
@@ -466,7 +467,7 @@
 						_question += '<div class="question-footer">';
 							_question += '<div class="question-praise">';
 								_question += '<i class="iconfont" data-id="'+ data.id +'">&#xe605;</i>&nbsp;';
-								_question += '<span>'+ data.vote || 0 +'</span>';
+								_question += '<span>'+ data.vote +'</span>';
 							_question += '</div>';
 							_question += '<div class="question-comments-list"></div>';
 							_question += '<div class="question-reply">';

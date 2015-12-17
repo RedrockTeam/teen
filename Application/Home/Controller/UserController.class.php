@@ -70,7 +70,7 @@ class UserController extends Controller {
     }
 
 
-    //获取主席自己的提问和@提问
+    // 获取主席自己的提问和@提问
     public function get_voice(){        
         $id = I('get.id');
         print_r($id);
@@ -104,7 +104,7 @@ class UserController extends Controller {
         if ($id) {
             $map['id'] = array('lt', $id);
         }
-        $voices = $Voice->where($map)->limit(5)->select();
+        $voices = $Voice->where($map)->select();
 
         foreach ($voices as $index => $voice) {
             if (strlen($voices[$index]['posterid']) > 6) {
@@ -145,7 +145,7 @@ class UserController extends Controller {
             $map['id'] = array('lt', $id);
         }
         
-        $voices = $Voice->where($map)->limit(5)->select();
+        $voices = $Voice->where($map)->select();
         
         foreach ($voices as $index => $voice) {
             if (strlen($voices[$index]['posterid']) > 6) {
