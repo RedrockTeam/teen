@@ -39,7 +39,7 @@
                 $map['id'] = array('lt', $id);
                 return $voice->where($map)->order('time desc')->limit(5)->select();   //下拉加载
             }else{
-                return $voice->order('time desc')->limit(5)->select();      //首页加载
+                return $voice->order('time desc')->limit(10)->select();      //首页加载
             }
         }
     }
