@@ -38,9 +38,9 @@ class QuestionController extends Controller {
 					$where = array(
 						'id' => $value['userid']
 					);
-					$commentData[$key]['image'] = M('chairman')->field('picture')->where($where)->select()[0]['picture'];
+					$commentData[$key]['touxiang'] = M('chairman')->where($where)->getField('picture');
 				}else{
-					$commentData[$key]['image'] = 'public/chairone/man.jpg';
+					$commentData[$key]['touxiang'] = '/teen/Public/home/images/default.png';
 				}
 			}
 
@@ -53,9 +53,9 @@ class QuestionController extends Controller {
 				$where = array(
 					'id' => $voiceData[0]['posterid']
 				);
-				$data['voice']['image'] = M('chairman')->field('picture')->where($where)->select()[0]['picture'];
+				$data['voice']['touxiang'] = M('chairman')->where($where)->getField('picture');
 			}else{
-				$data['voice']['image'] = 'public/chairone/man.jpg';
+				$data['voice']['touxiang'] = '/teen/Public/home/images/default.png';
 			}
 			//将照片地址添加到结果数组里
 			$where = array(
