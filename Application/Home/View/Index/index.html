@@ -723,7 +723,7 @@
 						data: $('.chairman-form').serialize()
 					}).done(function (response) {
 						if (response.status == 200) {
-							layer.alert('登录成功!', {icon: 5}, function (index) {
+							layer.alert('登录成功!', {icon: 6}, function (index) {
 								layer.close(index);
 								$('.dimmer').css('display', 'none');
 								$('#login-view-container').removeClass('bounceInDown').addClass('bounceOutUp');
