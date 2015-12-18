@@ -103,10 +103,9 @@
             $data['question'] = $this->load_question($id);  //加载提问数据
             return $data;
         }
-        private function load_be_question($id = 0){     
+        private function load_be_question(){     
             $where = array(
-                'gettername' => session('username'),    //这里是主席的id
-                'id' => array('gt', $id),
+                'gettername' => session('stunum'),    //这里是主席的id
             );
             $res = M('voice')->where($where)->order('time desc')->select();
             return $res;

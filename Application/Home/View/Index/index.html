@@ -108,9 +108,6 @@
 						<div class="all-question on-focus">
 							所有提问
 						</div>
-						<if condition="$Think.session.userType neq ''">
-							<div class="ask-me">向我提问</div>
-						</if>
 					</div>
 					
 					<div class="question-list">
@@ -231,6 +228,11 @@
 		<!-- 遮罩层 -->
 		<div class="dimmer" style=""></div>
 
+		<!-- 回到顶部 -->
+		<div class="return-top">
+			<i class="iconfont">&#xe601;</i>
+		</div>
+
 		<!-- @提问 -->
 		<div id="add-question-view-at">
 			<div class="add-question-view-at-header">
@@ -286,7 +288,7 @@
 		<div id="login-view-container">
 			
 			<div class="login-view-header">
-				<strong>公开提问</strong>
+				<strong>登录</strong>
 				<i class="iconfont">&#xe603;</i>
 			</div>
 			<div class="login-view-body">
@@ -361,15 +363,28 @@
 				}
 
 
-				$('#login-view-container').css({
-					
-				})
 
 				// 登录文字定位
 				var rightPosition = $('.nav-bar li:eq(7)').offset().left + 17 + $('.nav-bar li:eq(7)').width();
 				$('.login-reg-btn').css({
 					'opacity': 1,
 					'left': rightPosition - $('.login-reg-btn').width()
+				});
+
+
+				$(window).scroll(function(event) {
+					if ($(window).scrollTop() > $('.middle').offset().top) {
+						$('.return-top').css({
+							display: 'block',
+							left: $('#main .right-sidebar').offset().left	
+						});
+					} else {
+						$('.return-top').css('display', 'none');
+					}
+				});
+
+				$('.return-top').on('click', function () {
+					$("html,body").animate({scrollTop:0}, 500);
 				});
 
 
@@ -387,7 +402,7 @@
 						}).removeClass('bounceOutUp').addClass('animated bounceInDown');
 						$('body').css('overflow', 'hidden');
 					} else {
-						layer.alert('你还未登录, 不能进行此操作', {icon: 6});
+						layer.alert('你还未登录, 不能进行此操作', {icon: 5});
 					}
 				});
 
@@ -414,7 +429,7 @@
 						}).removeClass('bounceOutUp').addClass('animated bounceInDown');
 						$('body').css('overflow', 'hidden');
 					} else {
-						layer.alert('你还未登录, 不能进行此操作', {icon: 6});
+						layer.alert('你还未登录, 不能进行此操作', {icon: 5});
 					}
 				});
 
@@ -442,8 +457,17 @@
 
 
 				function questionTemplate (data) {
-					var _question = '', _temp = '';
-					var vote = data.vote == undefined ? 0 : data.vote;
+					var _question = '', _temp = '', type, vote;
+					vote = data.vote == undefined ? 0 : data.vote;
+					if (data.gettername == 'public') {
+						type = '公共提问';
+					} else {
+						$.each($('option'), function (index, option) {
+							if ($(option).val() == data.gettername) {
+								type = '@' + $(option).text();
+							}
+						});
+					}
 					_question += '<div class="question" data-index="'+ data.id +'">';
 						// 头部
 						_question += '<div class="question-header">';
@@ -460,6 +484,7 @@
 						_question += '<div class="question-body">';
 							_question += '<div class="question-title">';
 								_question += '<strong>'+ data.title +'</strong>';
+								_question += '<span>'+ type +'</span>';
 							_question += '</div>';
 							_question += '<div class="question-content">'+ data.question +'</div>';
 						_question += '</div>';
@@ -467,7 +492,7 @@
 						_question += '<div class="question-footer">';
 							_question += '<div class="question-praise">';
 								_question += '<i class="iconfont" data-id="'+ data.id +'">&#xe605;</i>&nbsp;';
-								_question += '<span>'+ data.vote +'</span>';
+								_question += '<span>'+ vote +'</span>';
 							_question += '</div>';
 							_question += '<div class="question-comments-list"></div>';
 							_question += '<div class="question-reply">';
@@ -487,28 +512,64 @@
 				// 添加问题
 				function addQuestion (formName) {
 
+					var title = $.trim($(formName).find('input[name=title]').val());
+					var content = $.trim($(formName).find('textarea[name=content]').val());
+
+
+					if (!title.length) {
+						layer.msg('标题不能为空', {time: 800});
+						return;
+					} else {
+						if (title.length > 40) {
+							layer.msg('标题不能多于40字', {time: 800});
+							return;
+						}
+					}
+
+					if (!content.length) {
+						layer.msg('内容不能为空', {time: 800});
+						return;
+					} else {
+						if (content.length < 20) {
+							layer.msg('内容不能少于20字', {time: 800});
+							return;
+						}
+						if (content.length > 140) {
+							layer.msg('内容不能多于140字', {time: 800});
+							return;
+						}
+					}
+
+
 					if (isLogin()) {
 						$.ajax({
 							url: $('html').data('add'),
 							type: 'POST',
 							data: $(formName).serialize()
 						}).done(function (response) {
-							layer.alert('提问成功', {icon: 5}, function (index) {
+							if (response.status == 200) {
+								layer.alert('提问成功', {icon: 6}, function (index) {
+									layer.close(index);
+									$(formName).get(0).reset();
+									$('.dimmer').css('display', 'none');
+									$('body').css('overflow', 'auto');
+									$(formName).parent().parent().removeClass('bounceInDown').addClass('bounceOutUp');
+								});
+								$('.question-list').prepend(questionTemplate(response.data));
+							} else {
+								layer.alert('提问失败, 请刷新试试', {icon: 5}, function (index) {
+									layer.close(index);
+								});
+							}
+						}).fail(function () {
+							layer.alert('提问失败, 请刷新试试', {icon: 5}, function (index) {
 								layer.close(index);
-								$('.dimmer').css('display', 'none');
-								$(formName).get(0).reset();
-								$(formName).parent().parent().removeClass('bounceInDown').addClass('bounceOutUp');
-								$('body').css('overflow', 'auto');
 							});
-							response.data.type = $(formName).find('input[name=type]')
-							$('.question-list').prepend(questionTemplate(response.data));
-						}).fail(function() {
-							console.log("error");
-						}).always(function() {
-							console.log("complete");
+						}).always(function () {
+							
 						});
 					} else {
-						layer.alert('你还未登录, 不能进行此操作', {icon: 6});
+						layer.alert('你还未登录, 不能进行此操作', {icon: 5});
 					}
 				}
 
@@ -557,16 +618,16 @@
 								html += '</div>';
 								$(self).parents('.question-reply').prev().append(html);
 							} else {
-								layer.alert('评论有误, 请重新评论', {icon: 6});
+								layer.alert('评论有误, 请重新评论', {icon: 5});
 							}
 						}).fail(function() {
-							layer.alert('系统好像出了点问题, 请刷新试试!', {icon: 6});
+							layer.alert('系统好像出了点问题, 请刷新试试!', {icon: 5});
 						}).always(function () {
 							$(self).parent().find('input[name=comment]').val('');
 							$(self).css('background-color', '#3686c5');
 						});
 					} else {
-						layer.alert('你还未登录, 不能进行此操作', {icon: 6});
+						layer.alert('你还未登录, 不能进行此操作', {icon: 5});
 					}
 				});
 
@@ -593,7 +654,7 @@
 							console.log("complete");
 						});
 					} else {
-						layer.alert('你还未登录, 不能进行此操作', {icon: 6});
+						layer.alert('你还未登录, 不能进行此操作', {icon: 5});
 					}
 				});
 				
@@ -638,7 +699,7 @@
 						data: $('.user-form').serialize()
 					}).done(function (response) {
 						if (response.status == 200) {
-							layer.alert('登录成功!', {icon: 3}, function (index) {
+							layer.alert('登录成功!', {icon: 6}, function (index) {
 								layer.close(index);
 								$('.dimmer').css('display', 'none');
 								$('#login-view-container').removeClass('bounceInDown').addClass('bounceOutUp');
@@ -662,7 +723,7 @@
 						data: $('.chairman-form').serialize()
 					}).done(function (response) {
 						if (response.status == 200) {
-							layer.alert('登录成功!', {icon: 3}, function (index) {
+							layer.alert('登录成功!', {icon: 5}, function (index) {
 								layer.close(index);
 								$('.dimmer').css('display', 'none');
 								$('#login-view-container').removeClass('bounceInDown').addClass('bounceOutUp');

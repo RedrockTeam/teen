@@ -66,7 +66,7 @@
 			<div class="main-content">
 
 				
-				<div class="middle" style="width: 758px; float: none; margin: 0 auto;">
+				<div class="middle" style="width: 758px; float: none; margin: 0 auto; min-height: 330px">
 					<div class="list-title">
 						<div class="all-question on-focus">
 							我的提问
@@ -80,6 +80,7 @@
 						<volist name="data.question" id="v">
 							<div class="question" data-index="{$v.id}">
 								<div class="question-header">
+									<div class="question-delete" data-id="{$v.id}"><i class="iconfont">&#xe603;</i></div>
 									<div class="user-avatar">
 										<img src="{$v.touxiang}" >
 									</div>
@@ -153,11 +154,6 @@
 								<div class="question-body">
 									<div class="question-title">
 										<strong>{$v.title}</strong>
-										<if condition="$v.gettername eq 'public'">
-											<span>公共提问</span>
-										<else/>
-											<span>@{$v.gettername}</span>
-										</if>
 									</div>
 									<div class="question-content">{$v.question}</div>
 								</div>
@@ -197,9 +193,6 @@
 							</div>
 						</volist>
 					</div>
-					
-					<div class="loading-more">加载更多</div>
-
 				</div>
 				
 			</div>	
@@ -354,7 +347,7 @@
 
 
 				// 添加评论
-				$('.question-list').on('click', '.add-comment', function () {
+				$('.question-list').add('.be-question-list').on('click', '.add-comment', function () {
 
 					if (isLogin()) {
 						var self = this;
@@ -400,7 +393,7 @@
 				});
 
 				// 点赞
-				$('.question-list').on('click', '.question-praise i', function () {
+				$('.question-list').add('.be-question-list').on('click', '.question-praise i', function () {
 					if (isLogin()) {
 						var self = this;
 						$.ajax({
@@ -426,38 +419,48 @@
 					}
 				});
 				
-
-				// 加载更多
-				$('.loading-more').on('click', function () {
-					
-					var layerIndex, indexArray = [];
-					$.each($('.question'), function (index, el) {
-						indexArray.push($(el).data('index'));
+				// 删除
+				$('.question-list').on('click', '.question-delete', function () {
+					var self = this;
+					layer.alert('此操作将删除问题和相关评论', function (index) {
+						$.post($('html').attr('data-del'), {id: $(self).data('id')}, function(response, textStatus) {
+							if (response.status == 200) {
+								layer.msg('删除成功', {time: 1000}, function () {
+									// 移除问题
+									$(self).parents('.question').fadeOut();
+									$(self).parents('.question').remove();
+								});
+							} else {
+								layer.msg('删除失败,请刷新试试', {icon: 5, time: 1000});
+							}
+						}).error(function () {
+							layer.msg('删除失败,请刷新试试', {icon: 5, time: 1000});
+						});
 					});
-					$.ajax({
-						url: $('html').data('loadmore'),
-						type: 'POST',
-						data: {id: Math.min.apply(Math, indexArray)},
-						beforeSend: function () {
-							layerIndex = layer.load(2000, {
-							    shade: [0.1, '#000']
-							});
-						}
-					}).done(function (response) {
-						if (response.length == 0) {
-							layer.msg('没有更多了!', {time: 1000});
-						} else {
-							$.each(response, function(index, el) {
-								$('.question-list').append(questionTemplate(el));
-							});
-						}
-					}).fail(function() {
-						layer.msg('加载错误!', {time: 1000});
-					}).always(function() {
-						layer.close(layerIndex);
-					});
-					
 				});
+
+
+				$('.ask-me').on('click', function () {
+					$('.question-list').removeClass('bounceInLeft').addClass('animated bounceOutLeft');
+					setTimeout(function () {
+						$('.question-list').css('display', 'none');
+						$('.all-question').removeClass('on-focus');
+						$('.be-question-list').removeClass('bounceOutRight').addClass('animated bounceInRight').css('display', 'block');
+						$('.ask-me').addClass('on-focus');
+					}, 500);
+				});
+
+				$('.all-question').on('click', function () {
+					$('.be-question-list').removeClass('bounceInRight').addClass('bounceOutRight');
+					setTimeout(function () {
+						$('.be-question-list').css('display', 'none');
+						$('.ask-me').removeClass('on-focus');
+						$('.question-list').removeClass('bounceOutLeft').addClass('animated bounceInLeft').css('display', 'block');
+						$('.all-question').addClass('on-focus');
+					}, 500);
+				});
+
+
 
 
 				

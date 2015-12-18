@@ -19,6 +19,9 @@
 .icon-guanbi:before {
   content: "\e603"; }
 
+.icon-11:before {
+  content: "\e600"; }
+
 .icon-dianzanhou01:before {
   content: "\e604"; }
 
@@ -192,6 +195,11 @@ p {
           #main .main-content .middle .be-question-list .question .question-header .post-date, #main .main-content .middle .question-list .question .question-header .post-date {
             color: #999;
             font-size: 12px; }
+          #main .main-content .middle .be-question-list .question .question-header .question-delete, #main .main-content .middle .question-list .question .question-header .question-delete {
+            float: right;
+            cursor: pointer; }
+            #main .main-content .middle .be-question-list .question .question-header .question-delete i, #main .main-content .middle .question-list .question .question-header .question-delete i {
+              font-weight: bolder; }
         #main .main-content .middle .be-question-list .question .question-body, #main .main-content .middle .question-list .question .question-body {
           padding-top: 17px;
           padding-bottom: 14px; }
@@ -433,10 +441,11 @@ p {
       padding: 12px 12px;
       font-size: 14px;
       letter-spacing: 1.2px;
-      color: #999;
       border: 1px solid #d8d9d9; }
       #add-question-view-public .form-control input:focus, #add-question-view-at .form-control input:focus {
         outline: none; }
+    #add-question-view-public .form-control input::-webkit-input-placeholder, #add-question-view-at .form-control input::-webkit-input-placeholder {
+      color: #999; }
     #add-question-view-public .form-control textarea, #add-question-view-at .form-control textarea {
       width: 578px;
       height: 229px;
@@ -505,10 +514,11 @@ p {
       font-size: 14px;
       letter-spacing: 1.2px;
       border-radius: 2px;
-      color: #999;
       border: 1px solid #d8d9d9; }
       #login-view-container .form-control input:focus {
         outline: none; }
+    #login-view-container .form-control input::-webkit-input-placeholder {
+      color: #999; }
     #login-view-container .form-control button {
       width: 280px;
       height: 36px;
@@ -521,3 +531,18 @@ p {
       letter-spacing: .3em;
       border-radius: 2px;
       cursor: pointer; }
+
+.return-top {
+  position: fixed;
+  width: 36px;
+  height: 36px;
+  background-color: #fff;
+  bottom: 30px;
+  display: none;
+  text-align: center;
+  cursor: pointer; }
+  .return-top:hover {
+    background-color: #eeeeee; }
+  .return-top i {
+    color: #ccccce;
+    line-height: 36px; }

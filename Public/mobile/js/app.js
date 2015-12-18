@@ -243,23 +243,29 @@
 			var tempData = tool.parseArgs(formData);
 			for (var name in tempData) {
 				if (!$.trim(tempData[name])) {
-					flag = false;
 					$('#' + name).addClass('am-form-field');
 					$('#' + name).parent().addClass('am-form-error');
+					return flag = false;
 				} else {
 					continue;
 				}
 			}
-			if ($.trim($(form).find('#title').val()).length > 30 || !$.trim($(form).find('#title').val())) {
-				flag = false;
+			if ($.trim($(form).find('#title').val()).length > 20) {
 				$(form).find('#title').addClass('am-form-field');
 				$(form).find('#title').parent().addClass('am-form-error');
+				view.alert('标题不能多于20字', function () {
+					$('#alert-modal').modal('close');
+				});
+				return flag = false;
 			}
 
-			if ($.trim($(form).find('#content').val()).length < 20 || !$.trim($(form).find('#content').val())) {
-				flag = false;	
+			if ($.trim($(form).find('#content').val()).length < 20) {
 				$(form).find('#content').addClass('am-form-field');
 				$(form).find('#content').parent().addClass('am-form-error');
+				view.alert('内容不能少于20字', function () {
+					$('#alert-modal').modal('close');
+				});
+				return flag = false;
 			}
 
 			return flag == true ? formData : flag;

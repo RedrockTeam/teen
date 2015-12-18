@@ -73,7 +73,6 @@ class UserController extends Controller {
     // 获取主席自己的提问和@提问
     public function get_voice(){        
         $id = I('get.id');
-        print_r($id);
         if(!$id){
             $data = $this->loadData($id);//根据是否有id判断是首次加载还是下拉加载
             $this->assign('data', $data);
@@ -112,6 +111,7 @@ class UserController extends Controller {
             } else {
                 $voices[$index]['touxiang'] = $chairman->where("id = '{$voice['posterid']}'")->getField('picture');
             }
+
           
             // 是否点过赞
             if($UserVote->where("voiceid = '{$voice['id']}' AND user = '$user'")->find()){
@@ -152,6 +152,10 @@ class UserController extends Controller {
                 $voices[$index]['touxiang'] = '/teen/Public/home/images/default.png';    
             } else {
                 $voices[$index]['touxiang'] = $chairman->where("id = '{$voice['posterid']}'")->getField('picture');
+            }
+
+            if ($voice['gettername'] != 'public') {
+                $voices[$index]['gettername'] = $chairman->where("id = '{$voice['gettername']}'")->getField('chairname');
             }
           
             // 是否点过赞

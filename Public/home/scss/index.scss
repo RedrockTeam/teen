@@ -18,8 +18,10 @@
 	}
 	.icon-huidaodingbu:before { content: "\e601"; }
 	.icon-guanbi:before { content: "\e603"; }
+	.icon-11:before { content: "\e600"; }
 	.icon-dianzanhou01:before { content: "\e604"; }
 	.icon-dianzanqian01:before { content: "\e605"; }
+
 
 
 	body {
@@ -237,6 +239,13 @@
 							.post-date {
 								color: #999;
 								font-size: 12px;
+							}
+							.question-delete {
+								float: right;
+								cursor: pointer;
+								i {
+									font-weight: bolder;
+								}
 							}
 						}
 						.question-body {
@@ -560,11 +569,14 @@
 				padding: 12px 12px;
 				font-size: 14px;
 				letter-spacing: 1.2px;
-				color: #999;
 				border: 1px solid #d8d9d9;
 				&:focus {
 					outline: none;
 				}
+
+			}
+			input::-webkit-input-placeholder {
+				color: #999;
 			}
 			textarea {
 				width: 578px;
@@ -646,11 +658,13 @@
 				font-size: 14px;
 				letter-spacing: 1.2px;
 				border-radius: 2px;
-				color: #999;
 				border: 1px solid #d8d9d9;
 				&:focus {
 					outline: none;
 				}
+			}
+			input::-webkit-input-placeholder {
+				color: #999;
 			}
 			button {
 				width: 280px;
@@ -667,4 +681,22 @@
 			}
 		}
     }
+
+	.return-top {
+		position: fixed;
+		width: 36px;
+		height: 36px;
+		background-color: #fff;
+		bottom: 30px;
+		display: none;
+		text-align: center;
+		cursor: pointer;
+		&:hover {
+			background-color: rgb(238, 238, 238);
+		}
+		i {
+			color: #ccccce;
+			line-height: 36px;
+		}
+	}
 

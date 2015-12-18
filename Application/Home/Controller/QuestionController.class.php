@@ -187,13 +187,12 @@ class QuestionController extends Controller {
     //删除自己提问的问题
     public function delete_vioce(){
     	$stunum = session('stunum');
-        dump(session());
     	$where = array(
-    		'id' => I('get.id'),  //问题的id
+    		'id' => I('post.id'),  //问题的id
     	);
     	$voice_stunum = M('voice')->where($where)->getField('posterid');	//查看是否是本人提的问题
     	if($stunum == $voice_stunum){
-        	$id = I('get.id');
+        	$id = I('post.id');
         	$where = array(
             	'id' => $id,
         	);
