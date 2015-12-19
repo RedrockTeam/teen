@@ -115,10 +115,15 @@ class QuestionController extends Controller {
     //提交问题的方法
     public function commit_voice(){
         if(!session('username')){return;} 
+        if (I('post.type') == 'public') {
+            $type = I('post.type');
+        } else {
+            $type = (int)I('post.type');
+        }
         $config = array(
             'postername' => session('username'),
             'posterid' => session('stunum'),
-            'gettername' => (int)I('post.type'),
+            'gettername' => $type,
             'title' => I('post.title'),
             'question' => I('post.content')
         );      //设置需要插入数据库的参数数组

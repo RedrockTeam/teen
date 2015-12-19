@@ -653,7 +653,6 @@
 						}).done(function (response) {
 							if (response.status === 200) {
 								$(self).html('&#xe604;');
-								console.log($(self).next().text());
 								$(self).next().html(Number($(self).next().text()) + 1);
 								layer.msg('点赞成功', {time: 500});
 							} else {
