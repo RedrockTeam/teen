@@ -118,7 +118,7 @@ class QuestionController extends Controller {
         $config = array(
             'postername' => session('username'),
             'posterid' => session('stunum'),
-            'gettername' => I('post.type'),
+            'gettername' => (int)I('post.type'),
             'title' => I('post.title'),
             'question' => I('post.content')
         );      //设置需要插入数据库的参数数组

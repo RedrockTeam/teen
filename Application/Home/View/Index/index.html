@@ -462,12 +462,23 @@
 					if (data.gettername == 'public') {
 						type = '公共提问';
 					} else {
-						$.each($('option'), function (index, option) {
-							if ($(option).val() == data.gettername) {
-								type = '@' + $(option).text();
-							}
-						});
+						if (typeof data.gettername == 'number') {
+							$.each($('option'), function (index, option) {
+								if ($(option).val() == data.gettername) {
+									type = '@' + $(option).text();
+								}
+							});
+						} else {
+							type = data.gettername;
+						}
 					}
+
+					if (data.is_voted == 'false' || !data.is_voted) {
+						icon = '&#xe605;';
+					} else {
+						icon = '&#xe604;';
+					}
+
 					_question += '<div class="question" data-index="'+ data.id +'">';
 						// 头部
 						_question += '<div class="question-header">';
@@ -491,13 +502,13 @@
 						// 尾部
 						_question += '<div class="question-footer">';
 							_question += '<div class="question-praise">';
-								_question += '<i class="iconfont" data-id="'+ data.id +'">&#xe605;</i>&nbsp;';
+								_question += '<i class="iconfont" data-id="'+ data.id +'">'+ icon +'</i>&nbsp;';
 								_question += '<span>'+ vote +'</span>';
 							_question += '</div>';
 							_question += '<div class="question-comments-list"></div>';
 							_question += '<div class="question-reply">';
 								_question += '<form>';
-									_question += '<input type="hidden" name="id" value="{$v.id}">';
+									_question += '<input type="hidden" name="id" value="'+ data.id +'">';
 									_question += '<input type="text" name="comment" placeholder="请输入回复内容">';
 									_question += '<button type="button" class="add-comment">回复</button>';
 								_question += '</form>';
