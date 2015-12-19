@@ -103,7 +103,7 @@ class UserController extends Controller {
         if ($id) {
             $map['id'] = array('lt', $id);
         }
-        $voices = $Voice->where($map)->select();
+        $voices = $Voice->where($map)->order('time desc')->select();
 
         foreach ($voices as $index => $voice) {
             if (strlen($voices[$index]['posterid']) > 6) {
@@ -145,7 +145,7 @@ class UserController extends Controller {
             $map['id'] = array('lt', $id);
         }
         
-        $voices = $Voice->where($map)->select();
+        $voices = $Voice->where($map)->order('time desc')->select();
         
         foreach ($voices as $index => $voice) {
             if (strlen($voices[$index]['posterid']) > 6) {

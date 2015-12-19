@@ -440,14 +440,17 @@
 				});
 
 
+				// @提问
 				$('.ask-me').on('click', function () {
-					$('.question-list').removeClass('bounceInLeft').addClass('animated bounceOutLeft');
-					setTimeout(function () {
-						$('.question-list').css('display', 'none');
-						$('.all-question').removeClass('on-focus');
-						$('.be-question-list').removeClass('bounceOutRight').addClass('animated bounceInRight').css('display', 'block');
-						$('.ask-me').addClass('on-focus');
-					}, 500);
+					if ($('.be-question-list .question').length > 0) {
+						$('.question-list').removeClass('bounceInLeft').addClass('animated bounceOutLeft');
+						setTimeout(function () {
+							$('.question-list').css('display', 'none');
+							$('.all-question').removeClass('on-focus');
+							$('.be-question-list').removeClass('bounceOutRight').addClass('animated bounceInRight').css('display', 'block');
+							$('.ask-me').addClass('on-focus');
+						}, 500);
+					}
 				});
 
 				$('.all-question').on('click', function () {
