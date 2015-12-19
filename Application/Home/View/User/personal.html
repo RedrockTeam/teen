@@ -208,6 +208,11 @@
 		<!-- 遮罩层 -->
 		<div class="dimmer" style=""></div>
 
+		<!-- 回到顶部 -->
+		<div class="return-top">
+			<i class="iconfont">&#xe601;</i>
+		</div>
+
 		<!-- @提问 -->
 		<div id="add-question-view-at">
 			<div class="add-question-view-at-header">
@@ -465,7 +470,20 @@
 
 
 
+				$(window).scroll(function(event) {
+					if ($(window).scrollTop() > $('.middle').offset().top) {
+						$('.return-top').css({
+							display: 'block',
+							left: $('#main .right-sidebar').offset().left	
+						});
+					} else {
+						$('.return-top').css('display', 'none');
+					}
+				});
 
+				$('.return-top').on('click', function () {
+					$("html,body").animate({scrollTop:0}, 500);
+				});
 				
 
 			})
