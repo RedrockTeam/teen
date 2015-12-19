@@ -479,6 +479,27 @@
 						icon = '&#xe604;';
 					}
 
+					var comment = comments = '';
+					if (data.comments && data.comments.length > 0) {
+						for (var i = 0; i < data.comments.length; i++) {
+							comment += '<div class="question-comment">';
+								comment += '<div class="comment-header">'
+									comment += '<img src="'+ data.comments[i].touxiang  +'" width="28" height="28">';
+								comment += '</div>';
+								comment += '<div class="comment-body">';
+									comment += '<span class="comment-content">';
+										comment += '<strong class="comment-user-name">'+ data.comments[i].username +'</strong>:&nbsp;'+ data.comments[i].comment +'';
+									comment += '</span>';
+									comment += '<div class="comment-date">'+ formatTime(data.comments[i].time) +'</div>';
+								comment += '</div>';
+							comment += '</div>';
+							comments += comment;
+							comment = '';
+						}
+					} else {
+						comments = '';
+					}
+
 					_question += '<div class="question" data-index="'+ data.id +'">';
 						// 头部
 						_question += '<div class="question-header">';
@@ -505,7 +526,7 @@
 								_question += '<i class="iconfont" data-id="'+ data.id +'">'+ icon +'</i>&nbsp;';
 								_question += '<span>'+ vote +'</span>';
 							_question += '</div>';
-							_question += '<div class="question-comments-list"></div>';
+							_question += '<div class="question-comments-list">'+ comments +'</div>';
 							_question += '<div class="question-reply">';
 								_question += '<form>';
 									_question += '<input type="hidden" name="id" value="'+ data.id +'">';
@@ -516,7 +537,7 @@
 						_question += '</div>';
 					_question += '</div>';
 					_temp = _question;
-					_question = '';
+					_question = comments = '';
 					return _temp
 				}
 
@@ -769,8 +790,9 @@
 						if (response.length == 0) {
 							layer.msg('没有更多了!', {time: 1000});
 						} else {
-							$.each(response, function(index, el) {
-								$('.question-list').append(questionTemplate(el));
+							$.each(response, function(index, data) {
+								console.log(data);
+								$('.question-list').append(questionTemplate(data));
 							});
 						}
 					}).fail(function() {
