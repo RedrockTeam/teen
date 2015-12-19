@@ -474,7 +474,7 @@
 					if ($(window).scrollTop() > $('.middle').offset().top) {
 						$('.return-top').css({
 							display: 'block',
-							left: $('#main .right-sidebar').offset().left	
+							left: $('.middle').offset().left + $('.middle').width() + 20
 						});
 					} else {
 						$('.return-top').css('display', 'none');
