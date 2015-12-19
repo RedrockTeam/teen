@@ -39,7 +39,11 @@
             $voice = M('voice');
             if($id){
                 $map['id'] = array('lt', $id);
-                return $voice->where($map)->order('time desc')->limit(5)->select();   //下拉加载
+                $voices = $voice->where($map)->order('time desc')->limit(5)->select();   //下拉加载
+                foreach ($voices as $index => $voice) {
+                    $voices[$index]['time'] = date('m-d H:i', $voices[$index]['time']);
+                }
+                return $voices;
             }else{
                 return $voice->order('time desc')->limit(10)->select();      //首页加载
             }
