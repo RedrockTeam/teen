@@ -6,6 +6,8 @@
         
         public function index(){
             $this->flash();
+            $this->assign('title', '青年之声首页');
+            $this->assign('headerTitle', '最新提问');
             $this->display();
         }
 

@@ -14,6 +14,8 @@
             $id = I('get.id');
     		$data = $this->get_voice_detail($id);
     		$this->assign('info', $data);
+            $this->assign('title', '青年之声');
+            $this->assign('headerTitle', '问题详情');
     		$this->display('detail');
     	}
 

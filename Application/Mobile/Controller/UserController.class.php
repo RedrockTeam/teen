@@ -5,6 +5,7 @@
     	//学生和老师登录的方法
     	public function login(){
             if (IS_GET) {
+                $this->assign('title', '青年之声');
                 $this->display('login');
             } else {
             	$username = I('post.username');
@@ -89,6 +90,8 @@
                     $map['id'] = $stunum;
                     $data['info'] = M('chairman')->where($map)->find();
                 }
+                $this->assign('title', '青年之声')
+                $this->assign('headerTitle', '个人中心');
                 $this->assign('data', $data);
                 $this->display('personal');
             }else{
