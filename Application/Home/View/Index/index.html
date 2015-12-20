@@ -29,22 +29,22 @@
 						<a href="###">首页</a>
 					</li>
 					<li class="nav">
-						<a href="###">学生辅导</a>
+						<a href="http://xsc.cqupt.edu.cn/xyfd">学业辅导</a>
 					</li>
 					<li class="nav">
-						<a href="###">职业规划</a>
+						<a href="http://cqupt.ncss.org.cn/jixun/Info/IeOnly.html">职业规划</a>
 					</li>
 					<li class="nav">
-						<a href="###">心里互助</a>
+						<a href="http://202.202.43.69/XinLiweb">心里互助</a>
 					</li>
 					<li class="nav">
-						<a href="###">书籍信箱</a>
+						<a href="http://president-mail.cqupt.edu.cn">书记信箱</a>
 					</li>
 					<li class="nav">
-						<a href="###">接待中心</a>
+						<a href="http://job.cqupt.edu.cn">就业中心</a>
 					</li>
 					<li class="nav">
-						<a href="###">售后服务</a>
+						<a href="http://jjc.cqupt.edu.cn">后勤中心</a>
 					</li>
 				</ul>
 			</div>
@@ -81,23 +81,50 @@
 						<p>网站链接</p>
 						<ul>
 							<li>
-								<a href="###">红岩网校</a>
+								<a href="http://xsc.cqupt.edu.cn/xyfd">学业辅导</a>
 							</li>
 							<li>
-								<a href="###">校学生会团宣部</a>
+								<a href="http://cqupt.ncss.org.cn/jixun/Info/IeOnly.html">职业规划</a>
 							</li>
 							<li>
-								<a href="###">体育部</a>
+								<a href="http://202.202.43.69/XinLiweb">心里互助</a>
 							</li>
 							<li>
-								<a href="###">勤工助学部</a>
+								<a href="http://president-mail.cqupt.edu.cn">书记信箱</a>
 							</li>
 							<li>
-								<a href="###">宿管部</a>
+								<a href="http://job.cqupt.edu.cn">就业中心</a>
 							</li>
 							<li>
-								<a href="###">科联</a>
+								<a href="http://jjc.cqupt.edu.cn">后勤中心</a>
 							</li>
+				        	<li>
+				        		<a href="http://172.22.161.11/">BT Down铺</a>
+				        	</li>
+				        	<li>
+				        		<a href="http://202.202.43.120/">幽幽黄桷兰</a>
+				        	</li>
+				        	<li>
+				        		<a href="http://hongyan.cqupt.edu.cn/user/user.php">重邮通行证</a>
+				        	</li>
+				        	<li>
+				        		<a href="http://hongyan.cqupt.edu.cn/web/">网址大全</a>
+				        	</li>
+				        	<li>
+				        		<a href="http://www.cqupt.edu.cn/">学校主页</a>
+				        	</li>
+				        	<li>
+				        		<a href="http://redrock.cqupt.edu.cn/market/">拾货网</a>
+				        	</li>
+				        	<li>
+				        		<a href="http://hongyan.cqupt.edu.cn/chat/">校领导接待室</a>
+				        	</li>
+				        	<li>
+				        		<a href="http://222.177.140.105/index.shtml">学工在线</a>
+				        	</li>
+				        	<li>
+				        		<a href="http://bxf.cqupt.edu.cn/Bscore/">素质教育网</a>
+				        	</li>
 						</ul>
 					</div>
 
@@ -205,8 +232,7 @@
 										<p class="president-dep">WEB研发部</p>
 									</div>
 									<div class="handle">
-										<p class="view-info">查看信息</p>
-										<p class="at-me">向他提问</p>
+										<p class="at-me" data-id="{$v.id}">向他提问</p>
 									</div>
 								</li>
 							</volist>
@@ -395,6 +421,7 @@
 							display: 'block',
 							top: $(document).scrollTop()
 						});
+						$('.add-private-question-form option:eq(0)').attr('selected', true);
 						$('#add-question-view-at').css({
 							display: 'block',
 							top: ($(window).height() - 467) / 2 + $(window).scrollTop(),
@@ -805,6 +832,30 @@
 					});
 					
 				});
+
+				$('.president-list').on('click', '.at-me', function () {
+					if (isLogin()) {
+						var self = this;
+						var id = $(self).data('id');
+						$.each($('#add-question-view-at option'), function(index, option) {
+							if ($(option).val() == id) {
+								$(option).attr('selected', true);
+							}
+						});
+						$('.dimmer').css({
+							display: 'block',
+							top: $(document).scrollTop()
+						});
+						$('#add-question-view-at').css({
+							display: 'block',
+							top: ($(window).height() - 467) / 2 + $(window).scrollTop(),
+							left: ($(window).width() - 664) / 2
+						}).removeClass('bounceOutUp').addClass('animated bounceInDown');
+						$('body').css('overflow', 'hidden');
+					} else {
+						layer.alert('你还未登录, 不能进行此操作', {icon: 5});
+					}
+				})
 
 
 				
