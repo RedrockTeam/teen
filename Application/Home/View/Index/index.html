@@ -35,10 +35,10 @@
 						<a href="http://cqupt.ncss.org.cn/jixun/Info/IeOnly.html">职业规划</a>
 					</li>
 					<li class="nav">
-						<a href="http://202.202.43.69/XinLiweb">心里互助</a>
+						<a href="http://202.202.43.69/XinLiweb">心理互助</a>
 					</li>
 					<li class="nav">
-						<a href="http://president-mail.cqupt.edu.cn">书记信箱</a>
+						<a href="http://president-mail.cqupt.edu.cn">校长信箱</a>
 					</li>
 					<li class="nav">
 						<a href="http://job.cqupt.edu.cn">就业中心</a>
@@ -90,7 +90,7 @@
 								<a href="http://202.202.43.69/XinLiweb">心里互助</a>
 							</li>
 							<li>
-								<a href="http://president-mail.cqupt.edu.cn">书记信箱</a>
+								<a href="http://president-mail.cqupt.edu.cn">校长信箱</a>
 							</li>
 							<li>
 								<a href="http://job.cqupt.edu.cn">就业中心</a>
@@ -124,6 +124,9 @@
 				        	</li>
 				        	<li>
 				        		<a href="http://bxf.cqupt.edu.cn/Bscore/">素质教育网</a>
+				        	</li>
+				        	<li>
+				        		<a href="http://qnzs.youth.cn">团中央青年之声</a>
 				        	</li>
 						</ul>
 					</div>
@@ -206,18 +209,12 @@
 					<div class="weico-link-list">
 						<p>微博链接</p>
 						<ul class="weico-avatar-list">
-							<?php 
-								for ($i = 0; $i < 9; $i++) { 
-									if ($i % 3 == 1) {
-							?>
-								<li class="weico-avatar-middle">
-							<?php 	} else { ?>
-								<li>
-							<?php 	}	?>
-									<img src="__PUBLIC__/home/images/face.png">
-									<span>大哥大</span>
+							<volist name="weibo" id="v" key="k">
+								<li class="<?php if ($k % 3 == 2) echo "weico-avatar-middle"; ?>">
+									<img src="{$v.img}">
+									<span><a href="{$v.url}">{$v.name}</a></span>
 								</li>
-							<?php } ?>
+							</volist>
 						</ul>
 						<div class="show-more-weico">查看更多</div>
 					</div>

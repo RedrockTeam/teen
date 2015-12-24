@@ -179,6 +179,12 @@
 							margin: 8px 0;
 							a {
 								font-size: 14px;
+								&:link {
+									color: #3886c6;
+								}
+								&:visited {
+									color: #3886c6;
+								}
 							}
 						}
 					}
@@ -405,9 +411,11 @@
 							margin-bottom: 3px;
 							text-align: center;
 							span {
-								color: #676767;
-								font-size: 14px;
-								margin-top: 3px;
+								a {
+									color: #3886c6;
+									font-size: 14px;
+									margin-top: 3px;
+								}
 							}
 							img {
 								border-radius: 3px;
