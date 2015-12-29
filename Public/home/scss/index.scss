@@ -116,9 +116,12 @@
 			span {
 				cursor: pointer;
 				a {
-					color: #0a6aa7;
+					color: #3886c6;
+					&:link {
+						color: #3886c6;
+					}
 					&:visited {
-						color: #0a6aa7;
+						color: #3886c6;
 					}
 				}
 			}

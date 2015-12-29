@@ -206,16 +206,16 @@
 						</ul>
 					</div>
 
-					
+
 					<div class="president-list">
-						<p>主席信息</p>
+						<p>学霸信息</p>
 						<ul>
-							<volist name="chairman" id="v">
-								<li>
+							<volist name="chairman" id="v" key="k" offset="0" length='5'>
+								<li data-index="{$k}">
 									<img src="{$v.picture}" height="43" width="43">
 									<div class="president-info">
 										<p class="president-name">{$v.chairname}</p>
-										<p class="president-dep">WEB研发部</p>
+										<p class="president-dep">{$v.information}</p>
 									</div>
 									<div class="handle">
 										<p class="at-me" data-id="{$v.id}">向他提问</p>
@@ -276,38 +276,6 @@
 				</form>
 			</div>
 		</div>
-
-
-		<!-- 向学霸提问 -->
-		<!-- 
-			<div id="add-question-view-xueba">
-				<div class="add-question-view-xueba-header">
-					<strong>@提问</strong>
-					<i class="iconfont">&#xe603;</i>
-				</div>
-				<div class="add-question-view-xueba-body">
-					<form class="add-xueba-question-form">
-						<div class="form-control">
-							<select name="type">
-								<volist name="chairman" id="v">
-									<option value="{$v.id}">{$v.chairname}</option>
-								</volist>
-							</select>
-						</div>
-						<div class="form-control">
-							<input type="text" name="title" placeholder="请输入标题">
-						</div>
-						<div class="form-control">
-							<textarea name="content" placeholder="请输入内容"></textarea>
-						</div>
-						<div class="form-control">
-							<button type="button">提问</button>
-						</div>
-					</form>
-				</div>
-			</div>
-		-->
-
 
 		<!-- 公开提问 -->
 		<div id="add-question-view-public">
@@ -388,6 +356,58 @@
 
 	
 	<script>
+
+			var chairman = {$jsonChairman};
+			$.each($.makeArray(chairman), function (index, el) {
+				el['index'] = ++index;
+			});
+
+			$('.prev').on('click', function () {
+				var $firstLiIndex = $('.president-list li').eq(0).data('index');
+				if ($('.president-list li').eq(0).data('index') == 1) {
+					layer.msg('当前是第一页', {time: 700});
+				} else {
+					var $thisPageData = chairman.slice($firstLiIndex - 6, --$firstLiIndex);
+					var template = '';
+					$.each($thisPageData, function (index, data) {
+						template += addChairmanLi(data);
+					});
+					$('.president-list li').remove();
+					$('.president-list ul').prepend(template);
+				}
+			});
+
+			$('.next').on('click', function () {
+				var $lastLiIndex = $('.president-list li').eq(-1).data('index');
+				if ($lastLiIndex == chairman[chairman.length - 1]['index']) {
+					layer.msg('没有更多了', {time: 700});
+				} else {
+					var $thisPageData = chairman.slice($lastLiIndex, $lastLiIndex + 5);
+					var template = '';
+					$.each($thisPageData, function (index, data) {
+						template += addChairmanLi(data);
+					});
+					$('.president-list li').remove();
+					$('.president-list ul').prepend(template);
+				}
+			});
+
+			function addChairmanLi (data) {
+				var temp = html = '';
+				html += '<li data-index="'+ data.index +'">';
+					html += '<img src="'+ data.picture +'" height="43" width="43">';
+					html += '<div class="president-info">';
+						html += '<p class="president-name">' + data.chairname + '</p>';
+						html += '<p class="president-dep">'+ data.information +'</p>';
+					html += '</div>';
+					html += '<div class="handle">';
+						html += '<p class="at-me" data-id="'+ data.id +'">向他提问</p>';
+					html += '</div>';
+				html += '</li>';
+				var temp = html;
+				html = '';
+				return temp;
+			}
 
 			/*
 			 	这是一段不可维护代码
@@ -843,7 +863,6 @@
 							layer.msg('没有更多了!', {time: 1000});
 						} else {
 							$.each(response, function(index, data) {
-								console.log(data);
 								$('.question-list').append(questionTemplate(data));
 							});
 						}

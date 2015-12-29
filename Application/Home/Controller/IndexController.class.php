@@ -46,6 +46,13 @@ class IndexController extends Controller {
                 "url" => "http://weibo.com/cquptqnzyz?is_hot=1"
             )
         );
+        if (session('userType')) {
+            $stunum = session('stunum');
+            $chairman = M('chairman')->field('id, chairname, picture, information')->where("id != '$stunum'")->select();    
+        } else {
+            $chairman = M('chairman')->field('id, chairname, picture, information')->select();
+        }
+        $this->assign('jsonChairman', json_encode($chairman));
         $this->assign('weibo', $weiboArray);
         $this->flash();
         $this->display();
@@ -54,9 +61,9 @@ class IndexController extends Controller {
     private function flash(){           //首页的数据渲染
         if (session('userType')) {
             $stunum = session('stunum');
-            $chairman = M('chairman')->field('id, chairname, picture')->where("id != '$stunum'")->select();    
+            $chairman = M('chairman')->field('id, chairname, picture, information')->where("id != '$stunum'")->select();    
         } else {
-            $chairman = M('chairman')->field('id, chairname, picture')->select();
+            $chairman = M('chairman')->field('id, chairname, picture, information')->select();
         }
         $voice = $this->load_home_data();
         $this->assign('voice', $voice); //这里缺少登陆状态和前端渲染的数据

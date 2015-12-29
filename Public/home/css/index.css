@@ -105,9 +105,11 @@ p {
     #header .login-reg-btn span {
       cursor: pointer; }
       #header .login-reg-btn span a {
-        color: #0a6aa7; }
+        color: #3886c6; }
+        #header .login-reg-btn span a:link {
+          color: #3886c6; }
         #header .login-reg-btn span a:visited {
-          color: #0a6aa7; }
+          color: #3886c6; }
 
 #main {
   width: 1002px;
