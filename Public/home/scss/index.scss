@@ -115,6 +115,12 @@
 			font-size: 18px;
 			span {
 				cursor: pointer;
+				a {
+					color: #0a6aa7;
+					&:visited {
+						color: #0a6aa7;
+					}
+				}
 			}
 		}
 	}
@@ -124,7 +130,7 @@
 		margin: 0 auto;
 		.teen-logo {
 			text-align: center;
-			margin-bottom: 154px;
+			margin-bottom: 20px;
 			img {
 				text-align: center;
 			}
@@ -443,6 +449,14 @@
 					cursor: pointer;
 					&:hover {
 						background-color: #eee;
+					}
+					div {
+						float: left;
+						width: 50%;
+						font-size: 12px;
+						&:hover {
+							background-color: #ddd;
+						}
 					}
 				}
 				

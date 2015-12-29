@@ -104,13 +104,17 @@ p {
     font-size: 18px; }
     #header .login-reg-btn span {
       cursor: pointer; }
+      #header .login-reg-btn span a {
+        color: #0a6aa7; }
+        #header .login-reg-btn span a:visited {
+          color: #0a6aa7; }
 
 #main {
   width: 1002px;
   margin: 0 auto; }
   #main .teen-logo {
     text-align: center;
-    margin-bottom: 154px; }
+    margin-bottom: 20px; }
     #main .teen-logo img {
       text-align: center; }
   #main .main-content {
@@ -344,6 +348,12 @@ p {
         cursor: pointer; }
         #main .main-content .right-sidebar .show-more-weico:hover, #main .main-content .right-sidebar .show-more-president:hover {
           background-color: #eee; }
+        #main .main-content .right-sidebar .show-more-weico div, #main .main-content .right-sidebar .show-more-president div {
+          float: left;
+          width: 50%;
+          font-size: 12px; }
+          #main .main-content .right-sidebar .show-more-weico div:hover, #main .main-content .right-sidebar .show-more-president div:hover {
+            background-color: #ddd; }
       #main .main-content .right-sidebar .president-list {
         background-color: #f6f7f7; }
         #main .main-content .right-sidebar .president-list p {
