@@ -130,7 +130,7 @@ p {
         #main .main-content .left-sidebar .add-question-container p {
           color: #333;
           font-size: 15.72px; }
-        #main .main-content .left-sidebar .add-question-container .at-question {
+        #main .main-content .left-sidebar .add-question-container .at-question, #main .main-content .left-sidebar .add-question-container .xueba-question {
           margin: 16px 0; }
         #main .main-content .left-sidebar .add-question-container div button {
           height: 33px;
@@ -186,7 +186,8 @@ p {
       #main .main-content .middle .be-question-list .question, #main .main-content .middle .question-list .question {
         margin-top: 10px;
         padding: 14px 11px 22px;
-        background-color: #fff; }
+        background-color: #fff;
+        border-top: 1px solid #e9eaeb; }
         #main .main-content .middle .be-question-list .question .question-header, #main .main-content .middle .question-list .question .question-header {
           height: 47px;
           border-bottom: 1px solid #f2f2f2; }
@@ -213,8 +214,7 @@ p {
           padding-bottom: 14px; }
           #main .main-content .middle .be-question-list .question .question-body .question-title, #main .main-content .middle .question-list .question .question-body .question-title {
             font-size: 14px;
-            color: #333;
-            cursor: pointer; }
+            color: #333; }
             #main .main-content .middle .be-question-list .question .question-body .question-title span, #main .main-content .middle .question-list .question .question-body .question-title span {
               float: right;
               display: inline-block;
@@ -338,7 +338,7 @@ p {
                 border-color: #3dc3f1; }
           #main .main-content .right-sidebar .weico-link-list .weico-avatar-list .weico-avatar-middle {
             margin: 0 7px; }
-      #main .main-content .right-sidebar .show-more-weico, #main .main-content .right-sidebar .show-more-president {
+      #main .main-content .right-sidebar .show-more-president, #main .main-content .right-sidebar .show-more-xueba {
         width: 100%;
         height: 32px;
         line-height: 32px;
@@ -346,44 +346,47 @@ p {
         background-color: #fff;
         color: #676767;
         cursor: pointer; }
-        #main .main-content .right-sidebar .show-more-weico:hover, #main .main-content .right-sidebar .show-more-president:hover {
+        #main .main-content .right-sidebar .show-more-president:hover, #main .main-content .right-sidebar .show-more-xueba:hover {
           background-color: #eee; }
-        #main .main-content .right-sidebar .show-more-weico div, #main .main-content .right-sidebar .show-more-president div {
+        #main .main-content .right-sidebar .show-more-president div, #main .main-content .right-sidebar .show-more-xueba div {
+          width: 116px;
           float: left;
-          width: 50%;
           font-size: 12px; }
-          #main .main-content .right-sidebar .show-more-weico div:hover, #main .main-content .right-sidebar .show-more-president div:hover {
-            background-color: #ddd; }
-      #main .main-content .right-sidebar .president-list {
-        background-color: #f6f7f7; }
-        #main .main-content .right-sidebar .president-list p {
+          #main .main-content .right-sidebar .show-more-president div:hover, #main .main-content .right-sidebar .show-more-xueba div:hover {
+            background-color: #ccccce; }
+        #main .main-content .right-sidebar .show-more-president .prev, #main .main-content .right-sidebar .show-more-xueba .prev {
+          border-right: 1px solid #dadada; }
+      #main .main-content .right-sidebar .president-list, #main .main-content .right-sidebar .xuebao-list {
+        background-color: #f6f7f7;
+        margin-bottom: 10px; }
+        #main .main-content .right-sidebar .president-list p, #main .main-content .right-sidebar .xuebao-list p {
           padding: 16px 16px;
           color: #333;
           font-size: 15.72px; }
-        #main .main-content .right-sidebar .president-list ul li {
+        #main .main-content .right-sidebar .president-list ul li, #main .main-content .right-sidebar .xuebao-list ul li {
           height: 43px;
           padding: 10px 16px; }
-          #main .main-content .right-sidebar .president-list ul li img {
+          #main .main-content .right-sidebar .president-list ul li img, #main .main-content .right-sidebar .xuebao-list ul li img {
             float: left; }
-          #main .main-content .right-sidebar .president-list ul li .president-info, #main .main-content .right-sidebar .president-list ul li .handle {
+          #main .main-content .right-sidebar .president-list ul li .president-info, #main .main-content .right-sidebar .president-list ul li .handle, #main .main-content .right-sidebar .xuebao-list ul li .president-info, #main .main-content .right-sidebar .xuebao-list ul li .handle {
             float: left;
             margin-left: 10px;
             height: 43px; }
-            #main .main-content .right-sidebar .president-list ul li .president-info p, #main .main-content .right-sidebar .president-list ul li .handle p {
+            #main .main-content .right-sidebar .president-list ul li .president-info p, #main .main-content .right-sidebar .president-list ul li .handle p, #main .main-content .right-sidebar .xuebao-list ul li .president-info p, #main .main-content .right-sidebar .xuebao-list ul li .handle p {
               margin: 0;
               padding: 0;
               font-size: 14px;
               color: #333; }
-          #main .main-content .right-sidebar .president-list ul li .president-name, #main .main-content .right-sidebar .president-list ul li .view-info {
+          #main .main-content .right-sidebar .president-list ul li .president-name, #main .main-content .right-sidebar .president-list ul li .view-info, #main .main-content .right-sidebar .xuebao-list ul li .president-name, #main .main-content .right-sidebar .xuebao-list ul li .view-info {
             height: 29px; }
-          #main .main-content .right-sidebar .president-list ul li .president-dep, #main .main-content .right-sidebar .president-list ul li .at-me {
+          #main .main-content .right-sidebar .president-list ul li .president-dep, #main .main-content .right-sidebar .president-list ul li .at-me, #main .main-content .right-sidebar .xuebao-list ul li .president-dep, #main .main-content .right-sidebar .xuebao-list ul li .at-me {
             height: 14px; }
-          #main .main-content .right-sidebar .president-list ul li .handle {
+          #main .main-content .right-sidebar .president-list ul li .handle, #main .main-content .right-sidebar .xuebao-list ul li .handle {
             float: right; }
-            #main .main-content .right-sidebar .president-list ul li .handle p {
+            #main .main-content .right-sidebar .president-list ul li .handle p, #main .main-content .right-sidebar .xuebao-list ul li .handle p {
               color: #3886c6;
               cursor: pointer; }
-        #main .main-content .right-sidebar .president-list ul li:nth-child(odd) {
+        #main .main-content .right-sidebar .president-list ul li:nth-child(odd), #main .main-content .right-sidebar .xuebao-list ul li:nth-child(odd) {
           background-color: #fff; }
 
 #footer {

@@ -38,7 +38,7 @@
 						<a href="http://202.202.43.69/XinLiweb">心理互助</a>
 					</li>
 					<li class="nav">
-						<a href="http://president-mail.cqupt.edu.cn">校长信箱</a>
+						<a href="http://president-mail.cqupt.edu.cn">书记校长信箱</a>
 					</li>
 					<li class="nav">
 						<a href="http://job.cqupt.edu.cn">就业中心</a>
@@ -90,7 +90,7 @@
 								<a href="http://202.202.43.69/XinLiweb">心理互助</a>
 							</li>
 							<li>
-								<a href="http://president-mail.cqupt.edu.cn">校长信箱</a>
+								<a href="http://president-mail.cqupt.edu.cn">书记校长信箱</a>
 							</li>
 							<li>
 								<a href="http://job.cqupt.edu.cn">就业中心</a>
@@ -99,22 +99,10 @@
 								<a href="http://jjc.cqupt.edu.cn">后勤中心</a>
 							</li>
 				        	<li>
-				        		<a href="http://172.22.161.11/">BT Down铺</a>
-				        	</li>
-				        	<li>
-				        		<a href="http://202.202.43.120/">幽幽黄桷兰</a>
-				        	</li>
-				        	<li>
-				        		<a href="http://hongyan.cqupt.edu.cn/user/user.php">重邮通行证</a>
-				        	</li>
-				        	<li>
 				        		<a href="http://hongyan.cqupt.edu.cn/web/">网址大全</a>
 				        	</li>
 				        	<li>
 				        		<a href="http://www.cqupt.edu.cn/">学校主页</a>
-				        	</li>
-				        	<li>
-				        		<a href="http://redrock.cqupt.edu.cn/market/">拾货网</a>
 				        	</li>
 				        	<li>
 				        		<a href="http://hongyan.cqupt.edu.cn/chat/">校领导接待室</a>
@@ -217,8 +205,10 @@
 							</volist>
 						</ul>
 					</div>
+
+					
 					<div class="president-list">
-						<p>学霸信息</p>
+						<p>主席信息</p>
 						<ul>
 							<volist name="chairman" id="v">
 								<li>
@@ -234,10 +224,11 @@
 							</volist>
 						</ul>
 						<div class="show-more-president">
-							<div>上一页</div>
-							<div>下一页</div>
+							<div class="prev">上一页</div>
+							<div class="next">下一页</div>
 						</div>
 					</div>
+					
 				</div>
 
 			</div>	
@@ -258,7 +249,7 @@
 			<i class="iconfont">&#xe601;</i>
 		</div>
 
-		<!-- @提问 -->
+		<!-- 向主席提问 -->
 		<div id="add-question-view-at">
 			<div class="add-question-view-at-header">
 				<strong>向学霸提问</strong>
@@ -285,6 +276,38 @@
 				</form>
 			</div>
 		</div>
+
+
+		<!-- 向学霸提问 -->
+		<!-- 
+			<div id="add-question-view-xueba">
+				<div class="add-question-view-xueba-header">
+					<strong>@提问</strong>
+					<i class="iconfont">&#xe603;</i>
+				</div>
+				<div class="add-question-view-xueba-body">
+					<form class="add-xueba-question-form">
+						<div class="form-control">
+							<select name="type">
+								<volist name="chairman" id="v">
+									<option value="{$v.id}">{$v.chairname}</option>
+								</volist>
+							</select>
+						</div>
+						<div class="form-control">
+							<input type="text" name="title" placeholder="请输入标题">
+						</div>
+						<div class="form-control">
+							<textarea name="content" placeholder="请输入内容"></textarea>
+						</div>
+						<div class="form-control">
+							<button type="button">提问</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		-->
+
 
 		<!-- 公开提问 -->
 		<div id="add-question-view-public">
