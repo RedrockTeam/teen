@@ -210,7 +210,7 @@
 					<div class="president-list">
 						<p>学霸信息</p>
 						<ul>
-							<volist name="chairman" id="v" key="k" offset="0" length='5'>
+							<volist name="chairman" id="v" key="k" offset="0" length='10'>
 								<li data-index="{$k}">
 									<img src="{$v.picture}" height="43" width="43">
 									<div class="president-info">
@@ -367,7 +367,7 @@
 				if ($('.president-list li').eq(0).data('index') == 1) {
 					layer.msg('当前是第一页', {time: 700});
 				} else {
-					var $thisPageData = chairman.slice($firstLiIndex - 6, --$firstLiIndex);
+					var $thisPageData = chairman.slice($firstLiIndex - 11, --$firstLiIndex);
 					var template = '';
 					$.each($thisPageData, function (index, data) {
 						template += addChairmanLi(data);
@@ -382,7 +382,7 @@
 				if ($lastLiIndex == chairman[chairman.length - 1]['index']) {
 					layer.msg('没有更多了', {time: 700});
 				} else {
-					var $thisPageData = chairman.slice($lastLiIndex, $lastLiIndex + 5);
+					var $thisPageData = chairman.slice($lastLiIndex, $lastLiIndex + 10);
 					var template = '';
 					$.each($thisPageData, function (index, data) {
 						template += addChairmanLi(data);
