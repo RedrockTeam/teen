@@ -69,8 +69,14 @@
 				<div class="left-sidebar">
 					<div class="add-question-container">
 						<p>提问框</p>
-						<div class="at-question">
-							<button>@提问</button>
+						<!-- 主席信息, 暂时隐藏 -->
+						<!--
+							<div class="at-question">
+								<button>向主席提问</button>
+							</div>
+						-->
+						<div class="xueba-question">
+							<button>向学霸提问</button>
 						</div>
 						<div class="public-question">
 							<button>公开提问</button>
@@ -204,10 +210,32 @@
 								</li>
 							</volist>
 						</ul>
-						<div class="show-more-weico">查看更多</div>
 					</div>
-					<div class="president-list">
-						<p>主席信息</p>
+
+					<!-- 主席信息, 暂时隐藏 -->
+					<!--
+						<div class="president-list">
+							<p>主席信息</p>
+							<ul>
+								<volist name="chairman" id="v">
+									<li>
+										<img src="{$v.picture}" height="43" width="43">
+										<div class="president-info">
+											<p class="president-name">{$v.chairname}</p>
+											<p class="president-dep">WEB研发部</p>
+										</div>
+										<div class="handle">
+											<p class="at-me" data-id="{$v.id}">向他提问</p>
+										</div>
+									</li>
+								</volist>
+							</ul>
+							<div class="show-more-president">查看更多</div>
+						</div>
+					-->
+
+					<div class="xuebao-list">
+						<p>学霸信息</p>
 						<ul>
 							<volist name="chairman" id="v">
 								<li>
@@ -222,7 +250,10 @@
 								</li>
 							</volist>
 						</ul>
-						<div class="show-more-president">查看更多</div>
+						<div class="show-more-xueba">
+							<div class="prev">上一页</div>
+							<div class="next">下一页</div>
+						</div>
 					</div>
 				</div>
 
@@ -244,7 +275,7 @@
 			<i class="iconfont">&#xe601;</i>
 		</div>
 
-		<!-- @提问 -->
+		<!-- 向主席提问 -->
 		<div id="add-question-view-at">
 			<div class="add-question-view-at-header">
 				<strong>@提问</strong>
@@ -271,6 +302,38 @@
 				</form>
 			</div>
 		</div>
+
+
+		<!-- 向学霸提问 -->
+		<!-- 
+			<div id="add-question-view-xueba">
+				<div class="add-question-view-xueba-header">
+					<strong>@提问</strong>
+					<i class="iconfont">&#xe603;</i>
+				</div>
+				<div class="add-question-view-xueba-body">
+					<form class="add-xueba-question-form">
+						<div class="form-control">
+							<select name="type">
+								<volist name="chairman" id="v">
+									<option value="{$v.id}">{$v.chairname}</option>
+								</volist>
+							</select>
+						</div>
+						<div class="form-control">
+							<input type="text" name="title" placeholder="请输入标题">
+						</div>
+						<div class="form-control">
+							<textarea name="content" placeholder="请输入内容"></textarea>
+						</div>
+						<div class="form-control">
+							<button type="button">提问</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		-->
+
 
 		<!-- 公开提问 -->
 		<div id="add-question-view-public">
