@@ -22,6 +22,8 @@ class AddchaironeController extends Controller {
 	public function add(){
 		if(session('manager')){
 			$picture = './Public/chairone/'.$_FILES['pic']['name'];
+            print_r($_FILES['pic']);
+            exit();
 			move_uploaded_file($_FILES['pic']['tmp_name'] , $picture); 
 			$data = array(
 				'id' => rand(10000, 50000),
