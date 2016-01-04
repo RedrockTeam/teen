@@ -348,8 +348,6 @@ p {
         background-color: #fff;
         color: #676767;
         cursor: pointer; }
-        #main .main-content .right-sidebar .show-more-president:hover, #main .main-content .right-sidebar .show-more-xueba:hover {
-          background-color: #eee; }
         #main .main-content .right-sidebar .show-more-president div, #main .main-content .right-sidebar .show-more-xueba div {
           width: 116px;
           float: left;
