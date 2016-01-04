@@ -22,7 +22,7 @@ class AddchaironeController extends Controller {
 	public function add(){
 		if(session('manager')){
 			$picture = './Public/chairone/'.$_FILES['pic']['name'];
-			move_uploaded_file($_FILES['pic']['tmp_name'] , $picture); 
+			$this->upload();
 			$data = array(
 				'id' => rand(10000, 50000),
 				'chairname' => I('post.username'),
@@ -46,5 +46,19 @@ class AddchaironeController extends Controller {
             window.location.href='".U('Index/index')."'</script>";
 		}
 	}
+	private function upload(){
+		$upload = new \Think\Upload();// 实例化上传类
+    	$upload->maxSize   =     3145728 ;// 设置附件上传大小
+    	$upload->exts      =     array('jpg', 'gif', 'png', 'jpeg');// 设置附件上传类型
+    	$upload->rootPath  =     './Public/'; // 设置附件上传根目录
+    	$upload->savePath  =     'chairone'; // 设置附件上传（子）目录
+    	// 上传文件 
+    	$info   =   $upload->upload();
+    	if(!$info) {// 上传错误提示错误信息
+    	    $this->error($upload->getError());
+    	}else{// 上传成功
+    	    $this->success('上传成功！');
+    	}
 
+	}
 }
