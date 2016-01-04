@@ -397,11 +397,11 @@
 				html += '<li data-index="'+ data.index +'">';
 					html += '<img src="'+ data.picture +'" height="43" width="43">';
 					html += '<div class="president-info">';
-						html += '<p class="president-name">' + data.chairname + '</p>';
-						html += '<p class="president-dep">'+ data.information +'</p>';
+						html += '<div class="president-name">' + data.chairname + '</div>';
+						html += '<div class="at-me" data-id="{$v.id}">向他提问</div>';
 					html += '</div>';
-					html += '<div class="handle">';
-						html += '<p class="at-me" data-id="'+ data.id +'">向他提问</p>';
+					html += '<div class="president-handle">';
+						html += '<span class="president-dep">'+ data.information +'</span>';
 					html += '</div>';
 				html += '</li>';
 				var temp = html;
