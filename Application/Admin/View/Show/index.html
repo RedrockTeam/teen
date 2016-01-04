@@ -1,11 +1,27 @@
 <include file="Index/header" />
 <div style="margin-top: 100px;">
-	<?php
-	foreach ($message as $key => $value) {
-	?>
-	<p style="text-align: center; font-size:20px; color: #fff;"><?php echo '名字' . ": " . $value['chairname'] . "  " . "性别" . ": " . $value['sex'] .' '. '职位' . ': ' . $value['information']?></p>
-	<?php 
-	}
-	?>
+	<div style="margin-top: 50px">
+	<table class="table table-striped">
+		<tr>
+  			<td class="success">姓名</td>
+  			<td class="info">性别</td>
+  			<td class="warning">学院</td>
+		</tr>
+		<?php
+			foreach ($message as $key => $value) {
+		?>
+			<tr>
+  				<td class="success"><?php echo $value['chairname'] ?></td>
+  				<td class="info"><?php echo $value['sex'] ?></td>
+  				<td class="warning"><?php echo $value['information'] ?></td>
+  				<td class="danger" style="text-align:center">
+  					<a href="{:U('Show/delete_chirman?id='.$value['id'])}" id="<?php echo $value['id'] ?>">删除</a>
+  				</td>
+			</tr>
+		<?php
+			}
+		?>
+	</table>
+</div>
 </div>
 <include file="Index/footer" />

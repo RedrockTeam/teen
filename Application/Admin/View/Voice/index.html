@@ -13,7 +13,7 @@
 			<tr>
   				<td class="success"><?php echo $key['title'] ?></td>
   				<td class="info"><?php echo $key['postername'] ?></td>
-  				<td class="warning"><?php echo $key['time'] ?></td>
+  				<td class="warning"><?php echo date('Y:m:d H:i', $key['time']) ?></td>
   				<td class="danger" style="text-align:center">
   					<a href="{:U('Voice/delete_voice?id='.$key['id'])}" id="<?php echo $key['id'] ?>">删除</a>
   				</td>
