@@ -482,29 +482,33 @@
 							img {
 								float: left;
 							}
-							.president-info, .handle {
+							.president-info {
 								float: left;
 								margin-left: 10px;
-								height: 43px;
-								p {
+								height: 21.5px;
+								.president-name {
+									width: 71.5px;
+									display: inline-block;
+								}
+								.at-me {
+									width: 71.5px;
+									display: inline-block;
+									text-align: right;
+									color: #3886c6;
+									cursor: pointer;
+								}
+							}
+							.president-handle {
+								float: left;
+								margin-left: 10px;
+								.president-dep {
 									margin: 0;
 									padding: 0;
 									font-size: 14px;
 									color: #333;
-								}
-							}
-							.president-name, .view-info {
-								height: 29px;
-							}
-							.president-dep, .at-me {
-								height: 14px;
-							}
-
-							.handle {
-								float: right;
-								p {
-									color: #3886c6;
-									cursor: pointer;
+									width: 100px;
+									vertical-align: -webkit-baseline-middle;
+									vertical-align: sub;
 								}
 							}
 						}

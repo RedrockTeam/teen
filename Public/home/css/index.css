@@ -370,24 +370,30 @@ p {
           padding: 10px 16px; }
           #main .main-content .right-sidebar .president-list ul li img, #main .main-content .right-sidebar .xuebao-list ul li img {
             float: left; }
-          #main .main-content .right-sidebar .president-list ul li .president-info, #main .main-content .right-sidebar .president-list ul li .handle, #main .main-content .right-sidebar .xuebao-list ul li .president-info, #main .main-content .right-sidebar .xuebao-list ul li .handle {
+          #main .main-content .right-sidebar .president-list ul li .president-info, #main .main-content .right-sidebar .xuebao-list ul li .president-info {
             float: left;
             margin-left: 10px;
-            height: 43px; }
-            #main .main-content .right-sidebar .president-list ul li .president-info p, #main .main-content .right-sidebar .president-list ul li .handle p, #main .main-content .right-sidebar .xuebao-list ul li .president-info p, #main .main-content .right-sidebar .xuebao-list ul li .handle p {
+            height: 21.5px; }
+            #main .main-content .right-sidebar .president-list ul li .president-info .president-name, #main .main-content .right-sidebar .xuebao-list ul li .president-info .president-name {
+              width: 71.5px;
+              display: inline-block; }
+            #main .main-content .right-sidebar .president-list ul li .president-info .at-me, #main .main-content .right-sidebar .xuebao-list ul li .president-info .at-me {
+              width: 71.5px;
+              display: inline-block;
+              text-align: right;
+              color: #3886c6;
+              cursor: pointer; }
+          #main .main-content .right-sidebar .president-list ul li .president-handle, #main .main-content .right-sidebar .xuebao-list ul li .president-handle {
+            float: left;
+            margin-left: 10px; }
+            #main .main-content .right-sidebar .president-list ul li .president-handle .president-dep, #main .main-content .right-sidebar .xuebao-list ul li .president-handle .president-dep {
               margin: 0;
               padding: 0;
               font-size: 14px;
-              color: #333; }
-          #main .main-content .right-sidebar .president-list ul li .president-name, #main .main-content .right-sidebar .president-list ul li .view-info, #main .main-content .right-sidebar .xuebao-list ul li .president-name, #main .main-content .right-sidebar .xuebao-list ul li .view-info {
-            height: 29px; }
-          #main .main-content .right-sidebar .president-list ul li .president-dep, #main .main-content .right-sidebar .president-list ul li .at-me, #main .main-content .right-sidebar .xuebao-list ul li .president-dep, #main .main-content .right-sidebar .xuebao-list ul li .at-me {
-            height: 14px; }
-          #main .main-content .right-sidebar .president-list ul li .handle, #main .main-content .right-sidebar .xuebao-list ul li .handle {
-            float: right; }
-            #main .main-content .right-sidebar .president-list ul li .handle p, #main .main-content .right-sidebar .xuebao-list ul li .handle p {
-              color: #3886c6;
-              cursor: pointer; }
+              color: #333;
+              width: 100px;
+              vertical-align: -webkit-baseline-middle;
+              vertical-align: sub; }
         #main .main-content .right-sidebar .president-list ul li:nth-child(odd), #main .main-content .right-sidebar .xuebao-list ul li:nth-child(odd) {
           background-color: #fff; }
 

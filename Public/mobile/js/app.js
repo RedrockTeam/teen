@@ -28,7 +28,9 @@
 	            	if (response.status == 200 && status === 'success') {
 	            		location.href = $('html').attr('data-index');
 	            	} else {
-	            		view.alert("你的账号或密码有误");
+	            		view.alert("你的账号或密码有误", function () {
+	            			$('#alert-modal').modal('close');
+	            		});
 	            	}
 	            }).fail(function (XMLHttpRequest, status) {
 	            	view.alert('稍安勿躁, 好像出了点小问题=_=');

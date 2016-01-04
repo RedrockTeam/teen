@@ -214,11 +214,11 @@
 								<li data-index="{$k}">
 									<img src="{$v.picture}" height="43" width="43">
 									<div class="president-info">
-										<p class="president-name">{$v.chairname}</p>
-										<p class="president-dep">{$v.information}</p>
+										<div class="president-name">{$v.chairname}</div>
+										<div class="at-me" data-id="{$v.id}">向他提问</div>
 									</div>
-									<div class="handle">
-										<p class="at-me" data-id="{$v.id}">向他提问</p>
+									<div class="president-handle">
+										<span class="president-dep" >{$v.information}</span>
 									</div>
 								</li>
 							</volist>
