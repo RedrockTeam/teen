@@ -24,7 +24,7 @@ class AddchaironeController extends Controller {
 			$picture = './Public/chairone/'.$_FILES['pic']['name'];
 
 			//move_uploaded_file($_FILES['pic']['tmp_name'] , $picture); 
-			$this->upload();
+			//$this->upload();
 			$data = array(
 				'id' => rand(10000, 50000),
 				'chairname' => I('post.username'),
