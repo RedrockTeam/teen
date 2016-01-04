@@ -17,7 +17,9 @@ class AddxuebaController extends Controller {
     public function add(){
         if(session('manager')){
             $picture = './Public/chairone/'.$_FILES['pic']['name'];
-            dump(move_uploaded_file($_FILES['pic']['tmp_name'] , $picture));
+            if(move_uploaded_file($_FILES['pic']['tmp_name'] , $picture)){
+                echo "ok";
+            }
             $data = array(
                 'id' => rand(1000, 5000),
                 'name' => I('post.username'),
