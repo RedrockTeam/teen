@@ -22,7 +22,7 @@ class AddchaironeController extends Controller {
 	public function add(){
 		if(session('manager')){
 			$picture = './Public/chairone/'.$_FILES['pic']['name'];
-			dump(move_uploaded_file($_FILES['pic']['tmp_name'] , $picture));
+			move_uploaded_file($_FILES['pic']['tmp_name'] , $picture); 
 			$data = array(
 				'id' => rand(10000, 50000),
 				'chairname' => I('post.username'),
