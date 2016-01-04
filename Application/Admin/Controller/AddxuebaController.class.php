@@ -28,7 +28,7 @@ class AddxuebaController extends Controller {
                 'info' => I('post.info'),
                 'picture' => $picture
             );
-            if(M('chairman')->add($data)){
+            if(M('xueba')->add($data)){
                 echo"<script>
                 alert('添加成功');
                 window.location.href='".U('Addchairone/index')."'</script>";
